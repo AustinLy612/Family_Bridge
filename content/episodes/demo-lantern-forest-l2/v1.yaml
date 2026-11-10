@@ -1,0 +1,148 @@
+# Conversion of the Lantern Forest prototype's Level 2 into schema v0 (Plan §5.9 fixture 2).
+# Test fixture only: approval "demo", never assignable to non-demo families. It shows the schema
+# can carry a real script; the real flow scripts (O1) and clinical review (O10) are still to come.
+kind: episode
+id: demo-lantern-forest-l2
+schema_version: 0
+version: 1
+approval: { status: demo, approved_by: null, approved_at: null }
+world: lantern_forest
+level: 2
+modes: [joint]
+title: { zh-CN: "灯笼森林 · 第二关（演示）", en: "Lantern Forest, level 2 (demo)" }
+skill_ids: [wmp.validating_others]
+objective:
+  zh-CN: "一起练习认可：先说出感受，再问对方需要什么。"
+  en: "Practise validation together: name the feeling first, then ask what would help."
+behavioral_criterion:
+  zh-CN: "你们的共同回应里有一句认可感受的话，并且在给建议之前先提问。"
+  en: "Your shared reply names a feeling and asks before offering advice."
+estimated_minutes: 12
+sensory: { motion: low, sound: optional }
+steps:
+  - id: intro
+    type: narration
+    title: { zh-CN: "森林里的守灯者", en: "The lantern keeper" }
+    text:
+      zh-CN: "夜色中，守灯者一次又一次地想点亮灯笼，可火光总是熄灭。它坐在树下，不再说话。你们两人一起来到它身边。"
+      en: "In the evening forest, the lantern keeper has tried again and again to light its lantern, but the flame keeps going out. It sits quietly under a tree. The two of you arrive together."
+  - id: distress
+    type: distress_check
+    text:
+      zh-CN: "开始之前：现在你感觉有多紧张？0 是完全不紧张，10 是非常紧张。可以跳过。"
+      en: "Before you start: how tense do you feel right now? 0 is not at all, 10 is very. You can skip this."
+  - id: emotion
+    type: private_choice
+    text:
+      zh-CN: "你觉得守灯者现在可能有什么感受？先各自私下选择。"
+      en: "What might the keeper be feeling? Each of you chooses privately first."
+    hints:
+      - { zh-CN: "看看它的样子：它试了很多次，现在很安静。", en: "Look at how it is: it tried many times and has gone quiet." }
+    roles:
+      adolescent:
+        options:
+          - { id: disappointed, text: { zh-CN: "失望", en: "Disappointed" }, rubric_tag: disappointed }
+          - { id: frustrated, text: { zh-CN: "沮丧", en: "Frustrated" }, rubric_tag: frustrated }
+          - { id: sad, text: { zh-CN: "难过", en: "Sad" }, rubric_tag: sad }
+          - { id: embarrassed, text: { zh-CN: "不好意思", en: "Embarrassed" }, rubric_tag: embarrassed }
+      caregiver:
+        options:
+          - { id: disappointed, text: { zh-CN: "失望", en: "Disappointed" }, rubric_tag: disappointed }
+          - { id: frustrated, text: { zh-CN: "沮丧", en: "Frustrated" }, rubric_tag: frustrated }
+          - { id: sad, text: { zh-CN: "难过", en: "Sad" }, rubric_tag: sad }
+          - { id: embarrassed, text: { zh-CN: "不好意思", en: "Embarrassed" }, rubric_tag: embarrassed }
+    reveal: { fields: [choice_text], when: both_submitted }
+  - id: response
+    type: private_choice
+    text:
+      zh-CN: "你会先怎么回应守灯者？各自私下选择。"
+      en: "How would you respond to the keeper first? Each of you chooses privately."
+    roles:
+      adolescent:
+        options:
+          - { id: a-reflect, text: { zh-CN: "说出它的失望，并好奇地问问", en: "Name the disappointment and stay curious" }, rubric_tag: validation }
+          - { id: a-cheer, text: { zh-CN: "马上让它开心起来", en: "Cheer the keeper up straight away" }, rubric_tag: reassurance }
+          - { id: a-space, text: { zh-CN: "先安静陪着，再问问它", en: "Give quiet space, then check in" }, rubric_tag: attuned_space }
+      caregiver:
+        options:
+          - { id: c-ask, text: { zh-CN: "肯定它的努力，再问发生了什么", en: "Acknowledge the effort, then ask what happened" }, rubric_tag: validation }
+          - { id: c-demo, text: { zh-CN: "教它正确点灯的方法", en: "Show the keeper the right way to light it" }, rubric_tag: problem_solving }
+          - { id: c-push, text: { zh-CN: "提醒它坚持很重要", en: "Remind the keeper that persistence matters" }, rubric_tag: encouragement }
+    reveal: { fields: [rubric_tag_summary], when: both_submitted }
+  - id: compose
+    type: cooperative_compose
+    text:
+      zh-CN: "一起编一句话送给守灯者。每人选 1 到 3 个片段。"
+      en: "Weave one reply to the keeper together. Each of you picks 1 to 3 pieces."
+    hints:
+      - { zh-CN: "可以先说你注意到了什么，再说出感受。", en: "You could start with what you noticed, then name a feeling." }
+    fragments:
+      - { id: notice, text: { zh-CN: "你一次又一次地尝试，", en: "You've tried again and again," }, rubric_tag: observation }
+      - { id: name, text: { zh-CN: "感到失望是很自然的。", en: "and it makes sense that you feel disappointed." }, rubric_tag: validation }
+      - { id: ask, text: { zh-CN: "你愿意告诉我们发生了什么吗，", en: "Would you like to tell us what happened," }, rubric_tag: curiosity }
+      - { id: choice, text: { zh-CN: "还是现在安静地陪着你更好？", en: "or would quiet company feel better for now?" }, rubric_tag: agency }
+      - { id: fix, text: { zh-CN: "我们可以教你怎么修好它。", en: "We can show you how to fix it." }, rubric_tag: problem_solving }
+      - { id: push, text: { zh-CN: "你只要再试一次就行。", en: "You only need to try one more time." }, rubric_tag: pressure }
+    rules: { min_per_role: 1, max_per_role: 3 }
+  - id: feedback
+    type: feedback
+    source: compose
+    text:
+      zh-CN: "看看你们的共同回应带来了什么。"
+      en: "Here is what your shared reply did."
+    rules:
+      - all: [validation]
+        any: [curiosity, agency]
+        none: [problem_solving, pressure]
+        title: { zh-CN: "灯笼听见了你们俩", en: "The lantern hears both of you" }
+        text:
+          zh-CN: "你们的回应先停下来照顾感受，再走向行动，这正是认可的核心。下次也可以照这个顺序：注意、说出感受、邀请、再问需要什么。"
+          en: "Your reply makes room for the feeling before moving to action. That is the heart of validation. Keep the same order next time: notice, name, invite, then ask what would help."
+      - all: [validation]
+        any: [curiosity, agency]
+        title: { zh-CN: "灯笼听见了你们俩", en: "The lantern hears both of you" }
+        text:
+          zh-CN: "你们的回应先照顾了感受。下次在给建议之前，也可以先问问对方想要支持还是想要办法。"
+          en: "Your reply makes room for the feeling. Next time, ask whether support or solutions are wanted before offering a solution."
+    default:
+      title: { zh-CN: "第一点火光", en: "A first spark" }
+      text:
+        zh-CN: "你们一起完成了，也都投入了。下次试试在建议或鼓励之前，先说出一种感受。"
+        en: "You worked together and stayed with it. Next time, try naming one feeling before advice or encouragement."
+    tag_notes:
+      observation: { zh-CN: "你们注意到了它的努力，没有评判。", en: "You noticed the effort without judging it." }
+      validation: { zh-CN: "你们说出了一种感受，并表示这种感受说得通。", en: "You named a feeling and showed that it made sense." }
+      curiosity: { zh-CN: "你们邀请它说出自己的想法，而不是替它决定。", en: "You invited the keeper's view instead of assuming it." }
+      agency: { zh-CN: "你们给了它选择，减少了压力。", en: "You offered a choice, which lowers pressure." }
+  - id: retry
+    type: retry
+    of: compose
+    feedback: feedback
+    text:
+      zh-CN: "想再编一次吗？可以换不同的片段，也可以跳过。"
+      en: "Would you like to weave the reply once more? You can pick different pieces, or skip."
+  - id: transfer
+    type: transfer_probe
+    title: { zh-CN: "小狐狸", en: "The little fox" }
+    text:
+      zh-CN: "另一处林间，一只小狐狸说：“大家没等我就走了。”你会怎么回应？"
+      en: "Elsewhere in the forest, a little fox says: \"Everyone left without waiting for me.\" How would you respond?"
+    options:
+      - id: fox-validate
+        text: { zh-CN: "“你本来希望他们等你。被落下一定很难受。”", en: "\"You were hoping they would wait. It makes sense that being left out hurt.\"" }
+        rubric_tag: validation
+        feedback: { zh-CN: "你先回应了小狐狸的感受。", en: "You responded to the fox's feeling first." }
+      - id: fox-fix
+        text: { zh-CN: "“我们给你找点别的事做，这样就没关系了。”", en: "\"Let's find you something else to do so it doesn't matter.\"" }
+        rubric_tag: problem_solving
+        feedback: { zh-CN: "你想帮忙。也可以先说出它的感受，再一起想办法。", en: "You wanted to help. You could also name its feeling before looking for a fix." }
+      - id: fox-minimize
+        text: { zh-CN: "“他们可能不是故意的，别难过了。”", en: "\"They probably didn't mean it, so try not to be upset.\"" }
+        rubric_tag: minimizing
+        feedback: { zh-CN: "你想让它好受些。先认可感受，常常更能让人感到被理解。", en: "You wanted it to feel better. Validating the feeling first often helps more." }
+  - id: reflection
+    type: private_reflection
+    text:
+      zh-CN: "如果你愿意，写一两句：今天你注意到了什么？只有你和你的治疗师能看到。"
+      en: "If you like, write a line or two: what did you notice today? Only you and your therapist can see it."
+    max_chars: 500

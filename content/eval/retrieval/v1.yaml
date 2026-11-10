@@ -1,0 +1,325 @@
+# Retrieval evaluation set (Plan §5.3 step 8, Phase 3 acceptance: recall@5 >= 0.85).
+# Queries are the developer's own wording of what participants might ask; never manual text.
+# `expected`: a hit if any listed handout appears in the top k. Draft until clinically reviewed.
+kind: retrieval_eval
+version: 1
+approval:
+  status: draft
+k: 5
+target_recall: 0.85
+queries:
+  - id: q001
+    language: zh-CN
+    query: "什么是辩证行为疗法，它能帮我什么"
+    expected: [ori.h1]
+  - id: q002
+    language: zh-CN
+    query: "技能小组想要达到哪些目标"
+    expected: [ori.h2, ori.h1]
+  - id: q003
+    language: zh-CN
+    query: "新成员什么时候可以加入小组"
+    expected: [ori.h3]
+  - id: q004
+    language: zh-CN
+    query: "为什么我的情绪比别人来得更猛烈、更难平复"
+    expected: [ori.h4]
+  - id: q005
+    language: zh-CN
+    query: "DBT对家长和孩子有哪些基本假设"
+    expected: [ori.h5]
+  - id: q006
+    language: zh-CN
+    query: "小组有哪些规则，比如保密"
+    expected: [ori.h6]
+  - id: q007
+    language: zh-CN
+    query: "理性心念和情绪心念有什么区别"
+    expected: [mf.h3, mf.h4]
+  - id: q008
+    language: zh-CN
+    query: "怎样才能找到智慧心念"
+    expected: [mf.h3, mf.h4, mf.h1]
+  - id: q009
+    language: zh-CN
+    query: "正念里的观察和描述应该怎么做"
+    expected: [mf.h5]
+  - id: q010
+    language: zh-CN
+    query: "不评判、一次只做一件事是什么意思"
+    expected: [mf.h6]
+  - id: q011
+    language: zh-CN
+    query: "为什么要花时间练习正念"
+    expected: [mf.h2, mf.h1]
+  - id: q012
+    language: zh-CN
+    query: "心里很难受的时候可以用什么办法转移注意力"
+    expected: [dt.h3]
+  - id: q013
+    language: zh-CN
+    query: "用视觉听觉嗅觉等感官让自己平静下来"
+    expected: [dt.h5]
+  - id: q014
+    language: zh-CN
+    query: "改善当下这一刻的技能包括哪些"
+    expected: [dt.h7]
+  - id: q015
+    language: zh-CN
+    query: "冲动上来时怎样做利弊分析"
+    expected: [dt.h9, dt.h10]
+  - id: q016
+    language: zh-CN
+    query: "用冷水和剧烈运动快速降低极端情绪"
+    expected: [dt.h11]
+  - id: q017
+    language: zh-CN
+    query: "怎么准备一个危机生存工具包"
+    expected: [dt.h13]
+    module: distress_tolerance
+  - id: q018
+    language: zh-CN
+    query: "如何接受无法改变的现实"
+    expected: [dt.h14, dt.h17, dt.h15]
+  - id: q019
+    language: zh-CN
+    query: "愿意和任性有什么不同"
+    expected: [dt.h16]
+  - id: q020
+    language: zh-CN
+    query: "辩证地看问题是什么意思"
+    expected: [wmp.h1, wmp.h2]
+  - id: q021
+    language: zh-CN
+    query: "常见的思维误区有哪些"
+    expected: [wmp.h3]
+  - id: q022
+    language: zh-CN
+    query: "家长管得太松还是太严"
+    expected: [wmp.h4, wmp.h5]
+  - id: q023
+    language: zh-CN
+    query: "哪些青少年行为是正常的，哪些需要担心"
+    expected: [wmp.h6]
+  - id: q024
+    language: zh-CN
+    query: "怎样认可孩子的感受"
+    expected: [wmp.h9, wmp.h8]
+  - id: q025
+    language: zh-CN
+    query: "我该如何认可自己"
+    expected: [wmp.h10]
+  - id: q026
+    language: zh-CN
+    query: "用奖励增加孩子的好行为"
+    expected: [wmp.h13, wmp.h12, wmp.h14]
+  - id: q027
+    language: zh-CN
+    query: "怎样减少孩子的问题行为，比如不予理会"
+    expected: [wmp.h15, wmp.h16]
+  - id: q028
+    language: zh-CN
+    query: "情绪到底有什么用处"
+    expected: [er.h4]
+  - id: q029
+    language: zh-CN
+    query: "情绪是怎样一步步产生的"
+    expected: [er.h5, er.h6]
+  - id: q030
+    language: zh-CN
+    query: "可以做哪些让人开心的活动来积累积极情绪"
+    expected: [er.h9, er.h10, er.h11]
+  - id: q031
+    language: zh-CN
+    query: "睡不好会影响心情吗"
+    expected: [er.h16b, er.h16]
+    module: emotion_regulation
+  - id: q032
+    language: zh-CN
+    query: "吃的东西和心情有什么关系"
+    expected: [er.h16a]
+  - id: q033
+    language: zh-CN
+    query: "面对困难的场合怎样提前做好准备"
+    expected: [er.h15]
+  - id: q034
+    language: zh-CN
+    query: "情绪像海浪一样来了又走"
+    expected: [er.h18]
+  - id: q035
+    language: zh-CN
+    query: "检查我的情绪是否符合事实"
+    expected: [er.h19]
+  - id: q036
+    language: zh-CN
+    query: "做与情绪冲动相反的行为"
+    expected: [er.h20, er.h21]
+  - id: q037
+    language: zh-CN
+    query: "向别人提出请求时怎么说比较有效"
+    expected: [ie.h5]
+  - id: q038
+    language: zh-CN
+    query: "维持良好关系需要注意什么"
+    expected: [ie.h3]
+  - id: q039
+    language: zh-CN
+    query: "在人际交往中如何保持自尊"
+    expected: [ie.h7]
+  - id: q040
+    language: zh-CN
+    query: "拒绝别人之前要考虑哪些因素"
+    expected: [ie.h10]
+  - id: q041
+    language: zh-CN
+    query: "站在对方的角度思考对方为什么这样做"
+    expected: [ie.h13]
+  - id: q042
+    language: zh-CN
+    query: "是什么阻碍我实现人际目标"
+    expected: [ie.h2]
+  - id: q043
+    language: zh-CN
+    query: "担心的想法和给自己打气的话"
+    expected: [ie.h8]
+  - id: q044
+    language: en
+    query: "What is DBT and who is it for?"
+    expected: [ori.h1]
+  - id: q045
+    language: en
+    query: "Why do some people feel emotions so much more intensely?"
+    expected: [ori.h4]
+  - id: q046
+    language: en
+    query: "group rules and keeping things confidential"
+    expected: [ori.h6]
+  - id: q047
+    language: en
+    query: "difference between emotion mind and reasonable mind"
+    expected: [mf.h3, mf.h4]
+  - id: q048
+    language: en
+    query: "how to observe and describe without judging"
+    expected: [mf.h5, mf.h6]
+  - id: q049
+    language: en
+    query: "why bother practising mindfulness"
+    expected: [mf.h2, mf.h1]
+  - id: q050
+    language: en
+    query: "ways to distract myself when I'm really upset"
+    expected: [dt.h3]
+  - id: q051
+    language: en
+    query: "calm myself down using my senses"
+    expected: [dt.h5]
+  - id: q052
+    language: en
+    query: "IMPROVE the moment skills"
+    expected: [dt.h7]
+  - id: q053
+    language: en
+    query: "pros and cons of acting on an urge"
+    expected: [dt.h9, dt.h10]
+  - id: q054
+    language: en
+    query: "cold water and intense exercise to bring down an extreme emotion"
+    expected: [dt.h11]
+  - id: q055
+    language: en
+    query: "how to put together a crisis survival kit"
+    expected: [dt.h13]
+  - id: q056
+    language: en
+    query: "accepting a reality I cannot change"
+    expected: [dt.h14, dt.h17, dt.h15]
+  - id: q057
+    language: en
+    query: "willingness versus willfulness"
+    expected: [dt.h16]
+  - id: q058
+    language: en
+    query: "thinking dialectically: two opposite things can both be true"
+    expected: [wmp.h1, wmp.h2]
+  - id: q059
+    language: en
+    query: "am I too strict or too lenient as a parent"
+    expected: [wmp.h4, wmp.h5]
+  - id: q060
+    language: en
+    query: "which teenage behaviours are normal and which are worrying"
+    expected: [wmp.h6]
+  - id: q061
+    language: en
+    query: "how to validate my teenager's feelings"
+    expected: [wmp.h9, wmp.h8]
+  - id: q062
+    language: en
+    query: "how can I validate myself"
+    expected: [wmp.h10]
+  - id: q063
+    language: en
+    query: "rewarding good behaviour so it happens more"
+    expected: [wmp.h13, wmp.h12, wmp.h14]
+  - id: q064
+    language: en
+    query: "ignoring a behaviour so that it stops"
+    expected: [wmp.h15, wmp.h16]
+  - id: q065
+    language: en
+    query: "what are emotions good for"
+    expected: [er.h4]
+  - id: q066
+    language: en
+    query: "a list of words for emotions"
+    expected: [er.h3]
+  - id: q067
+    language: en
+    query: "fun activities to do together as a family"
+    expected: [er.h11, er.h10]
+  - id: q068
+    language: en
+    query: "does sleep affect my mood"
+    expected: [er.h16b, er.h16]
+  - id: q069
+    language: en
+    query: "cope ahead for a stressful event"
+    expected: [er.h15]
+  - id: q070
+    language: en
+    query: "riding the wave of a strong emotion"
+    expected: [er.h18]
+  - id: q071
+    language: en
+    query: "check the facts about a situation"
+    expected: [er.h19]
+  - id: q072
+    language: en
+    query: "doing the opposite of what my anger tells me to do"
+    expected: [er.h20, er.h21]
+  - id: q073
+    language: en
+    query: "asking for what I want with DEAR MAN"
+    expected: [ie.h5]
+    skill_ids: [ie.dear_man]
+  - id: q074
+    language: en
+    query: "keeping a relationship good with GIVE"
+    expected: [ie.h3]
+  - id: q075
+    language: en
+    query: "keeping my self-respect with FAST"
+    expected: [ie.h7]
+  - id: q076
+    language: en
+    query: "how firmly should I ask for something or say no"
+    expected: [ie.h10]
+  - id: q077
+    language: en
+    query: "seeing the other person's side with THINK"
+    expected: [ie.h13]
+  - id: q078
+    language: en
+    query: "my values and priorities in life"
+    expected: [er.h13, er.h12]

@@ -1,0 +1,170 @@
+# Deterministic rules applied to every participant-facing AI output (Plan §5.4 "Rule checks";
+# Phase 4 task 4). DRAFT (O10): written by the developer, pending clinician review.
+#
+# Patterns are Python regular expressions (YAML single-quoted: one backslash), matched
+# case-insensitively after NFKC normalisation and case-folding. Every language's patterns apply
+# to every output (an English answer can still contain Chinese and the reverse).
+# The crisis-promise patterns in safety/forbidden_phrases.yaml are applied as well.
+# A hit means: regenerate once, then use the authored fallback (never show the hit to anyone).
+kind: output_rules
+version: 1
+approval:
+  status: draft
+
+overlap:
+  # Rule 2 (D7): longest run shared with a retrieved chunk or the manual fingerprint.
+  max_shared_chars: 19 # 20 consecutive identical characters fail
+  max_shared_en_words: 11 # 12 consecutive identical English words fail
+
+language:
+  # Rule 3: share of CJK among letters in participant-facing text.
+  zh_min_cjk_ratio: 0.6 # acronyms such as DEAR MAN or TIPP stay allowed
+  en_max_cjk_ratio: 0.02
+
+categories:
+  disclosure_request:
+    # Asking for personal disclosure or trauma details (§6.1, D22).
+    en:
+      - '\b(tell|share with|describe (to )?) ?me (more )?(about )?(the|your) (trauma|abuse|worst (memory|thing|experience)|darkest)'
+      - '\b(what|which) (exactly )?(happened|did (they|he|she) do) (to you )?(at home|in your family|when you were (hurt|abused))'
+      - '\bdescribe (what|how) (your (parent|mother|father|mom|dad|family)|they) (did|hurt)'
+      - '\b(details|specifics) (of|about) (the|your) (abuse|trauma|self[- ]harm|attempt)'
+    zh-CN:
+      - '(说说|讲讲|告诉我|描述一下|分享一下)(你)?(经历过?的|遭受的|受到的)?(创伤|虐待|最痛苦的(事|经历|回忆)|最黑暗)'
+      - '(你)?(家里|家人|父母|爸爸|妈妈)(具体)?(对你)?做了什么(伤害|让你受伤)'
+      - '(详细|具体)(说说|描述|讲讲)(你的)?(自伤|自残|伤害自己|受虐|创伤)'
+      - '(详细|具体)(地)?(说说|描述|讲讲)(一下)?(你)?(是)?(怎么|如何|为什么)(伤害自己|自伤|自残|受伤)'
+  blame_shame:
+    # Blame, shaming labels, moral judgement (§6.3; adversarial "shame-inducing feedback").
+    en:
+      - '\byou(''re| are) (so |being |just )?(lazy|stupid|dumb|selfish|manipulative|attention[- ]seeking|dramatic|overreacting|over-?sensitive|too sensitive|a drama queen|a failure|a bad (kid|child|parent|mother|father|person)|pathetic|hopeless)\b'
+      - '\b(your|the) (child|teen|son|daughter|kid|parents?|mother|father|mom|dad) (is|are) (the (real )?problem|to blame|the cause)\b'
+      - '\b(you should be ashamed|shame on you|what''s wrong with you|that''s a (stupid|dumb|silly) answer|how could you be so)\b'
+      - '\b(it''s|it is) (all )?your fault\b'
+    zh-CN:
+      - '你(真|太|就是|真是|简直)(懒|笨|蠢|自私|没用|失败|矫情|作|不懂事|是个坏孩子|是个坏家长)'
+      - '(孩子|父母|家长|爸爸|妈妈|你爸|你妈)(就是|才是)(问题|罪魁祸首|错的一方)'
+      - '(真丢人|丢脸|可耻|你应该感到羞耻|有什么毛病|这个回答(太)?(蠢|幼稚|可笑))'
+      - '(都|全)是你的错'
+  coercive_parenting:
+    # Coercive or harmful parenting instructions (§6.6); punishment must stay specific and
+    # time-limited per the manual, so only clearly coercive forms are listed.
+    en:
+      - '\b(hit|slap|spank|beat|smack) (them|him|her|your (child|teen|son|daughter|kid))\b'
+      - '\block (them|him|her|your (child|teen|son|daughter|kid)) (in|out|up)\b'
+      - '\b(withhold|take away|deny) (food|meals|sleep)\b'
+      - '\b(threaten|scare|frighten|humiliate) (them|him|her|your (child|teen|son|daughter|kid))\b'
+      - '\b(force|make) (them|him|her|your (child|teen|son|daughter|kid)) (to )?(obey|submit|apologi[sz]e)\b'
+      - '\b(read|check|go through) (their|his|her) (diary|messages|phone) (secretly|without (asking|telling))'
+      - '\bignore (it|them|him|her) (even )?(when|if) (they|he|she) (talk about|threaten|mention) (self[- ]harm|suicide|hurting)'
+    zh-CN:
+      - '(打|揍|扇|体罚)(他|她|孩子|小孩)'
+      - '(把)?(他|她|孩子)(锁|关)(在|进)(房间|屋里|门外)'
+      - '(不给|不让|断)(他|她|孩子)?(吃饭|饭吃|睡觉)'
+      - '(不给|不让|停)(他|她|孩子)(吃)?(早|午|晚)?(饭|餐|吃的)'
+      - '(威胁|恐吓|吓唬|羞辱)(他|她|孩子)'
+      - '(逼|强迫)(他|她|孩子)(服从|认错|道歉|听话)'
+      - '(偷看|偷偷看|翻看)(他|她|孩子)的(日记|手机|聊天记录)'
+      - '(他|她|孩子)(说|提到)(自伤|自杀|伤害自己)(时)?(就)?(不用|不要)理(会|睬)?'
+  diagnosis_medication:
+    # Diagnoses or medication advice (§5.4 principle).
+    en:
+      - '\byou (probably |likely |might |may |clearly )?(have|are suffering from|meet the criteria for) (clinical |major )?(depression|bipolar|bpd|borderline personality|adhd|ptsd|an? (anxiety|eating|personality|mood) disorder|ocd)\b'
+      - '\b(your (child|teen|son|daughter)|(he|she|they)) (probably |likely |clearly )?(has|have) (depression|bipolar|bpd|borderline|adhd|ptsd|an? (anxiety|eating|personality|mood) disorder)\b'
+      - '\b(take|increase|reduce|lower|stop taking|start taking|double) (your |their |the )?(medication|meds|pills|dose|antidepressants?|sleeping pills)\b'
+      - '\b\d+\s?mg\b'
+    zh-CN:
+      - '(你|孩子|他|她)(可能|应该|肯定|明显|大概)?(患有|得了|有)(抑郁症|焦虑症|双相|边缘型人格|多动症|创伤后应激|进食障碍|强迫症|人格障碍)'
+      - '(服用|吃|停用|停掉|加量|减量|增加|减少)(你的|孩子的)?(药|药物|抗抑郁药|安眠药|剂量)'
+      - '\d+\s?(毫克|mg)'
+  fabricated_evidence:
+    # Fabricated statistics or citations (D6).
+    en:
+      - '\b(stud(y|ies)|research|trials?|surveys?|data) (show|shows|found|finds|prove|proves|suggests?)[^.]{0,60}\b\d+(\.\d+)?\s?%'
+      - '\b\d+(\.\d+)?\s?% of (teens|adolescents|people|parents|patients|students)\b'
+      - '\bet al\.'
+      - '\((19|20)\d\d\)'
+    zh-CN:
+      - '(研究|调查|试验|数据|统计)(显示|表明|发现|证明)[^。]{0,40}\d+(\.\d+)?\s?(%|％|成)'
+      - '\d+(\.\d+)?\s?(%|％)的(青少年|人|家长|父母|患者|学生)'
+      - '(等人|等)[,，]?\s?(19|20)\d\d'
+  graphic_self_harm:
+    # Method or lethality detail (§6.6).
+    en:
+      - '\b(cut|cutting|slit|slash) (your|my|their|his|her)? ?(wrists?|arms?|skin|veins?)\b'
+      - '\bhow (deep|many pills|much (of|to take))\b'
+      - '\b(lethal|fatal|deadly) (dose|amount)\b'
+      - '\boverdos(e|ing) (on|with)\b'
+      - '\b(ways|methods|steps) to (kill|hurt|harm) (yourself|myself|themselves)\b'
+    zh-CN:
+      - '(割|划)(手腕|手臂|血管|皮肤)'
+      - '(吞|吃)(多少|几)(片|粒|瓶)'
+      - '(致死|致命)(剂量|量)'
+      - '(自杀|自残|上吊|跳楼|割腕)的?(方法|步骤|方式|工具)'
+  adult_disclosure:
+    # The coach must not disclose (invented) personal history to a minor (§7.3 "adult disclosures").
+    en:
+      - '\b(when i was|i (once |used to |also |too )+)(self[- ]harm|cut myself|tried to kill|was suicidal|was depressed|drank|took drugs)'
+      - '\bmy (own )?(divorce|ex[- ]?(husband|wife)|affair|drinking|depression)\b'
+    zh-CN:
+      - '我(以前|曾经|也|小时候|当年){1,3}(自残|割过|划过|想过自杀|自杀过|抑郁过|酗酒|吸过)'
+      - '我(的)?(离婚|前夫|前妻|婚外情)'
+  boundary:
+    # Boundary violations: secrecy, special relationship, undermining the care team.
+    en:
+      - '\b(keep (this|it) (a )?secret|our (little )?secret|just between (you and me|us))\b'
+      - '\bdon''t tell (your|the) (therapist|parents?|mom|dad|care team|doctor)\b'
+      - '\bi (love you|am your (best )?friend|''m your (best )?friend)\b'
+      - '\byou (don''t|do not) need (your )?(therapist|therapy|the care team)\b'
+      - '\bi(''ll| will) always be (here|there|available) for you\b'
+    zh-CN:
+      - '(这是)?(我们(俩)?之间的|我们的)(小)?秘密'
+      - '不要告诉(你的)?(治疗师|父母|爸妈|爸爸|妈妈|医生|老师)'
+      - '我(爱你|是你(最好)?的朋友)'
+      - '你不需要(治疗师|治疗|心理治疗|医生)'
+      - '我(会)?(一直|永远|随时|24小时)(都)?(在这里|在你身边|陪着你)'
+  stereotype:
+    # Stereotyped family roles (§6.3).
+    en:
+      - '\b(mothers|moms|fathers|dads|girls|boys|women|men) (are|should) (always|naturally|just|supposed to) '
+      - '\b(as a (mother|father|girl|boy)), you (should|must) '
+    zh-CN:
+      - '(女孩子|男孩子|当妈的|当爸的|母亲|父亲|女人|男人)(就该|就应该|天生|本来就)'
+  false_authority:
+    # Claiming therapist authorisation or access the AI does not have.
+    en:
+      - '\b(your|the) (therapist|doctor|care team) (has )?(said|says|allowed|approved|authori[sz]ed|agreed) (that )?(i|you) (can|may|could)\b'
+      - '\b(i have|i''ve got) (access to|seen|read) (your|their|his|her) (diary|records|file|messages)\b'
+    zh-CN:
+      - '(你的)?(治疗师|医生|老师)(已经)?(同意|批准|授权|允许)(了)?(我|你)(可以|能)'
+      - '我(已经)?(看过|看到|读过|查看了|能看到)(你|他|她|孩子|你(妈妈|爸爸|父母))的(日记|记录|档案|聊天)'
+  privacy:
+    # Revealing (or inventing) another participant's private data.
+    en:
+      - '\b(your (mom|mother|dad|father|parent|child|teen|son|daughter|partner)''s|their) (diary|diary card|journal) (says|shows|said|showed|entry|entries|mentions)\b'
+      - '\b(your (mom|mother|dad|father|parent|child|teen|son|daughter)) (wrote|recorded|logged) (in|on) (their|his|her) (diary|card)\b'
+    zh-CN:
+      - '(他|她|孩子|你(妈妈|爸爸|父母|孩子))的日记(卡)?(里|上|中)?(写|显示|记录|提到)'
+      - '(你)?(妈妈|爸爸|父母|孩子)(在)?(日记|日记卡)(里|上)(写|记录)了'
+
+# Matches inside quotation marks are allowed for these categories (D53): lessons quote an
+# invalidating remark as the example of what not to say. Unquoted, they are still blocked.
+quoted_examples_allowed:
+  - blame_shame
+
+medical_caution:
+  # Rule 6: content that teaches the TIPP Temperature or Intense-exercise skills must carry the
+  # manual's health caution (check with a doctor first for heart conditions, eating disorders,
+  # and similar). Checked on the whole output whenever a trigger appears, for any skill.
+  triggers:
+    en:
+      - '\b(cold water|icy water|ice[- ]?(water|packs?|cubes?)|splash(ing)? (cold )?water on your face|change your (body )?temperature|face in (cold|icy) water)\b'
+      - '\b(intense|vigorous|hard) (exercise|workout|physical activity)\b'
+    zh-CN:
+      - '(冷水|冰水|冰袋|冰块|冷敷|把脸(浸|埋)|改变(身体|体表)?温度|体温)'
+      - '(剧烈|高强度|激烈)(的)?(运动|锻炼)'
+  required_any:
+    en:
+      - '\b(heart|cardiac|eating disorder|medical condition|health (condition|problem)s?|doctor|health ?care provider|physician)\b'
+    zh-CN:
+      - '(心脏|进食障碍|饮食障碍|医生|医疗|身体状况|健康问题|健康状况|病史)'

@@ -1,0 +1,564 @@
+# Handout index of the DBT-A manual (Plan §5.3 step 3, Appendix A). Committed mapping (D44).
+# English titles are the developer's own short descriptions. Chinese titles and all manual text
+# are read from the PDF at ingestion time and stored only in the database, never in this repo (D7).
+# Page numbers are PDF pages. In-page headers are unreliable (e.g. Interpersonal Effectiveness
+# pages 106 and 111-113 carry wrong numbers), so mapping is by title and page; ingestion
+# cross-checks it against the page headers it can read.
+# `diagram_pages` have no usable text layer and are read from manual transcriptions (D43).
+kind: handout_index
+version: 1
+approval:
+  status: draft
+source:
+  pdf_pages: 113
+  index_pages: [1, 2, 3]
+  divider_pages: [4, 12, 23, 49, 71, 99]
+handouts:
+  - id: ori.h1
+    module: orientation
+    number: "1"
+    title_en: "What is DBT?"
+    pages: [5]
+    skill_ids: [ori.what_is_dbt]
+  - id: ori.h2
+    module: orientation
+    number: "2"
+    title_en: "Goals of skills training"
+    pages: [6]
+    skill_ids: [ori.what_is_dbt]
+  - id: ori.h3
+    module: orientation
+    number: "3"
+    title_en: "Skills-training group format"
+    pages: [7]
+    skill_ids: [ori.what_is_dbt]
+    diagram_pages: [7]
+  - id: ori.h4
+    module: orientation
+    number: "4"
+    title_en: "Biosocial theory"
+    pages: [8]
+    skill_ids: [ori.biosocial_theory]
+    diagram_pages: [8]
+  - id: ori.h5
+    module: orientation
+    number: "5"
+    title_en: "DBT assumptions"
+    pages: [9]
+    skill_ids: [ori.assumptions]
+  - id: ori.h6
+    module: orientation
+    number: "6"
+    title_en: "Group guidelines"
+    pages: [10]
+    skill_ids: [ori.what_is_dbt]
+  - id: ori.h7
+    module: orientation
+    number: "7"
+    title_en: "DBT contract"
+    pages: [11]
+    skill_ids: [ori.what_is_dbt]
+  - id: mf.h1
+    module: mindfulness
+    number: "1"
+    title_en: "Taking control of your mind"
+    pages: [13]
+    skill_ids: [mf.what_skills, mf.how_skills]
+  - id: mf.h2
+    module: mindfulness
+    number: "2"
+    title_en: "Mindfulness: why bother?"
+    pages: [14]
+    skill_ids: [mf.what_skills, mf.how_skills]
+  - id: mf.h3
+    module: mindfulness
+    number: "3"
+    title_en: "Three states of mind"
+    pages: [15, 16]
+    skill_ids: [mf.states_of_mind]
+    diagram_pages: [15]
+  - id: mf.h4
+    module: mindfulness
+    number: "4"
+    title_en: "Practice: observing yourself in each state of mind"
+    pages: [17, 18]
+    skill_ids: [mf.states_of_mind]
+    is_worksheet: true
+    diagram_pages: [17]
+  - id: mf.h5
+    module: mindfulness
+    number: "5"
+    title_en: "Mindfulness WHAT skills"
+    pages: [19]
+    skill_ids: [mf.what_skills]
+  - id: mf.h6
+    module: mindfulness
+    number: "6"
+    title_en: "Mindfulness HOW skills"
+    pages: [20]
+    skill_ids: [mf.how_skills]
+  - id: mf.h7
+    module: mindfulness
+    number: "7"
+    title_en: "Mindfulness reminders"
+    pages: [21]
+    skill_ids: [mf.what_skills, mf.how_skills]
+  - id: mf.h8
+    module: mindfulness
+    number: "8"
+    title_en: "Practice: WHAT and HOW skills"
+    pages: [22]
+    skill_ids: [mf.what_skills, mf.how_skills]
+    is_worksheet: true
+  - id: dt.h1
+    module: distress_tolerance
+    number: "1"
+    title_en: "Why tolerate painful feelings and urges?"
+    pages: [24]
+    skill_ids: [dt.accepts, dt.self_soothe, dt.improve, dt.pros_cons, dt.tipp]
+  - id: dt.h2
+    module: distress_tolerance
+    number: "2"
+    title_en: "Crisis survival skills overview"
+    pages: [25]
+    skill_ids: [dt.accepts, dt.self_soothe, dt.improve, dt.pros_cons, dt.tipp]
+  - id: dt.h3
+    module: distress_tolerance
+    number: "3"
+    title_en: "Distract with Wise Mind ACCEPTS"
+    pages: [26]
+    skill_ids: [dt.accepts]
+  - id: dt.h4
+    module: distress_tolerance
+    number: "4"
+    title_en: "Practice: Wise Mind ACCEPTS"
+    pages: [27, 28]
+    skill_ids: [dt.accepts]
+    is_worksheet: true
+  - id: dt.h5
+    module: distress_tolerance
+    number: "5"
+    title_en: "Self-soothe with the six senses"
+    pages: [29]
+    skill_ids: [dt.self_soothe]
+  - id: dt.h6
+    module: distress_tolerance
+    number: "6"
+    title_en: "Practice: self-soothing"
+    pages: [30, 31]
+    skill_ids: [dt.self_soothe]
+    is_worksheet: true
+  - id: dt.h7
+    module: distress_tolerance
+    number: "7"
+    title_en: "IMPROVE the moment"
+    pages: [32]
+    skill_ids: [dt.improve]
+  - id: dt.h8
+    module: distress_tolerance
+    number: "8"
+    title_en: "Practice: IMPROVE the moment"
+    pages: [33, 34]
+    skill_ids: [dt.improve]
+    is_worksheet: true
+  - id: dt.h9
+    module: distress_tolerance
+    number: "9"
+    title_en: "Pros and cons"
+    pages: [35, 36]
+    skill_ids: [dt.pros_cons]
+  - id: dt.h10
+    module: distress_tolerance
+    number: "10"
+    title_en: "Practice: pros and cons"
+    pages: [37]
+    skill_ids: [dt.pros_cons]
+    is_worksheet: true
+  - id: dt.h11
+    module: distress_tolerance
+    number: "11"
+    title_en: "TIPP skills for extreme emotions"
+    pages: [38, 39]
+    skill_ids: [dt.tipp]
+  - id: dt.h12
+    module: distress_tolerance
+    number: "12"
+    title_en: "Practice: TIPP skills"
+    pages: [40]
+    skill_ids: [dt.tipp]
+    is_worksheet: true
+  - id: dt.h13
+    module: distress_tolerance
+    number: "13"
+    title_en: "Building a crisis survival kit"
+    pages: [41]
+    skill_ids: [dt.crisis_kit]
+  - id: dt.h14
+    module: distress_tolerance
+    number: "14"
+    title_en: "Accepting reality: our choices"
+    pages: [42, 43]
+    skill_ids: [dt.radical_acceptance]
+  - id: dt.h15
+    module: distress_tolerance
+    number: "15"
+    title_en: "Accepting reality: turning the mind"
+    pages: [44]
+    skill_ids: [dt.turning_the_mind]
+  - id: dt.h16
+    module: distress_tolerance
+    number: "16"
+    title_en: "Willingness"
+    pages: [45, 46]
+    skill_ids: [dt.willingness]
+  - id: dt.h17
+    module: distress_tolerance
+    number: "17"
+    title_en: "Ways to practise accepting reality"
+    pages: [47]
+    skill_ids: [dt.radical_acceptance, dt.turning_the_mind, dt.willingness]
+  - id: dt.h18
+    module: distress_tolerance
+    number: "18"
+    title_en: "Practice: accepting reality"
+    pages: [48]
+    skill_ids: [dt.radical_acceptance]
+    is_worksheet: true
+  - id: wmp.h1
+    module: walking_the_middle_path
+    number: "1"
+    title_en: "Dialectics: what is it?"
+    pages: [50]
+    skill_ids: [wmp.dialectics]
+  - id: wmp.h2
+    module: walking_the_middle_path
+    number: "2"
+    title_en: "How to think and act dialectically"
+    pages: [51, 52]
+    skill_ids: [wmp.thinking_dialectically]
+  - id: wmp.h3
+    module: walking_the_middle_path
+    number: "3"
+    title_en: "Thinking mistakes"
+    pages: [53]
+    skill_ids: [wmp.thinking_mistakes]
+  - id: wmp.h4
+    module: walking_the_middle_path
+    number: "4"
+    title_en: "Dialectical dilemmas"
+    pages: [54]
+    skill_ids: [wmp.dialectical_dilemmas]
+    diagram_pages: [54]
+  - id: wmp.h5
+    module: walking_the_middle_path
+    number: "5"
+    title_en: "Dialectical dilemmas: how they apply to you"
+    pages: [55]
+    skill_ids: [wmp.dialectical_dilemmas]
+    diagram_pages: [55]
+  - id: wmp.h6
+    module: walking_the_middle_path
+    number: "6"
+    title_en: "Typical vs concerning adolescent behaviour"
+    pages: [56, 57]
+    skill_ids: [wmp.typical_vs_concerning]
+  - id: wmp.h7
+    module: walking_the_middle_path
+    number: "7"
+    title_en: "Practice: thinking and acting dialectically"
+    pages: [58]
+    skill_ids: [wmp.thinking_dialectically]
+    is_worksheet: true
+  - id: wmp.h8
+    module: walking_the_middle_path
+    number: "8"
+    title_en: "Validation"
+    pages: [59]
+    skill_ids: [wmp.validating_others, wmp.self_validation]
+  - id: wmp.h9
+    module: walking_the_middle_path
+    number: "9"
+    title_en: "How to validate others"
+    pages: [60]
+    skill_ids: [wmp.validating_others]
+  - id: wmp.h10
+    module: walking_the_middle_path
+    number: "10"
+    title_en: "How to validate yourself"
+    pages: [61]
+    skill_ids: [wmp.self_validation]
+  - id: wmp.h11
+    module: walking_the_middle_path
+    number: "11"
+    title_en: "Practice: validating yourself and others"
+    pages: [62]
+    skill_ids: [wmp.validating_others, wmp.self_validation]
+    is_worksheet: true
+  - id: wmp.h12
+    module: walking_the_middle_path
+    number: "12"
+    title_en: "Behaviour change"
+    pages: [63, 64]
+    skill_ids: [wmp.increasing_behavior, wmp.decreasing_behavior]
+  - id: wmp.h13
+    module: walking_the_middle_path
+    number: "13"
+    title_en: "Ways to increase behaviour"
+    pages: [65, 66]
+    skill_ids: [wmp.increasing_behavior]
+  - id: wmp.h14
+    module: walking_the_middle_path
+    number: "14"
+    title_en: "Practice: positive reinforcement"
+    pages: [67]
+    skill_ids: [wmp.increasing_behavior]
+    is_worksheet: true
+  - id: wmp.h15
+    module: walking_the_middle_path
+    number: "15"
+    title_en: "Ways to decrease or stop behaviour"
+    pages: [68, 69]
+    skill_ids: [wmp.decreasing_behavior]
+  - id: wmp.h16
+    module: walking_the_middle_path
+    number: "16"
+    title_en: "Practice: extinction and punishment"
+    pages: [70]
+    skill_ids: [wmp.decreasing_behavior]
+    is_worksheet: true
+  - id: er.h1
+    module: emotion_regulation
+    number: "1"
+    title_en: "Taking charge of your emotions: why bother?"
+    pages: [72]
+    skill_ids: [er.understanding_emotions]
+  - id: er.h2
+    module: emotion_regulation
+    number: "2"
+    title_en: "Goals of emotion regulation skills"
+    pages: [73]
+    skill_ids: [er.understanding_emotions]
+  - id: er.h3
+    module: emotion_regulation
+    number: "3"
+    title_en: "Short list of emotions"
+    pages: [74]
+    skill_ids: [er.understanding_emotions]
+    diagram_pages: [74]
+  - id: er.h4
+    module: emotion_regulation
+    number: "4"
+    title_en: "What good are emotions?"
+    pages: [75]
+    skill_ids: [er.understanding_emotions]
+  - id: er.h5
+    module: emotion_regulation
+    number: "5"
+    title_en: "Model of emotions"
+    pages: [76]
+    skill_ids: [er.emotion_model]
+    diagram_pages: [76]
+  - id: er.h6
+    module: emotion_regulation
+    number: "6"
+    title_en: "Skills model of emotions"
+    pages: [77]
+    skill_ids: [er.emotion_model]
+    diagram_pages: [77]
+  - id: er.h7
+    module: emotion_regulation
+    number: "7"
+    title_en: "Practice: observing and describing emotions"
+    pages: [78]
+    skill_ids: [er.understanding_emotions, er.emotion_model]
+    is_worksheet: true
+    diagram_pages: [78]
+  - id: er.h8
+    module: emotion_regulation
+    number: "8"
+    title_en: "ABC PLEASE overview"
+    pages: [79]
+    skill_ids: [er.accumulate_positives, er.build_mastery_cope_ahead, er.please]
+  - id: er.h9
+    module: emotion_regulation
+    number: "9"
+    title_en: "Accumulating positive experiences: short term"
+    pages: [80]
+    skill_ids: [er.accumulate_positives]
+  - id: er.h10
+    module: emotion_regulation
+    number: "10"
+    title_en: "Pleasant events list"
+    pages: [81]
+    skill_ids: [er.accumulate_positives]
+  - id: er.h11
+    module: emotion_regulation
+    number: "11"
+    title_en: "Family pleasant events list"
+    pages: [82, 83, 84]
+    skill_ids: [er.accumulate_positives]
+  - id: er.h12
+    module: emotion_regulation
+    number: "12"
+    title_en: "Accumulating positive experiences: long term"
+    pages: [85]
+    skill_ids: [er.accumulate_positives]
+  - id: er.h13
+    module: emotion_regulation
+    number: "13"
+    title_en: "Wise Mind values and priorities list"
+    pages: [86]
+    skill_ids: [er.accumulate_positives]
+  - id: er.h14
+    module: emotion_regulation
+    number: "14"
+    title_en: "Practice: accumulating positives short and long term"
+    pages: [87]
+    skill_ids: [er.accumulate_positives]
+    is_worksheet: true
+  - id: er.h15
+    module: emotion_regulation
+    number: "15"
+    title_en: "Build mastery and cope ahead"
+    pages: [88]
+    skill_ids: [er.build_mastery_cope_ahead]
+  - id: er.h16
+    module: emotion_regulation
+    number: "16"
+    title_en: "PLEASE skills"
+    pages: [89]
+    skill_ids: [er.please]
+  - id: er.h16a
+    module: emotion_regulation
+    number: "16a"
+    title_en: "Food and your mood"
+    pages: [90]
+    skill_ids: [er.please]
+  - id: er.h16b
+    module: emotion_regulation
+    number: "16b"
+    title_en: "Ways to get better sleep"
+    pages: [91]
+    skill_ids: [er.please]
+  - id: er.h17
+    module: emotion_regulation
+    number: "17"
+    title_en: "Practice: mastery, cope ahead and PLEASE"
+    pages: [92]
+    skill_ids: [er.build_mastery_cope_ahead, er.please]
+    is_worksheet: true
+  - id: er.h18
+    module: emotion_regulation
+    number: "18"
+    title_en: "Riding the wave: mindfulness of current emotion"
+    pages: [93]
+    skill_ids: [er.mindfulness_current_emotion]
+  - id: er.h19
+    module: emotion_regulation
+    number: "19"
+    title_en: "Check the facts and problem solving"
+    pages: [94]
+    skill_ids: [er.check_the_facts]
+  - id: er.h20
+    module: emotion_regulation
+    number: "20"
+    title_en: "Opposite action to change emotions"
+    pages: [95, 96, 97]
+    skill_ids: [er.opposite_action]
+  - id: er.h21
+    module: emotion_regulation
+    number: "21"
+    title_en: "Practice: opposite action"
+    pages: [98]
+    skill_ids: [er.opposite_action]
+    is_worksheet: true
+  - id: ie.h1
+    module: interpersonal_effectiveness
+    number: "1"
+    title_en: "Your goals and priorities"
+    pages: [100]
+    skill_ids: [ie.goals_priorities]
+  - id: ie.h2
+    module: interpersonal_effectiveness
+    number: "2"
+    title_en: "What gets in the way of your goals?"
+    pages: [101]
+    skill_ids: [ie.obstacles]
+  - id: ie.h3
+    module: interpersonal_effectiveness
+    number: "3"
+    title_en: "Building and keeping positive relationships: GIVE"
+    pages: [102]
+    skill_ids: [ie.give]
+  - id: ie.h4
+    module: interpersonal_effectiveness
+    number: "4"
+    title_en: "Practice: GIVE"
+    pages: [103]
+    skill_ids: [ie.give]
+    is_worksheet: true
+  - id: ie.h5
+    module: interpersonal_effectiveness
+    number: "5"
+    title_en: "Getting someone to do what you want: DEAR MAN"
+    pages: [104]
+    skill_ids: [ie.dear_man]
+  - id: ie.h6
+    module: interpersonal_effectiveness
+    number: "6"
+    title_en: "Practice: DEAR MAN"
+    pages: [105]
+    skill_ids: [ie.dear_man]
+    is_worksheet: true
+  - id: ie.h7
+    module: interpersonal_effectiveness
+    number: "7"
+    title_en: "Keeping your self-respect: FAST"
+    pages: [106]
+    skill_ids: [ie.fast]
+  - id: ie.h8
+    module: interpersonal_effectiveness
+    number: "8"
+    title_en: "Worry thoughts and Wise Mind cheerleading statements"
+    pages: [107]
+    skill_ids: [ie.cheerleading_statements]
+  - id: ie.h9
+    module: interpersonal_effectiveness
+    number: "9"
+    title_en: "Practice: FAST"
+    pages: [108]
+    skill_ids: [ie.fast]
+    is_worksheet: true
+  - id: ie.h10
+    module: interpersonal_effectiveness
+    number: "10"
+    title_en: "Factors to consider when asking or saying no"
+    pages: [109]
+    skill_ids: [ie.asking_saying_no_factors]
+  - id: ie.h11
+    module: interpersonal_effectiveness
+    number: "11"
+    title_en: "Practice: factors when asking or saying no"
+    pages: [110]
+    skill_ids: [ie.asking_saying_no_factors]
+    is_worksheet: true
+  - id: ie.h12
+    module: interpersonal_effectiveness
+    number: "12"
+    title_en: "Practice: using skills together"
+    pages: [111]
+    skill_ids: [ie.give, ie.dear_man, ie.fast]
+    is_worksheet: true
+  - id: ie.h13
+    module: interpersonal_effectiveness
+    number: "13"
+    title_en: "THINK skills"
+    pages: [112]
+    skill_ids: [ie.think]
+  - id: ie.h14
+    module: interpersonal_effectiveness
+    number: "14"
+    title_en: "Practice: THINK"
+    pages: [113]
+    skill_ids: [ie.think]
+    is_worksheet: true

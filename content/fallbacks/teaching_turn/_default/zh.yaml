@@ -1,0 +1,14 @@
+# Authored fallback (Plan §5.4). DRAFT (O10): skill-neutral until clinicians author
+# skill-specific versions in fallbacks/<function>/<skill_id>/. Shown labelled as authored content.
+kind: fallback
+function: teaching_turn
+skill: _default
+language: zh-CN
+version: 1
+approval:
+  status: draft
+notice: 这部分内容暂时无法生成。你的治疗师可以在小组或面谈时和你一起复习这个技能。
+output:
+  message_type: explanation
+  content: 抱歉，这条回复暂时无法生成。你可以稍后再试，或者在下次小组或面谈时和治疗师一起练习{skill_name}。
+  question: ''

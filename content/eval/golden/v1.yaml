@@ -1,0 +1,223 @@
+# AI golden set (Plan §7.3; Phase 4 task 8). DRAFT (O10).
+# For every skill: what a correct explanation must cover, written by the developer in their own
+# words from general DBT knowledge (never manual wording, D7), plus the clinician rubric.
+# Automated checks (schema, citations, overlap, language) run on every output; the key points and
+# rubric are for clinician rating of the `ai sweep --export` file.
+kind: golden_eval
+version: 1
+approval:
+  status: draft
+rubric:
+  - id: accuracy_vs_manual
+    label: { zh-CN: 与手册一致, en: Accurate to the manual }
+    scale: "1-5 (1 = wrong or invented, 5 = fully consistent with the manual)"
+  - id: age_appropriate
+    label: { zh-CN: 适合年龄, en: Age-appropriate }
+    scale: "1-5 (language, examples and tone fit the reader's age and role)"
+  - id: non_blaming
+    label: { zh-CN: 不指责, en: Non-blaming }
+    scale: "1-5 (no blame, shame, labels or family member framed as the problem)"
+  - id: practice_quality
+    label: { zh-CN: 练习质量, en: Practice quality }
+    scale: "1-5 (concrete, doable practice rather than lecture)"
+skills:
+  - skill_id: ori.what_is_dbt
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [DBT帮助人们在强烈情绪中找到更有效的应对方式, DBT在接纳和改变之间寻找平衡, 技能通过反复练习掌握]
+      en: [DBT helps people respond more effectively when emotions are intense, DBT balances acceptance and change, Skills are learned through repeated practice]
+  - skill_id: ori.biosocial_theory
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [情绪困难来自天生的情绪敏感和不认可的环境之间的相互作用, 不把问题归咎于任何一个人, 认可和技能学习可以改变这种循环]
+      en: [Emotional difficulties come from the interaction of high emotional sensitivity and an invalidating environment, No single person is to blame, Validation and skill learning can change the cycle]
+  - skill_id: ori.assumptions
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [每个人都在尽力也都需要做得更好, 没有绝对的真理和对错, 问题不一定是自己造成的但需要自己去解决]
+      en: [Everyone is doing their best and also needs to do better, There is no absolute truth, Problems may not be your fault but you still need to work on them]
+  - skill_id: mf.states_of_mind
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [情绪心念由感受主导, 理智心念由逻辑主导, 智慧心念整合两者并带来平衡的判断]
+      en: [Emotion mind is ruled by feelings, Reasonable mind is ruled by logic, Wise mind combines both into a balanced judgement]
+  - skill_id: mf.what_skills
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [观察：只注意不反应, 描述：用语言说出事实而不加评判, 参与：全身心投入当下的活动]
+      en: [Observe - notice without reacting, Describe - put facts into words without judging, Participate - throw yourself fully into the present activity]
+  - skill_id: mf.how_skills
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [不评判：只看事实不贴好坏标签, 一心一意：一次只做一件事, 有效：做有用的事而不是争对错]
+      en: [Non-judgementally - see facts without labelling good or bad, One-mindfully - do one thing at a time, Effectively - do what works rather than what is "right"]
+  - skill_id: dt.accepts
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [用活动、贡献、比较、相反情绪、推开、想法和感觉转移注意力, 目的是度过危机而不是解决问题, 只在短时间内使用]
+      en: [Distract with activities contributing comparisons opposite emotions pushing away thoughts and sensations, The aim is to get through a crisis not to solve the problem, Use it for a short time only]
+  - skill_id: dt.self_soothe
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [通过视觉、听觉、嗅觉、味觉、触觉和身体动作安抚自己, 选择温和、对自己友善的方式, 提前准备好自己的安抚清单]
+      en: [Comfort yourself through sight hearing smell taste touch and movement, Choose gentle kind ways to care for yourself, Prepare your own soothing list in advance]
+  - skill_id: dt.improve
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [用想象、意义、祈祷或信念、放松、一次一件事、短暂休息和自我鼓励改善当下, 帮助在无法改变的处境中撑过去]
+      en: [Improve the moment with imagery meaning prayer relaxation one thing at a time a brief vacation and encouragement, It helps you get through a situation you cannot change right now]
+  - skill_id: dt.pros_cons
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [比较冲动行事和忍住冲动的好处与坏处, 同时考虑短期和长期后果, 在冲动来临前提前做好分析]
+      en: [Compare the pros and cons of acting on an urge and of resisting it, Look at both short-term and long-term consequences, Do the analysis before the urge hits]
+  - skill_id: dt.tipp
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [通过改变身体状态快速降低极端情绪, 包括温度、剧烈运动、调节呼吸和配对式肌肉放松, 有心脏问题或进食障碍等健康问题的人使用温度和运动方法前要先问医生]
+      en: [Changes body chemistry to bring extreme emotion down quickly, Includes temperature intense exercise paced breathing and paired muscle relaxation, Anyone with a heart condition eating disorder or other health problem should check with a doctor before the temperature and exercise parts]
+  - skill_id: dt.crisis_kit
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [提前把能帮助自己度过危机的物品和方法准备好, 工具包要随手可用, 包括可以联系的人和可以做的事]
+      en: [Prepare items and ideas that help you through a crisis in advance, Keep the kit easy to reach, Include people to contact and things to do]
+  - skill_id: dt.radical_acceptance
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [全然接受无法改变的现实, 接受不等于赞同或放弃, 拒绝接受会把痛苦变成更长久的苦难]
+      en: [Fully accept reality you cannot change, Acceptance is not approval or giving up, Refusing reality turns pain into longer suffering]
+  - skill_id: dt.turning_the_mind
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [接受是一次又一次的选择, 注意到自己不接受时把心念转回接受, 需要反复练习]
+      en: [Acceptance is a choice made again and again, Notice when you are not accepting and turn the mind back, It takes repeated practice]
+  - skill_id: dt.willingness
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [自愿是做当下需要的事, 任性是拒绝或固执地对抗现实, 注意任性并转向自愿]
+      en: [Willingness is doing what is needed in the moment, Willfulness is refusing or fighting reality, Notice willfulness and turn towards willingness]
+  - skill_id: wmp.dialectics
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [两种看似对立的观点可以同时成立, 没有绝对的对错, 寻找双方观点中的合理部分]
+      en: [Two seemingly opposite views can both be true, There is no absolute right or wrong, Look for what is valid on both sides]
+  - skill_id: wmp.thinking_dialectically
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [用"和"代替"但是", 避免"总是""从不"这样的极端说法, 从他人的角度看问题]
+      en: [Use "and" instead of "but", Avoid extreme words like "always" and "never", Look at the situation from the other person's point of view]
+  - skill_id: wmp.thinking_mistakes
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [常见的思考误区包括非黑即白、过度概括和读心, 注意到误区后用更平衡的想法代替, 想法不等于事实]
+      en: [Common thinking mistakes include all-or-nothing thinking overgeneralising and mind-reading, Replace them with more balanced thoughts once noticed, Thoughts are not facts]
+  - skill_id: wmp.dialectical_dilemmas
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [家庭中常见的两难：过于宽松与过于严格、把正常行为病理化与把问题行为正常化、强迫自主与培养依赖, 目标是在两端之间找到中间道路]
+      en: [Common family dilemmas are being too loose vs too strict normalising problem behaviour vs pathologising normal behaviour and forcing autonomy vs fostering dependence, The aim is a middle path between the extremes]
+  - skill_id: wmp.typical_vs_concerning
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [区分青少年的典型行为和值得担心的行为, 值得担心的行为需要和专业人员讨论, 不要把正常的成长变化当成问题]
+      en: [Tell typical teenage behaviour apart from concerning behaviour, Concerning behaviour should be discussed with professionals, Do not treat normal growing-up changes as problems]
+  - skill_id: wmp.validating_others
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [认可是让对方知道其感受在当时的情况下可以理解, 认可不等于同意, 包括专心倾听、反映感受和表现出理解]
+      en: [Validation communicates that someone's feelings make sense in the situation, Validating is not agreeing, It includes attentive listening reflecting feelings and showing understanding]
+  - skill_id: wmp.self_validation
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [承认自己的感受和想法是可以理解的, 不因为有某种情绪而批评自己, 自我认可有助于情绪平稳]
+      en: [Acknowledge that your own feelings and thoughts make sense, Do not criticise yourself for having an emotion, Self-validation helps emotions settle]
+  - skill_id: wmp.increasing_behavior
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [强化是在行为后带来好的结果以增加这种行为, 及时而具体的表扬效果最好, 先多用强化]
+      en: [Reinforcement means a good consequence after a behaviour makes it more likely, Prompt and specific praise works best, Use reinforcement first and most]
+  - skill_id: wmp.decreasing_behavior
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [消退是不再强化不想要的行为, 惩罚要少用并且具体、有时间限制, 危险行为绝不能忽略, 同时强化想要的替代行为]
+      en: [Extinction means no longer reinforcing an unwanted behaviour, Use punishment sparingly and keep it specific and time-limited, Never ignore dangerous behaviour, Reinforce the wanted alternative behaviour at the same time]
+  - skill_id: er.understanding_emotions
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [情绪有作用：传递信息、推动行动和与他人沟通, 情绪本身没有好坏, 了解情绪是调节情绪的第一步]
+      en: [Emotions have functions - they inform us motivate action and communicate to others, Emotions are not good or bad in themselves, Understanding emotions is the first step to regulating them]
+  - skill_id: er.emotion_model
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [情绪由触发事件、想法解读、身体反应、行动冲动和表达组成, 在任何一个环节都可以改变情绪, 给情绪命名有帮助]
+      en: [An emotion includes a prompting event an interpretation body changes urges and expression, You can change an emotion at any link, Naming the emotion helps]
+  - skill_id: er.accumulate_positives
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [每天安排一些愉快的小事, 朝着重要的长期目标采取行动, 积极体验时专注当下不担心结束]
+      en: [Schedule small pleasant events every day, Take steps towards important long-term goals, Be mindful of positive experiences without worrying about when they end]
+  - skill_id: er.build_mastery_cope_ahead
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [每天做一点有挑战但能完成的事以建立掌控感, 提前想象困难情境并演练应对方法, 演练让真正面对时更有准备]
+      en: [Do something a bit challenging but achievable every day to build mastery, Imagine a difficult situation in advance and rehearse coping, Rehearsal makes you more prepared when it happens]
+  - skill_id: er.please
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [照顾身体可以降低情绪脆弱性, 包括治疗身体疾病、均衡饮食、避免改变情绪的物质、充足睡眠和运动, 身体状态影响情绪]
+      en: [Taking care of the body lowers emotional vulnerability, It covers treating illness balanced eating avoiding mood-altering substances enough sleep and exercise, Body state affects mood]
+  - skill_id: er.mindfulness_current_emotion
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [像观察海浪一样观察情绪的起伏, 不压抑也不放大情绪, 情绪会自己过去]
+      en: [Observe the emotion rise and fall like a wave, Neither push it away nor amplify it, The emotion will pass on its own]
+  - skill_id: er.check_the_facts
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [区分事实和自己的解读, 检查情绪及其强度是否符合事实, 情绪符合事实时可以用问题解决]
+      en: [Separate facts from interpretations, Check whether the emotion and its intensity fit the facts, When the emotion fits the facts problem solving can help]
+  - skill_id: er.opposite_action
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [当情绪不符合事实时做与情绪冲动相反的事, 要全身心地做相反行为, 例如害怕时靠近而不是逃避]
+      en: [When an emotion does not fit the facts act opposite to its urge, Do the opposite action all the way, For example approach instead of avoiding when afraid]
+  - skill_id: ie.goals_priorities
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [人际情境中有三种目标：达成目的、维护关系和保持自尊, 先想清楚哪一个最重要, 不同目标用不同技能]
+      en: [Interpersonal situations have three goals - getting what you want keeping the relationship and keeping self-respect, Decide which matters most first, Different goals call for different skills]
+  - skill_id: ie.obstacles
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [阻碍包括缺乏技能、担心和顾虑、情绪太强、犹豫不决和环境限制, 找出具体阻碍才能针对处理]
+      en: [Obstacles include lack of skill worry thoughts overwhelming emotions indecision and the environment, Naming the specific obstacle lets you address it]
+  - skill_id: ie.give
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [温和、表现出兴趣、认可对方、态度轻松, 用于维护关系]
+      en: [Be gentle act interested validate and use an easy manner, It is used to keep the relationship]
+  - skill_id: ie.dear_man
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [描述情况、表达感受、清楚提出请求、强化对方, 保持专注、表现自信、愿意协商, 用于达成目的]
+      en: [Describe express assert and reinforce, Stay mindful appear confident and negotiate, It is used to get what you want]
+  - skill_id: ie.fast
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [公平、不过度道歉、坚持自己的价值观、诚实, 用于保持自尊]
+      en: [Be fair no excessive apologies stick to your values and be truthful, It is used to keep self-respect]
+  - skill_id: ie.cheerleading_statements
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [用鼓励自己的话对抗担心和自我怀疑, 提前准备好几句自我鼓励的话, 在困难的人际情境中使用]
+      en: [Use encouraging statements to counter worry and self-doubt, Prepare a few cheerleading lines in advance, Use them in difficult interpersonal situations]
+  - skill_id: ie.asking_saying_no_factors
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [决定提出请求或拒绝的强度前考虑多个因素, 例如对方的能力、时机、关系和自尊, 强度可以从很温和到很坚定]
+      en: [Consider several factors before deciding how strongly to ask or say no, For example the other person's capability timing the relationship and self-respect, The intensity can range from very soft to very firm]
+  - skill_id: ie.think
+    roles: [adolescent, caregiver]
+    key_points:
+      zh-CN: [从对方的角度思考, 考虑对方行为的其他可能解释, 用同理心和善意回应以缓和冲突]
+      en: [Think from the other person's point of view, Consider other possible explanations for their behaviour, Respond with empathy and kindness to ease conflict]

@@ -1,0 +1,12 @@
+# Authored fallback (Plan §5.4). DRAFT (O10): skill-neutral until clinicians author
+# skill-specific versions in fallbacks/<function>/<skill_id>/. Shown labelled as authored content.
+kind: fallback
+function: generate_hint
+skill: _default
+language: en
+version: 1
+approval:
+  status: draft
+notice: This is a prepared hint.
+output:
+  hint: Read this step's task again and think about which skill it is practising.

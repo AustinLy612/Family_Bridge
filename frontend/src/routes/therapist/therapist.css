@@ -1,0 +1,66 @@
+/* Phase 7 therapist dashboard. Calm and neutral: shades show amounts, never judgements (§5.13). */
+
+.fb-table--left td:not(:first-child),
+.fb-table--left th:not(:first-child) {
+  text-align: left;
+}
+.fb-heat__scroll {
+  overflow-x: auto;
+}
+.fb-heat {
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+  min-width: 100%;
+}
+.fb-heat th,
+.fb-heat td {
+  border: 1px solid var(--color-border);
+  padding: var(--space-1) var(--space-2);
+  text-align: left;
+}
+.fb-heat thead th {
+  vertical-align: bottom;
+  min-width: 7rem;
+}
+.fb-heat__alias {
+  display: block;
+  font-weight: 600;
+}
+.fb-heat__module {
+  background: var(--color-surface-muted, var(--color-surface));
+  font-weight: 700;
+}
+.fb-heat__cell {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.fb-heat__cell--1 {
+  background: var(--color-lavender-100);
+}
+.fb-heat__cell--2 {
+  background: color-mix(in srgb, var(--color-lavender) 35%, var(--color-surface));
+}
+.fb-heat__cell--3 {
+  background: color-mix(in srgb, var(--color-lavender) 55%, var(--color-surface));
+}
+.fb-transcript {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.fb-transcript__student {
+  padding-inline-start: var(--space-4);
+}
+.fb-content-output {
+  padding-top: var(--space-2);
+}
+
+/* Phase 9: recruitment denominators */
+.fb-recruit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--space-3, 0.75rem);
+}

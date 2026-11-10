@@ -1,0 +1,145 @@
+# Risk keyword lists for the keyword channel of safety screening (Plan §5.7, Phase 2 task 2).
+# DRAFT. Not clinically reviewed (O10). Seeded from DBT_Revised risk/services.py (D1):
+# HIGH_RISK_KEYWORDS, MODERATE_RISK_KEYWORDS and _MODERATE_CONCERN_INDICATORS.
+# Changes from the source, to stop ordinary speech from triggering (Plan §5.7):
+#   - removed "死掉" (high): matches "植物死掉了"; "想死" still covers the self-directed form
+#   - removed "我要杀" and "kill them" (moderate): match game talk ("我要杀了这个boss", "kill them at basketball")
+#   - "nothing matters" became "nothing matters anymore" ("nothing matters more than family")
+#   - "jump off" became specific places ("jump off a bridge" and similar)
+#   - "no reason to live" moved from moderate to high
+#   - added indirect disclosures (Plan §9.2), e.g. "better off without me", "遗书", "一了百了"
+#   - Phase 4 (D52): concern indicators for indirect warning signs found by the adversarial
+#     suite (giving belongings away, "easier without me") so the assess_risk LLM channel runs
+#   - added `benign` phrases, which are removed before matching (e.g. "想死你了" = "miss you so much")
+#
+# How matching works (backend/app/safety/screening.py):
+#   - text is NFKC-normalised and case-folded; curly apostrophes become straight ones
+#   - zh-CN terms are matched with all whitespace removed ("想 死" matches "想死")
+#   - en terms are matched as whole words or phrases ("hopeless" does not match "hopelessly")
+#   - every list is checked for every user, whatever their language setting
+#   - high -> severity high, stop the activity; moderate or concern -> severity medium
+#     (with the LLM channel off, concern indicators count as medium, as in DBT_Revised)
+kind: risk_keywords
+version: 1
+approval:
+  status: draft
+languages:
+  zh-CN:
+    high:
+      - 自杀
+      - 自伤
+      - 自残
+      - 想死
+      - 不想活
+      - 割腕
+      - 跳楼
+      - 上吊
+      - 安眠药
+      - 结束生命
+      - 杀死自己
+      - 伤害自己
+      - 活不下去
+      - 死了算了
+      - 去死
+      - 不想存在
+      - 消失算了
+      - 没有我会更好
+      - 遗书
+      - 一了百了
+      - 永远不要醒来
+      - 不想再醒来
+      - 结束这一切
+    moderate:
+      - 绝望
+      - 毫无希望
+      - 活着没意义
+      - 我想伤害
+      - 我想杀人
+      - 撑不下去
+      - 想消失
+    concern:
+      - 没有意义
+      - 活得没意义
+      - 存在没意义
+      - 我恨我
+      - 讨厌自己
+      - 伤害我
+      - 活着好累
+      - 东西都送给
+      - 东西都送人
+      - 以后也用不上了
+      - 没有我会更轻松
+      - 没有我会轻松
+      - 没有我大家会
+    benign:
+      - 想死你了
+      - 想死我了
+      - 笑死
+      - 累死
+      - 热死
+      - 冷死
+      - 饿死
+      - 烦死
+      - 难死
+      - 吓死
+      - 气死
+  en:
+    high:
+      - suicide
+      - suicidal
+      - kill myself
+      - killing myself
+      - end my life
+      - take my life
+      - hurt myself
+      - harm myself
+      - self-harm
+      - self harm
+      - cut myself
+      - cutting myself
+      - overdose
+      - jump off a bridge
+      - jump off the bridge
+      - jump off a building
+      - jump off the roof
+      - hang myself
+      - don't want to live
+      - do not want to live
+      - want to die
+      - wish i were dead
+      - wish i was dead
+      - better off dead
+      - better off without me
+      - no reason to live
+      - end it all
+      - suicide note
+      - goodbye note
+      - never wake up
+      - not be around much longer
+    moderate:
+      - hopeless
+      - life is meaningless
+      - hurt someone
+      - kill someone
+      - can't go on
+      - cannot go on
+      - want to disappear
+    concern:
+      - i hate myself
+      - hate myself
+      - nothing matters anymore
+      - no point anymore
+      - so tired of everything
+      - giving my stuff away
+      - giving my things away
+      - giving away my stuff
+      - giving away my things
+      - won't need it where
+      - won't need them where
+      - easier without me
+    benign:
+      - suicide squad
+      - killing me
+      - kill for a
+      - dying to
+      - dying of laughter

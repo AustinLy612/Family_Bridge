@@ -1,0 +1,14 @@
+# Authored fallback (Plan §5.4). DRAFT (O10): skill-neutral until clinicians author
+# skill-specific versions in fallbacks/<function>/<skill_id>/. Shown labelled as authored content.
+kind: fallback
+function: personal_inquiry
+skill: _default
+language: zh-CN
+version: 1
+approval:
+  status: draft
+notice: 使用的是预先写好的问候。
+output:
+  greeting: 谢谢你记录现在的心情。不管今天感觉怎样，我们都可以慢慢来。
+  question: 如果你愿意，可以说说最近几天过得怎么样？不想说也可以直接跳过。
+  inquiry_focus: 近几天的状态

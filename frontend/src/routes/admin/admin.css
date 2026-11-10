@@ -1,0 +1,20 @@
+/* Admin screens (Phase 9: research export). */
+.fb-export-rules {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: var(--space-2, 0.5rem);
+}
+
+.fb-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  min-height: 44px; /* touch target */
+  cursor: pointer;
+}
+
+.fb-check input {
+  width: 1.25rem;
+  height: 1.25rem;
+}

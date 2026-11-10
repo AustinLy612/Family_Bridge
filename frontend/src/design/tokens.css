@@ -1,0 +1,138 @@
+/*
+ * FamilyBridge design tokens (Plan §5.13.4; Velin reference D18, style only — no assets copied).
+ *
+ * Palettes are switched with attributes on <html>, set by the accessibility settings provider:
+ *   data-palette="default|calm"   data-contrast="normal|high"
+ *   data-reduce-motion="true|false"   data-density="participant|therapist"
+ * Every text/background pairing used by components is listed in src/design/contrast.ts and
+ * checked by an automated WCAG AA test (src/design/contrast.test.ts). Keep the two in sync.
+ */
+
+:root {
+  /* Reference palette */
+  --color-bg: #f7f4f6;
+  --color-surface: #ffffff;
+  --color-ink: #1f2323;
+  --color-ink-muted: #545a5a;
+  --color-border: #ebe6ea;
+  --color-border-strong: #857d83; /* ≥ 3:1 on surface for input outlines (WCAG 1.4.11) */
+
+  --color-lavender-50: #f7f3f9;
+  --color-lavender-100: #eee6f3;
+  --color-lavender-200: #dccde5;
+  --color-lavender-300: #c1aace; /* --color-lavender */
+  --color-lavender: var(--color-lavender-300);
+
+  --color-accent-pink: #ff38c2; /* decorative only — never carries small white text */
+  --color-pink-100: #ffe0f5;
+  --color-amber: #f1a412; /* primary CTA background (ink text), selected border, lesson progress */
+  --color-amber-100: #fdeecb;
+  --color-blue: #2e24f4; /* links, focus ring, secondary accent */
+  --color-blue-100: #e0defd;
+  --color-red: #d24734; /* therapist destructive actions ONLY */
+
+  /* Semantic roles */
+  --color-cta-bg: var(--color-amber);
+  --color-cta-ink: var(--color-ink);
+  --color-selected-border: var(--color-amber);
+  --color-progress: var(--color-amber);
+  --color-progress-alt: var(--color-lavender-300);
+  --color-nav-active-bg: var(--color-lavender-200);
+  --color-chip-bg: var(--color-lavender-100);
+  --color-link: var(--color-blue);
+  --color-focus: var(--color-blue);
+  --color-decor: var(--color-accent-pink);
+  --color-card-pink: var(--color-pink-100);
+  --color-card-amber: var(--color-amber-100);
+  --color-card-blue: var(--color-blue-100);
+  --color-card-lavender: var(--color-lavender-100);
+  --gradient-hero: linear-gradient(
+    120deg,
+    var(--color-lavender-200) 0%,
+    var(--color-lavender-100) 60%,
+    var(--color-pink-100) 100%
+  );
+
+  /* Shape */
+  --radius-frame: 24px;
+  --radius-card: 20px;
+  --radius-tile: 14px;
+  --radius-input: 12px;
+  --radius-pill: 999px;
+
+  /* Spacing — 8-pt grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --card-padding: var(--space-5);
+  --frame-margin: var(--space-5);
+  --touch-target: 44px;
+
+  /* Depth */
+  --shadow-soft: 0 1px 2px rgb(31 35 35 / 4%), 0 4px 16px rgb(31 35 35 / 4%);
+
+  /* Typography (O19: licences to confirm before Stage 2) */
+  --font-display: "Fredoka", "Noto Sans SC", system-ui, sans-serif;
+  --font-ui: "Plus Jakarta Sans", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text-scale: 1;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.875rem;
+  --fs-body: 1rem; /* ≥ 16 px */
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-display: 2.25rem;
+  --measure: 70ch;
+  --measure-cjk: 35em;
+
+  /* Motion — gentle, no bounce */
+  --motion-fast: 150ms;
+  --motion-base: 220ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Calm palette (§6.2 "adjust sensory load"): pink → lavender, amber → soft amber, muted art. */
+:root[data-palette="calm"] {
+  --color-accent-pink: #c9b3d6;
+  --color-pink-100: #f1eaf5;
+  --color-amber: #e8c27a;
+  --color-amber-100: #f6ebd3;
+  --color-blue: #3a3f9e;
+  --color-blue-100: #e3e4f3;
+  --color-decor: var(--color-lavender-300);
+  --gradient-hero: linear-gradient(120deg, var(--color-lavender-100) 0%, var(--color-lavender-50) 100%);
+}
+
+/* High contrast */
+:root[data-contrast="high"] {
+  --color-bg: #ffffff;
+  --color-ink: #000000;
+  --color-ink-muted: #1f2323;
+  --color-border: #1f2323;
+  --color-border-strong: #000000;
+  --color-nav-active-bg: var(--color-lavender-300);
+  --shadow-soft: none;
+}
+
+/* Therapist/admin density (Plan §5.13.6) */
+:root[data-density="therapist"] {
+  --card-padding: var(--space-4);
+  --frame-margin: var(--space-4);
+}
+
+/* Reduce motion: explicit setting OR the OS preference */
+:root[data-reduce-motion="true"] {
+  --motion-fast: 0ms;
+  --motion-base: 0ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-reduce-motion="false"]) {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+  }
+}

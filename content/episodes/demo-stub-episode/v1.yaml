@@ -1,0 +1,107 @@
+# Neutral, non-clinical placeholder that exercises every step type (Plan §5.9 fixture 1).
+# For tests and demos only: approval "demo" means it can never be assigned to a non-demo family.
+kind: episode
+id: demo-stub-episode
+schema_version: 0
+version: 1
+approval: { status: demo, approved_by: null, approved_at: null }
+world: placeholder
+level: 1
+modes: [joint, solo]
+title: { zh-CN: "示例活动（占位）", en: "Sample activity (placeholder)" }
+skill_ids: [wmp.validating_others]
+objective:
+  zh-CN: "占位目标：一起完成几个简短的步骤。"
+  en: "Placeholder objective: finish a few short steps together."
+behavioral_criterion:
+  zh-CN: "占位标准：每个人都至少参与一步。"
+  en: "Placeholder criterion: each person takes part in at least one step."
+estimated_minutes: 10
+sensory: { motion: none, sound: none }
+steps:
+  - id: s1
+    type: narration
+    title: { zh-CN: "开始", en: "Start" }
+    text:
+      zh-CN: "这是一个占位故事。两位旅行者来到一座安静的花园。准备好后，点击“继续”。"
+      en: "This is a placeholder story. Two travellers arrive at a quiet garden. Select Continue when you are ready."
+    hints:
+      - { zh-CN: "慢慢读，不着急。", en: "Take your time reading." }
+  - id: s2
+    type: distress_check
+    text:
+      zh-CN: "现在你感觉有多紧张？0 是完全不紧张，10 是非常紧张。可以跳过。"
+      en: "How tense do you feel right now? 0 is not at all, 10 is very. You can skip this."
+  - id: s3
+    type: private_choice
+    text:
+      zh-CN: "每个人私下选一样东西放进篮子。对方暂时看不到你的选择。"
+      en: "Each of you privately picks one thing for the basket. Your partner can't see your choice yet."
+    roles:
+      adolescent:
+        prompt: { zh-CN: "你想放什么？", en: "What would you add?" }
+        options:
+          - { id: a-apple, text: { zh-CN: "一个苹果", en: "An apple" }, rubric_tag: placeholder_a }
+          - { id: a-book, text: { zh-CN: "一本书", en: "A book" }, rubric_tag: placeholder_b }
+      caregiver:
+        prompt: { zh-CN: "你想放什么？", en: "What would you add?" }
+        options:
+          - { id: c-scarf, text: { zh-CN: "一条围巾", en: "A scarf" }, rubric_tag: placeholder_a }
+          - { id: c-map, text: { zh-CN: "一张地图", en: "A map" }, rubric_tag: placeholder_b }
+    reveal: { fields: [choice_text], when: both_submitted }
+  - id: s4
+    type: cooperative_compose
+    text:
+      zh-CN: "一起给花园写一句问候。每人选 1 到 2 个短语。"
+      en: "Write a greeting to the garden together. Each of you picks 1 or 2 phrases."
+    hints:
+      - { zh-CN: "任何顺序都可以。", en: "Any order is fine." }
+    fragments:
+      - { id: f-hello, text: { zh-CN: "你好，花园，", en: "Hello, garden," }, rubric_tag: greeting }
+      - { id: f-notice, text: { zh-CN: "我们看到你的花开了，", en: "we can see your flowers have opened," }, rubric_tag: noticing }
+      - { id: f-ask, text: { zh-CN: "你今天过得怎么样？", en: "how is your day going?" }, rubric_tag: asking }
+      - { id: f-rush, text: { zh-CN: "我们要赶时间。", en: "we are in a hurry." }, rubric_tag: rushing }
+    rules: { min_per_role: 1, max_per_role: 2 }
+  - id: s5
+    type: feedback
+    source: s4
+    text:
+      zh-CN: "这是根据你们一起选的短语给出的占位反馈。"
+      en: "Placeholder feedback based on the phrases you chose together."
+    rules:
+      - all: [noticing, asking]
+        title: { zh-CN: "你们注意到了，也问了", en: "You noticed and you asked" }
+        text: { zh-CN: "占位反馈：先注意，再提问。", en: "Placeholder: notice first, then ask." }
+    default:
+      title: { zh-CN: "一起完成了", en: "You did it together" }
+      text: { zh-CN: "占位反馈：下次可以试试加入一个提问。", en: "Placeholder: next time, try adding a question." }
+    tag_notes:
+      noticing: { zh-CN: "你们注意到了一些事。", en: "You noticed something." }
+      asking: { zh-CN: "你们提出了一个问题。", en: "You asked a question." }
+  - id: s6
+    type: retry
+    of: s4
+    feedback: s5
+    text:
+      zh-CN: "想再试一次吗？可以换几个短语，也可以跳过。"
+      en: "Want another go? You can pick different phrases, or skip."
+  - id: s7
+    type: transfer_probe
+    text:
+      zh-CN: "新的场景（占位）：一位同学说今天很累。你会怎么回应？"
+      en: "A new scene (placeholder): a classmate says they are tired today. How would you reply?"
+    options:
+      - id: t-ask
+        text: { zh-CN: "“听起来你今天很累，想聊聊吗？”", en: "\"Sounds like a tiring day. Want to talk?\"" }
+        rubric_tag: asking
+        feedback: { zh-CN: "占位反馈：你先回应了对方的感受。", en: "Placeholder: you responded to how they feel first." }
+      - id: t-fix
+        text: { zh-CN: "“早点睡就好了。”", en: "\"Just go to bed earlier.\"" }
+        rubric_tag: fixing
+        feedback: { zh-CN: "占位反馈：也可以先问问对方需要什么。", en: "Placeholder: you could also ask what they need first." }
+  - id: s8
+    type: private_reflection
+    text:
+      zh-CN: "如果你愿意，写一两句今天的感受。只有你和你的治疗师能看到。"
+      en: "If you like, write a line or two about today. Only you and your therapist can see it."
+    max_chars: 500

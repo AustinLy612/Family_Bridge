@@ -1,0 +1,186 @@
+# Diary card template, adolescent (Plan §5.6; D9, D17). DRAFT wording for clinical
+# sign-off before Stage 2 (O3). Homework checklist deferred to Phase 7 (D63).
+kind: diary_template
+role: adolescent
+version: 1
+approval:
+  status: draft
+title:
+  zh-CN: "日记卡"
+  en: "Diary card"
+intro:
+  zh-CN: "记下此刻的感受和用过的技能。每一项都可以跳过，漏记也没关系。"
+  en: "A quick note of how you feel right now and any skills you used. You can skip anything, and missed entries are okay."
+groups:
+  - id: affect
+    label:
+      zh-CN: "此刻的感受"
+      en: "How you feel right now"
+    fields:
+      - id: sad
+        type: scale
+        label:
+          zh-CN: "难过"
+          en: "Sad"
+        low:
+          zh-CN: "一点也不"
+          en: "Not at all"
+        high:
+          zh-CN: "非常"
+          en: "Very much"
+      - id: anxious
+        type: scale
+        label:
+          zh-CN: "焦虑"
+          en: "Anxious"
+        low:
+          zh-CN: "一点也不"
+          en: "Not at all"
+        high:
+          zh-CN: "非常"
+          en: "Very much"
+      - id: angry
+        type: scale
+        label:
+          zh-CN: "生气"
+          en: "Angry"
+        low:
+          zh-CN: "一点也不"
+          en: "Not at all"
+        high:
+          zh-CN: "非常"
+          en: "Very much"
+      - id: calm
+        type: scale
+        label:
+          zh-CN: "平静"
+          en: "Calm"
+        low:
+          zh-CN: "一点也不"
+          en: "Not at all"
+        high:
+          zh-CN: "非常"
+          en: "Very much"
+      - id: hopeful
+        type: scale
+        label:
+          zh-CN: "有希望"
+          en: "Hopeful"
+        low:
+          zh-CN: "一点也不"
+          en: "Not at all"
+        high:
+          zh-CN: "非常"
+          en: "Very much"
+  - id: distress
+    label:
+      zh-CN: "痛苦程度"
+      en: "Distress"
+    fields:
+      - id: distress
+        type: scale
+        label:
+          zh-CN: "此刻有多痛苦？"
+          en: "How distressing is right now?"
+        low:
+          zh-CN: "一点也不"
+          en: "Not at all"
+        high:
+          zh-CN: "极其痛苦"
+          en: "Extremely"
+  - id: urges
+    label:
+      zh-CN: "冲动"
+      en: "Urges"
+    fields:
+      - id: self_harm_urge
+        type: scale
+        label:
+          zh-CN: "伤害自己的冲动"
+          en: "Urge to harm yourself"
+        low:
+          zh-CN: "一点也不"
+          en: "Not at all"
+        high:
+          zh-CN: "非常"
+          en: "Very much"
+        urge: true
+        hint:
+          zh-CN: "如果打分较高，保存后会显示求助方式。治疗师会在工作时间查看，这里不会被实时监看。"
+          en: "If you rate this high, ways to get help appear after you save. Your therapist reviews entries during working hours; this is not monitored in real time."
+      - id: suicide_urge
+        type: scale
+        label:
+          zh-CN: "结束生命的冲动"
+          en: "Urge to end your life"
+        low:
+          zh-CN: "一点也不"
+          en: "Not at all"
+        high:
+          zh-CN: "非常"
+          en: "Very much"
+        urge: true
+        hint:
+          zh-CN: "如果打分较高，保存后会显示求助方式。治疗师会在工作时间查看，这里不会被实时监看。"
+          en: "If you rate this high, ways to get help appear after you save. Your therapist reviews entries during working hours; this is not monitored in real time."
+  - id: skills
+    label:
+      zh-CN: "技能"
+      en: "Skills"
+    fields:
+      - id: skill_used
+        type: boolean
+        label:
+          zh-CN: "自上次记录以来，你用过DBT技能吗？"
+          en: "Have you used a DBT skill since your last entry?"
+      - id: skills_used
+        type: skills
+        show_if: skill_used
+        label:
+          zh-CN: "用了哪些技能？"
+          en: "Which skills?"
+      - id: skill_helpful
+        type: scale
+        label:
+          zh-CN: "有多大帮助？"
+          en: "How helpful was it?"
+        low:
+          zh-CN: "没有帮助"
+          en: "Not helpful"
+        high:
+          zh-CN: "非常有帮助"
+          en: "Very helpful"
+        show_if: skill_used
+  - id: care
+    label:
+      zh-CN: "自上次记录以来"
+      en: "Since your last entry"
+    fields:
+      - id: doctor_visit
+        type: boolean
+        label:
+          zh-CN: "看过医生"
+          en: "Saw a doctor"
+      - id: group_therapy
+        type: boolean
+        label:
+          zh-CN: "参加了团体治疗"
+          en: "Went to group therapy"
+      - id: medication_change
+        type: boolean
+        label:
+          zh-CN: "药物有变化"
+          en: "Medication changed"
+  - id: note
+    label:
+      zh-CN: "备注"
+      en: "Note"
+    fields:
+      - id: note
+        type: note
+        label:
+          zh-CN: "想记下的其他内容（可选）"
+          en: "Anything else you want to note (optional)"
+        hint:
+          zh-CN: "只有你和你的治疗师能看到。这里不会被实时监看；如果你现在需要帮助，请打开“求助”。"
+          en: "Only you and your therapist can see this. It is not monitored in real time; if you need help now, open Get help."

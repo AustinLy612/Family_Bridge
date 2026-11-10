@@ -1,0 +1,241 @@
+# Skill taxonomy (Plan Appendix B; Phase 3 task 1). Stable internal ids.
+# Names are short standard DBT terms (developer draft). handout_refs point at
+# content/skills/handouts.yaml and must match its skill_ids (checked by the content loader).
+# Do not add skills that are not in the manual. Clinical review pending (Plan §8 O10).
+kind: skill_taxonomy
+version: 2
+approval:
+  status: draft
+  approved_by: null
+  approved_at: null
+modules:
+  - id: orientation
+    name:
+      zh-CN: "导论"
+      en: "Orientation"
+    skills:
+      - id: ori.what_is_dbt
+        name:
+          zh-CN: "什么是DBT"
+          en: "What DBT is"
+        handout_refs: [ori.h1, ori.h2, ori.h3, ori.h6, ori.h7]
+      - id: ori.biosocial_theory
+        name:
+          zh-CN: "生物社会理论"
+          en: "Biosocial theory"
+        handout_refs: [ori.h4]
+      - id: ori.assumptions
+        name:
+          zh-CN: "DBT假设"
+          en: "DBT assumptions"
+        handout_refs: [ori.h5]
+  - id: mindfulness
+    name:
+      zh-CN: "正念"
+      en: "Mindfulness"
+    skills:
+      - id: mf.states_of_mind
+        name:
+          zh-CN: "三种心念状态"
+          en: "Three states of mind"
+        handout_refs: [mf.h3, mf.h4]
+      - id: mf.what_skills
+        name:
+          zh-CN: "正念“什么”技能"
+          en: "Mindfulness WHAT skills"
+        handout_refs: [mf.h1, mf.h2, mf.h5, mf.h7, mf.h8]
+      - id: mf.how_skills
+        name:
+          zh-CN: "正念“如何”技能"
+          en: "Mindfulness HOW skills"
+        handout_refs: [mf.h1, mf.h2, mf.h6, mf.h7, mf.h8]
+  - id: distress_tolerance
+    name:
+      zh-CN: "痛苦忍受"
+      en: "Distress tolerance"
+    skills:
+      - id: dt.accepts
+        name:
+          zh-CN: "智慧心念接受（ACCEPTS）"
+          en: "Wise Mind ACCEPTS"
+        handout_refs: [dt.h1, dt.h2, dt.h3, dt.h4]
+      - id: dt.self_soothe
+        name:
+          zh-CN: "六感自我安抚"
+          en: "Self-soothe with six senses"
+        handout_refs: [dt.h1, dt.h2, dt.h5, dt.h6]
+      - id: dt.improve
+        name:
+          zh-CN: "改善此刻（IMPROVE）"
+          en: "IMPROVE the moment"
+        handout_refs: [dt.h1, dt.h2, dt.h7, dt.h8]
+      - id: dt.pros_cons
+        name:
+          zh-CN: "利弊分析"
+          en: "Pros and cons"
+        handout_refs: [dt.h1, dt.h2, dt.h9, dt.h10]
+      - id: dt.tipp
+        name:
+          zh-CN: "TIPP技能"
+          en: "TIPP skills"
+        handout_refs: [dt.h1, dt.h2, dt.h11, dt.h12]
+      - id: dt.crisis_kit
+        name:
+          zh-CN: "危机生存工具包"
+          en: "Crisis survival kit"
+        handout_refs: [dt.h13]
+      - id: dt.radical_acceptance
+        name:
+          zh-CN: "接受现实"
+          en: "Radical acceptance"
+        handout_refs: [dt.h14, dt.h17, dt.h18]
+      - id: dt.turning_the_mind
+        name:
+          zh-CN: "转念"
+          en: "Turning the mind"
+        handout_refs: [dt.h15, dt.h17]
+      - id: dt.willingness
+        name:
+          zh-CN: "自主自愿"
+          en: "Willingness"
+        handout_refs: [dt.h16, dt.h17]
+  - id: walking_the_middle_path
+    name:
+      zh-CN: "走在中道上"
+      en: "Walking the Middle Path"
+    skills:
+      - id: wmp.dialectics
+        name:
+          zh-CN: "辩证"
+          en: "Dialectics"
+        handout_refs: [wmp.h1]
+      - id: wmp.thinking_dialectically
+        name:
+          zh-CN: "辩证地思考和行动"
+          en: "Thinking and acting dialectically"
+        handout_refs: [wmp.h2, wmp.h7]
+      - id: wmp.thinking_mistakes
+        name:
+          zh-CN: "思考的误区"
+          en: "Thinking mistakes"
+        handout_refs: [wmp.h3]
+      - id: wmp.dialectical_dilemmas
+        name:
+          zh-CN: "辩证困境"
+          en: "Dialectical dilemmas"
+        handout_refs: [wmp.h4, wmp.h5]
+      - id: wmp.typical_vs_concerning
+        name:
+          zh-CN: "典型与值得担心的青少年行为"
+          en: "Typical vs concerning adolescent behaviour"
+        handout_refs: [wmp.h6]
+      - id: wmp.validating_others
+        name:
+          zh-CN: "认可他人"
+          en: "Validating others"
+        handout_refs: [wmp.h8, wmp.h9, wmp.h11]
+      - id: wmp.self_validation
+        name:
+          zh-CN: "认可自己"
+          en: "Self-validation"
+        handout_refs: [wmp.h8, wmp.h10, wmp.h11]
+      - id: wmp.increasing_behavior
+        name:
+          zh-CN: "增加行为的方法"
+          en: "Increasing behaviour"
+        handout_refs: [wmp.h12, wmp.h13, wmp.h14]
+      - id: wmp.decreasing_behavior
+        name:
+          zh-CN: "减少行为的方法"
+          en: "Decreasing behaviour"
+        handout_refs: [wmp.h12, wmp.h15, wmp.h16]
+  - id: emotion_regulation
+    name:
+      zh-CN: "情绪调节"
+      en: "Emotion regulation"
+    skills:
+      - id: er.understanding_emotions
+        name:
+          zh-CN: "理解情绪"
+          en: "Understanding emotions"
+        handout_refs: [er.h1, er.h2, er.h3, er.h4, er.h7]
+      - id: er.emotion_model
+        name:
+          zh-CN: "情绪模型"
+          en: "Model of emotions"
+        handout_refs: [er.h5, er.h6, er.h7]
+      - id: er.accumulate_positives
+        name:
+          zh-CN: "积累积极情绪体验"
+          en: "Accumulating positive emotions"
+        handout_refs: [er.h8, er.h9, er.h10, er.h11, er.h12, er.h13, er.h14]
+      - id: er.build_mastery_cope_ahead
+        name:
+          zh-CN: "建立掌控感与提前应对"
+          en: "Build mastery and cope ahead"
+        handout_refs: [er.h8, er.h15, er.h17]
+      - id: er.please
+        name:
+          zh-CN: "PLEASE技能"
+          en: "PLEASE skills"
+        handout_refs: [er.h8, er.h16, er.h16a, er.h16b, er.h17]
+      - id: er.mindfulness_current_emotion
+        name:
+          zh-CN: "对当下情绪的正念（冲浪）"
+          en: "Mindfulness of current emotion"
+        handout_refs: [er.h18]
+      - id: er.check_the_facts
+        name:
+          zh-CN: "检查事实与问题解决"
+          en: "Check the facts and problem solving"
+        handout_refs: [er.h19]
+      - id: er.opposite_action
+        name:
+          zh-CN: "相反行为"
+          en: "Opposite action"
+        handout_refs: [er.h20, er.h21]
+  - id: interpersonal_effectiveness
+    name:
+      zh-CN: "人际效能"
+      en: "Interpersonal effectiveness"
+    skills:
+      - id: ie.goals_priorities
+        name:
+          zh-CN: "目标与优先级"
+          en: "Goals and priorities"
+        handout_refs: [ie.h1]
+      - id: ie.obstacles
+        name:
+          zh-CN: "阻碍目标的因素"
+          en: "Obstacles to goals"
+        handout_refs: [ie.h2]
+      - id: ie.give
+        name:
+          zh-CN: "GIVE技能"
+          en: "GIVE skills"
+        handout_refs: [ie.h3, ie.h4, ie.h12]
+      - id: ie.dear_man
+        name:
+          zh-CN: "DEAR MAN技能"
+          en: "DEAR MAN skills"
+        handout_refs: [ie.h5, ie.h6, ie.h12]
+      - id: ie.fast
+        name:
+          zh-CN: "FAST技能"
+          en: "FAST skills"
+        handout_refs: [ie.h7, ie.h9, ie.h12]
+      - id: ie.cheerleading_statements
+        name:
+          zh-CN: "智慧心念的自我鼓励"
+          en: "Wise Mind cheerleading statements"
+        handout_refs: [ie.h8]
+      - id: ie.asking_saying_no_factors
+        name:
+          zh-CN: "提出请求或拒绝时的考虑因素"
+          en: "Factors in asking or saying no"
+        handout_refs: [ie.h10, ie.h11]
+      - id: ie.think
+        name:
+          zh-CN: "THINK技能"
+          en: "THINK skills"
+        handout_refs: [ie.h13, ie.h14]

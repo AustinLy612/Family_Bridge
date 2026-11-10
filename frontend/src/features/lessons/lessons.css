@@ -1,0 +1,109 @@
+/* Phase 5 learning screens. Calm, card-based; no alarm colours for "not yet" (§5.13). */
+
+.fb-mood {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+.fb-mood__option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: calc(var(--touch-target) * 1.6);
+  padding: var(--space-2);
+  border-radius: var(--radius-tile);
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: var(--fs-xl);
+  cursor: pointer;
+}
+.fb-mood__option--on {
+  border-color: var(--color-selected-border);
+  background: var(--color-lavender-100);
+}
+.fb-mood__label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-align: center;
+}
+
+.fb-convo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: var(--measure);
+}
+.fb-turn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  white-space: pre-wrap;
+}
+.fb-turn--student {
+  align-self: flex-end;
+  background: var(--color-lavender-100);
+  max-width: 85%;
+}
+.fb-turn__question {
+  font-weight: 700;
+}
+.fb-turn__meta {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  font-size: var(--fs-xs);
+  color: var(--color-ink-muted);
+}
+
+.fb-plan {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+.fb-plan li + li {
+  margin-top: var(--space-1);
+}
+
+.fb-options {
+  display: grid;
+  gap: var(--space-2);
+}
+.fb-option {
+  text-align: left;
+  min-height: var(--touch-target);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-input);
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  cursor: pointer;
+}
+.fb-option:disabled {
+  cursor: default;
+}
+.fb-option--right {
+  border-color: var(--color-blue);
+  background: var(--color-blue-100);
+}
+.fb-option--chosen {
+  border-color: var(--color-lavender-300);
+  background: var(--color-lavender-50);
+}
+
+.fb-skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: var(--space-2);
+}
+.fb-refs {
+  margin: 0;
+  padding-left: var(--space-5);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-muted);
+}

@@ -1,0 +1,36 @@
+# Phrases that must never appear in safety, help or consent copy (Plan §7.2, Phase 2 acceptance):
+# promises of real-time monitoring, rescue or contact that FamilyBridge cannot keep (§9.1F).
+# DRAFT (O10). Patterns are Python regular expressions (YAML single-quoted, so one backslash),
+# matched case-insensitively after NFKC normalisation and case-folding.
+# `required_in_help` must appear in every help document.
+kind: forbidden_phrases
+version: 1
+approval:
+  status: draft
+languages:
+  en:
+    forbidden:
+      - '\b(we|someone|somebody|the team|your therapist|your care team|staff|they)(''ll| will| are going to| is going to) (call|contact|reach|text|message|find|check on|come|send)'
+      - '\b(we|they|the team|staff|someone|your therapist|your care team)( are| is|''re|''s) (watching|monitoring|keeping an eye)'
+      - '(?<!not )\bmonitored (in real time|live|24/7|around the clock|at all times)'
+      - '\b(real[- ]time|live|round[- ]the[- ]clock|around[- ]the[- ]clock) (support|monitoring|response)'
+      - '\bhelp is (on (the|its) way|coming)'
+      - '\b(we|the app|familybridge)(''ll| will| can) keep you safe'
+      - '\byou(''re| are) safe now'
+      - '\b(immediately|instantly|automatically) (notif|alert|tell|inform|send)'
+      - '\b(will|we|app) (alert|notify|tell) (your|the) (therapist|care team|team|doctor|parents?)'
+      - '24/7'
+    required_in_help:
+      - not monitored in real time
+  zh-CN:
+    forbidden:
+      - '(我们|有人|团队|治疗师|工作人员|医生)(会|将)?(马上|立刻|立即|很快)?(联系|打电话|找到|赶到|来找|发消息|通知)你'
+      - '(正在|会|将|随时|一直)(实时)?(监控|监看|看着|关注着)你'
+      - '(?<!不会被)(?<!不)实时(监控|监看|守护|回应|支持)'
+      - '(24|二十四)小时(在线|守护|监控|值守|陪伴)'
+      - '帮助(马上|很快|已经|正在)(就到|在路上)'
+      - '(我们|平台|familybridge)(会|能|将)(保护|保证)你的安全'
+      - '你现在安全了'
+      - '(立即|马上|自动)(通知|提醒|告诉)(你的)?(治疗师|团队|医生|父母|家长)'
+    required_in_help:
+      - 不会被实时监看

@@ -1,0 +1,38 @@
+{
+  "name": "familybridge-lantern-forest",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Locally runnable GenAI-DBT FamilyBridge Lantern Forest research prototype",
+  "scripts": {
+    "dev": "concurrently -n SERVER,STORYBOOK -c magenta,cyan \"tsx watch server/index.ts\" \"vite --host 0.0.0.0\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:client": "vite --host 0.0.0.0",
+    "build": "tsc -p tsconfig.server.json && vite build",
+    "start": "node build-server/server/index.js",
+    "check": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.server.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "framer-motion": "^11.18.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.10",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.1",
+    "vitest": "^3.0.8"
+  }
+}

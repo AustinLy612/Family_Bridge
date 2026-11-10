@@ -1,0 +1,16 @@
+# Authored fallback (Plan §5.4). DRAFT (O10): skill-neutral until clinicians author
+# skill-specific versions in fallbacks/<function>/<skill_id>/. Shown labelled as authored content.
+kind: fallback
+function: evaluate_practice_answer
+skill: _default
+language: en
+version: 1
+approval:
+  status: draft
+notice: Personal feedback is not available right now.
+output:
+  category: not_evaluated
+  what_worked: Thank you for doing this practice; thinking it through is practice in itself.
+  why: Specific feedback is not available this time. Compare your answer with the skill steps from group and see which step you used.
+  try_next: You could bring this item to your next group and talk it through with your therapist.
+  allow_retry: true

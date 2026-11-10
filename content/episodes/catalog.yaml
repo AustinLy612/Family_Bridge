@@ -1,0 +1,39 @@
+# Placeholder worlds and levels (Plan §5.9 "Catalog placeholders", §6.5). No content yet (O1):
+# therapists see these as "coming soon". Skill links are placeholders for clinical review (O10).
+kind: episode_catalog
+version: 1
+approval: { status: draft, approved_by: null, approved_at: null }
+worlds:
+  - id: lantern_forest
+    name: { zh-CN: "灯笼森林", en: "Lantern Forest" }
+    levels:
+      - level: 1
+        focus: { zh-CN: "识别情绪与认可", en: "Emotion recognition and validation" }
+        skill_ids: [er.understanding_emotions, wmp.validating_others]
+        target_minutes: [8, 12]
+      - level: 2
+        focus: { zh-CN: "合作中的认可", en: "Cooperative validation" }
+        skill_ids: [wmp.validating_others]
+        target_minutes: [8, 12]
+  - id: bridge_of_two_moons
+    name: { zh-CN: "双月之桥", en: "Bridge of Two Moons" }
+    levels:
+      - level: 1
+        focus: { zh-CN: "换位思考", en: "Perspective-taking" }
+        skill_ids: [wmp.thinking_dialectically]
+        target_minutes: [8, 12]
+      - level: 2
+        focus: { zh-CN: "辩证合作", en: "Dialectical cooperation" }
+        skill_ids: [wmp.dialectical_dilemmas]
+        target_minutes: [8, 12]
+  - id: floating_islands
+    name: { zh-CN: "漂浮群岛", en: "Floating Islands" }
+    levels:
+      - level: 1
+        focus: { zh-CN: "表达需要", en: "Expressing needs" }
+        skill_ids: [ie.dear_man]
+        target_minutes: [8, 12]
+      - level: 2
+        focus: { zh-CN: "一起找方向", en: "Collaborative navigation" }
+        skill_ids: [ie.give]
+        target_minutes: [8, 12]

@@ -1,0 +1,26 @@
+# Authored fallback (Plan §5.4). DRAFT (O10): skill-neutral until clinicians author
+# skill-specific versions in fallbacks/<function>/<skill_id>/. Shown labelled as authored content.
+kind: fallback
+function: teaching_plan
+skill: _default
+language: zh-CN
+version: 1
+approval:
+  status: draft
+notice: 使用的是预先写好的通用练习步骤。
+output:
+  module: '{module_name}'
+  skill: '{skill_name}'
+  plan_steps:
+  - step_number: 1
+    title: 回想这个技能
+    content: 想一想{skill_name}在小组里是怎么讲的，或看看你的小组资料。
+    estimated_minutes: 3
+  - step_number: 2
+    title: 小小练习一次
+    content: 选一个最近的小场景，在心里把这个技能慢慢走一遍。
+    estimated_minutes: 6
+  - step_number: 3
+    title: 记下一个问题
+    content: 写下一个想在下次小组或面谈时问治疗师的问题。
+    estimated_minutes: 3
