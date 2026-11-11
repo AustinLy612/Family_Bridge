@@ -1112,7 +1112,8 @@
       "end": "That's enough for today",
       "finish": "Finish",
       "saveExit": "Save and come back later",
-      "stop": "Stop the lesson"
+      "stop": "Stop the lesson",
+      "working": "One moment, getting the next step ready…"
     },
     "summary": {
       "title": "Lesson recap",
@@ -1413,6 +1414,8 @@
       "reflectionPrivate": "Only you and your therapist can see this.",
       "reflectionSaved": "Saved. Only you and your therapist can see it.",
       "save": "Save"
-    }
+    },
+    "showAll": "Show all ({{count}})",
+    "showFewer": "Show fewer"
   }
 }

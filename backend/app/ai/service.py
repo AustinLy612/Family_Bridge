@@ -419,6 +419,7 @@ class AIService:
                 v[name] = ", ".join(f"{x}/5" for x in value) or ("无" if zh else "none")
             elif name == "assess_risk":
                 v["risk_instruction"] = _risk_instruction(bool(value), language)
+                v["_assess_risk"] = bool(value)
             elif name in ("authored_feedback", "step_prompt", "hint_scope", "selection_reason"):
                 v[name] = value or ("（无）" if zh else "(none)")
             elif name == "message_text":
@@ -521,6 +522,8 @@ class AIService:
         try:
             v = validate(llm.text, spec.output)
         except OutputInvalidError as exc:
+            # Field paths and error types only (never model text), to diagnose fallbacks (O24).
+            log.warning("ai_output_invalid", function=spec.name, code=exc.code, detail=exc.summary)
             return _Attempt(failures=[exc.code], llm=llm)
         data = v.model.model_dump()
         relabelled = _relabel_unscoped(data, ctx)
@@ -609,15 +612,32 @@ class AIService:
                 meta = json.loads(body) if body.startswith("{") else {}
             except json.JSONDecodeError:
                 meta = {}
+        defaulted = False
+        if not meta and content.strip() and not ctx.get("_assess_risk"):
+            # The model sometimes drops the trailing META line. As in DBT_Revised, keep the reply
+            # with neutral defaults: no citations, so it is labelled general knowledge; it still
+            # goes through every output rule below. Not when this turn had to judge risk inline:
+            # a missing verdict is never assumed safe.
+            meta = {"message_type": "explanation", "grounding": "general", "confidence": "low"}
+            defaulted = True
         try:
             v = validate({**meta, "content": content.strip()}, spec.output)
         except OutputInvalidError as exc:
+            log.warning(
+                "ai_output_invalid",
+                function=spec.name,
+                code=exc.code if meta else "missing_metadata",
+                detail=exc.summary,
+                content_chars=len(content.strip()),
+            )
             return _Attempt(failures=[exc.code if meta else "missing_metadata"])
         data = v.model.model_dump()
         bad = self._post_checks(spec, data, ctx, language)
         if bad:
             return _Attempt(failures=[str(x) for x in bad])
-        return _Attempt(data=data, repaired=v.repaired)
+        if defaulted:
+            log.info("ai_metadata_defaulted", function=spec.name)
+        return _Attempt(data=data, repaired=v.repaired or defaulted)
 
     def _sentence_violations(
         self, released: list[str], sentence: str, sources: Sequence[SourceChunk]

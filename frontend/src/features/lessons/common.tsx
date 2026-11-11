@@ -65,7 +65,7 @@ export function MoodPicker({
         maxLength={500}
         onChange={(e) => setNote(e.target.value)}
       />
-      <PrimaryButton type="submit" disabled={!value || busy}>
+      <PrimaryButton type="submit" disabled={!value} loading={busy}>
         {submitLabel}
       </PrimaryButton>
     </form>
@@ -168,6 +168,20 @@ export function OpenLessonCard({
         </button>
       </div>
       <p className="fb-setting__hint">{t("learn.open.hint")}</p>
+    </div>
+  );
+}
+
+/** Shown while the server prepares the next step (an AI call can take several seconds). */
+export function Thinking({ label }: { label: string }) {
+  return (
+    <div className="fb-card fb-thinking" role="status" aria-live="polite">
+      <span className="fb-thinking__dots" aria-hidden>
+        <span />
+        <span />
+        <span />
+      </span>
+      <span>{label}</span>
     </div>
   );
 }

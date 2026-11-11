@@ -45,6 +45,7 @@ T400 = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max
 T60 = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=60)]
 T600 = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=600)]
 T900 = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=900)]
+T1600 = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=1600)]
 TFree = Annotated[
     str, StringConstraints(strip_whitespace=True, min_length=1, max_length=FREE_TEXT_MAX)
 ]
@@ -162,7 +163,9 @@ class TeachingMessageOut(Out):
     """`teaching_opening` and `teaching_turn` (streamed: content first, metadata at the end)."""
 
     message_type: MessageType
-    content: T900  # about one screen
+    # One screen. 900 was too tight for English (1,000+ characters is normal there; O24), so
+    # the cap is a safety bound and the prompt asks for ~300 字 / ~200 words.
+    content: T1600
     question: O200 = ""
     risk_level: RiskLevel = "none"
     should_stop: bool = False

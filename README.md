@@ -42,7 +42,10 @@ cp .env.example .env
 Edit `.env` and replace every `change-me` with a local value. `POSTGRES_PASSWORD` must match the password
 inside both database URLs. `APP_DB_PASSWORD` is the password of the API's restricted database role (Phase 10);
 use a different value. **Never commit `.env`.** The DeepSeek key goes only in `DEEPSEEK_API_KEY` in `.env`.
-Use `LLM_PROVIDER=mock` for offline development.
+`LLM_PROVIDER=deepseek` gives real lessons; `LLM_PROVIDER=mock` runs offline with canned text (lesson content will look
+generic). Backend tests always use the mock. The lesson E2E tests need the API on the mock: set `LLM_PROVIDER=mock`,
+restart the API (`docker compose up -d api`), run them, then switch back. The E2E walkthrough switches demo accounts to
+English and adds joint sessions to the demo family.
 
 ## Run the whole stack
 
@@ -378,7 +381,7 @@ Pseudonymous research data for the feasibility measures (Plan §5.10, §8.4). Co
   reflow checks, in `frontend/e2e/a11y.spec.ts`. A manual screen-reader pass was cancelled
   (O27, D90).
 - **Adversarial benchmark:** [docs/dev/ADVERSARIAL_RESULTS.md](docs/dev/ADVERSARIAL_RESULTS.md),
-  the full run against DeepSeek (80/81 passed; all high-severity cases passed).
+  the full run against DeepSeek (81/81 passed on 2026-11-10; 80/81 at Phase 10 sign-off).
 - **Guides and demo script:** see the table at the top of this file.
 
 ## Tests and checks

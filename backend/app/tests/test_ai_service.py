@@ -469,6 +469,40 @@ def test_stream_risk_metadata_marks_stopped(
     assert r.outcome is AIOutcome.stopped and r.output is not None and r.output["should_stop"]
 
 
+def test_stream_without_metadata_keeps_the_reply_as_general_knowledge(
+    db: Session, content: ContentBundle, settings: Settings
+) -> None:
+    """The model sometimes drops the META line (benchmark, O24): the checked reply is kept with
+    neutral defaults, as in DBT_Revised, and is labelled general knowledge (no citations)."""
+    ai, mock = make_ai(content, settings)
+    mock.script.append("Let's try slow breathing together. Breathe out longer than you breathe in.")
+    events = list(
+        ai.stream(
+            db,
+            "teaching_turn",
+            {**_turn_inputs(), "assess_risk": False},
+            role="adolescent",
+            language="en",
+            caller="t",
+        )
+    )
+    assert "replace" not in [e.kind for e in events]
+    final = events[-1].result
+    assert final is not None and final.outcome is AIOutcome.repaired and final.output is not None
+    assert final.output["grounding"] == "general" and final.output["source_chunk_ids"] == []
+    assert final.output["risk_level"] == "none" and not final.output["should_stop"]
+
+
+def test_stream_without_metadata_falls_back_when_risk_was_requested(
+    db: Session, content: ContentBundle, settings: Settings
+) -> None:
+    """A turn that had to judge risk inline never treats a missing verdict as safe."""
+    ai, mock = make_ai(content, settings)
+    mock.script.extend(["Let's breathe slowly.", "Let's breathe slowly again."])
+    r = ai.run(db, "teaching_turn", _turn_inputs(), role="adolescent", language="en", caller="t")
+    assert r.is_fallback and "missing_metadata" in r.failures
+
+
 # --- circuit breaker ------------------------------------------------------------------------------
 
 

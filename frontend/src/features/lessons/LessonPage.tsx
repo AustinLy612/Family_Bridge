@@ -15,11 +15,10 @@ import type { ContentSource } from "../../api/types";
 import { helpPath, useSafetyOutcome } from "../../app/safety";
 import { ROLE_HOME } from "../../app/session";
 import { ErrorNotice, Notice, TextAreaField } from "../../components/Forms";
-import { PauseControl } from "../../components/Controls";
 import { CareCard } from "../../components/Safety";
 import { PrimaryButton, SelectCard } from "../../design";
 import { Page } from "../../routes/Page";
-import { MoodPicker, Section, SourceChip } from "./common";
+import { MoodPicker, Section, SourceChip, Thinking } from "./common";
 
 const HOME = ROLE_HOME.adolescent;
 
@@ -155,18 +154,13 @@ export function LessonPage() {
   const open = lesson.status === "ongoing";
   const title = lesson.skill?.name ?? t("learn.lesson.title");
   return (
-    <Page
-      title={title}
-      subtitle={lesson.skill?.module}
-      icon={<BookOpen size={22} />}
-      showBack
-      headerPills={open ? <PauseControl /> : undefined}
-    >
-      <div className="fb-stack">
+    <Page title={title} subtitle={lesson.skill?.module} icon={<BookOpen size={22} />} showBack>
+      <div className="fb-stack fb-lesson" aria-busy={busy || undefined}>
         <ErrorNotice error={error} />
         {safety.careCard && <CareCard helpHref={helpPath("adolescent")} onDismiss={safety.dismissCareCard} />}
         {!open && <ClosedNotice lesson={lesson} />}
         {open && phase()}
+        {open && busy && live === null && <Thinking label={t("learn.lesson.working")} />}
         {(lesson.phase === "summary" || lesson.phase === "done" || !open) && lesson.summary && (
           <Summary lesson={lesson} />
         )}
@@ -231,7 +225,7 @@ export function LessonPage() {
               onChange={(e) => setCheckin(e.target.value)}
             />
             <div className="fb-actions">
-              <PrimaryButton type="submit" disabled={busy || !checkin.trim()}>
+              <PrimaryButton type="submit" disabled={busy || !checkin.trim()} loading={busy}>
                 {t("learn.checkin.share")}
               </PrimaryButton>
               <button

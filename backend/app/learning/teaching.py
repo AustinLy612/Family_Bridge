@@ -125,15 +125,25 @@ def get_owned(db: Session, user: User, session_id: uuid.UUID) -> TeachingSession
     s = db.get(TeachingSession, session_id)
     if s is None or s.user_id != user.id:
         raise not_found("lesson.not_found")
+    return follow_language(s, user)
+
+
+def follow_language(s: TeachingSession, user: User) -> TeachingSession:
+    """An open lesson follows the learner's current language (as DBT_Revised does per call): a
+    switch mid-lesson applies to names and every AI step from now on; earlier messages stay as
+    they were written."""
+    if s.status == LessonStatus.ongoing and s.language != user.language:
+        s.language = user.language
     return s
 
 
 def open_session(db: Session, user: User) -> TeachingSession | None:
-    return db.scalar(
+    s = db.scalar(
         select(TeachingSession).where(
             TeachingSession.user_id == user.id, TeachingSession.status == LessonStatus.ongoing
         )
     )
+    return follow_language(s, user) if s else None
 
 
 def claim(db: Session, s: TeachingSession, expected: TeachingPhase, to: TeachingPhase) -> None:

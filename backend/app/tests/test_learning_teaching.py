@@ -363,3 +363,26 @@ def test_closed_lessons_keep_status(db: Session, client: TestClient, world: Worl
     sid = complete_lesson(client)
     s = db.get(TeachingSession, sid)
     assert s is not None and s.status is LessonStatus.completed
+
+
+def test_open_lesson_follows_the_learners_current_language(
+    client: TestClient, world: World, db: Session
+) -> None:
+    """Switching language mid-lesson changes skill names and the following AI steps (D91)."""
+    login(client, world.f1.teen)
+    ok(client.patch("/api/v1/me", json={"language": "en"}))
+    profile(client)
+    lesson = to_teaching(client)
+    sid = lesson["id"]
+    en_name = lesson["skill"]["name"]
+    ok(client.patch("/api/v1/me", json={"language": "zh-CN"}))
+    current = ok(client.get("/api/v1/learn/sessions/current"))["lesson"]
+    assert current["id"] == sid and current["skill"]["name"] != en_name
+    db.expire_all()
+    row = db.get(TeachingSession, sid)
+    assert row is not None and row.language == "zh-CN"
+    closed = ok(client.post(f"/api/v1/learn/sessions/{sid}/stop"))["lesson"]
+    ok(client.patch("/api/v1/me", json={"language": "en"}))
+    db.expire_all()
+    row = db.get(TeachingSession, closed["id"])
+    assert row is not None and row.language == "zh-CN"  # closed lessons keep theirs

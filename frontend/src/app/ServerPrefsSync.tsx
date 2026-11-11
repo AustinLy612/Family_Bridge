@@ -3,6 +3,7 @@
  * - On sign-in: the account's saved language and prefs are applied.
  * - While signed in: changes made anywhere (language switch, settings panel) are saved.
  */
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { patch } from "../api/client";
@@ -23,6 +24,7 @@ function fromServer(prefs: Record<string, unknown> | undefined): Partial<A11ySet
 export function ServerPrefsSync() {
   const { user, setUser } = useSessionControls();
   const { i18n } = useTranslation();
+  const qc = useQueryClient();
   const { settings, update } = useAccessibility();
   const appliedFor = useRef<string | null>(null);
   const lastSaved = useRef<string>("");
@@ -51,15 +53,20 @@ export function ServerPrefsSync() {
     const snapshot = JSON.stringify({ a11y: settings, lang });
     if (snapshot === lastSaved.current) return;
     const handle = window.setTimeout(() => {
+      const languageChanged = lang !== undefined && lang !== user.language;
       lastSaved.current = snapshot;
       patch<UserOut>("/me", { a11y_prefs: settings, language: lang })
-        .then(setUser)
+        .then((u) => {
+          setUser(u);
+          // Lesson text, skill names and next AI steps follow the saved language.
+          if (languageChanged) void qc.invalidateQueries({ queryKey: ["learn"] });
+        })
         .catch(() => {
           lastSaved.current = "";
         });
     }, 400);
     return () => window.clearTimeout(handle);
-  }, [settings, i18n.language, user?.id, setUser]);
+  }, [settings, i18n.language, user?.id, user?.language, setUser, qc]);
 
   return null;
 }

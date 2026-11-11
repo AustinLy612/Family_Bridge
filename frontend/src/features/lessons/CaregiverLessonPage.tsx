@@ -13,11 +13,10 @@ import { learn, type CaregiverLesson, type CaregiverOut, type Feedback } from ".
 import { helpPath, useSafetyOutcome } from "../../app/safety";
 import { ROLE_HOME } from "../../app/session";
 import { ErrorNotice, Notice, TextAreaField } from "../../components/Forms";
-import { PauseControl } from "../../components/Controls";
 import { CareCard } from "../../components/Safety";
 import { PrimaryButton, ProgressBar } from "../../design";
 import { Page } from "../../routes/Page";
-import { OutcomeChip, SourceChip } from "./common";
+import { OutcomeChip, SourceChip, Thinking } from "./common";
 
 const HOME = ROLE_HOME.caregiver;
 const STEPS = ["explain", "practice", "quiz", "wrap_up"] as const;
@@ -85,14 +84,8 @@ export function CaregiverLessonPage() {
   const next = (from: "explain" | "practice" | "quiz") => run(() => learn.next(lessonId, from));
 
   return (
-    <Page
-      title={lesson.skill.name}
-      subtitle={lesson.skill.module}
-      icon={<BookOpen size={22} />}
-      showBack
-      headerPills={open ? <PauseControl /> : undefined}
-    >
-      <div className="fb-stack">
+    <Page title={lesson.skill.name} subtitle={lesson.skill.module} icon={<BookOpen size={22} />} showBack>
+      <div className="fb-stack fb-lesson" aria-busy={busy || undefined}>
         <ErrorNotice error={error} />
         {safety.careCard && <CareCard helpHref={helpPath("caregiver")} onDismiss={safety.dismissCareCard} />}
         {open && <ProgressBar current={stepIndex + 1} total={STEPS.length} tone="lavender" />}
@@ -109,6 +102,7 @@ export function CaregiverLessonPage() {
           </p>
         )}
 
+        {open && busy && <Thinking label={t("learn.lesson.working")} />}
         {(lesson.step === "explain" || !open) && explain(lesson)}
         {(lesson.step === "practice" || (!open && lesson.practice)) && practice(lesson)}
         {(lesson.step === "quiz" || (!open && lesson.quiz)) && quiz(lesson)}

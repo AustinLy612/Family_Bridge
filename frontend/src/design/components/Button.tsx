@@ -10,18 +10,37 @@ export interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonEleme
   variant?: Variant;
   block?: boolean;
   icon?: ReactNode;
+  /** Shows a spinner, sets aria-busy and disables the button while work is in progress. */
+  loading?: boolean;
 }
 
 export const PrimaryButton = forwardRef<HTMLButtonElement, PrimaryButtonProps>(function PrimaryButton(
-  { variant = "primary", block = false, icon, className, children, type = "button", ...rest },
+  {
+    variant = "primary",
+    block = false,
+    icon,
+    loading = false,
+    className,
+    children,
+    type = "button",
+    disabled,
+    ...rest
+  },
   ref,
 ) {
   const cls = ["fb-btn", `fb-btn--${variant}`, block ? "fb-btn--block" : "", className ?? ""]
     .filter(Boolean)
     .join(" ");
   return (
-    <button ref={ref} type={type} className={cls} {...rest}>
-      {icon}
+    <button
+      ref={ref}
+      type={type}
+      className={cls}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
+      {...rest}
+    >
+      {loading ? <span className="fb-spinner" aria-hidden /> : icon}
       {children}
     </button>
   );

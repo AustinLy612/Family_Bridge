@@ -29,6 +29,7 @@
   --color-amber-100: #fdeecb;
   --color-blue: #2e24f4; /* links, focus ring, secondary accent */
   --color-blue-100: #e0defd;
+  --color-plum: #5b3a74; /* links and focus ring: sits with the lavender palette (≥ 4.5:1 on surface) */
   --color-red: #d24734; /* therapist destructive actions ONLY */
 
   /* Semantic roles */
@@ -39,8 +40,8 @@
   --color-progress-alt: var(--color-lavender-300);
   --color-nav-active-bg: var(--color-lavender-200);
   --color-chip-bg: var(--color-lavender-100);
-  --color-link: var(--color-blue);
-  --color-focus: var(--color-blue);
+  --color-link: var(--color-plum);
+  --color-focus: var(--color-plum);
   --color-decor: var(--color-accent-pink);
   --color-card-pink: var(--color-pink-100);
   --color-card-amber: var(--color-amber-100);

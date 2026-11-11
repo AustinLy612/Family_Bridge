@@ -31,9 +31,10 @@ open-items table in `docs/dev/DEVELOPMENT_PLAN.md` §8.
 
 - Uses DeepSeek when `LLM_PROVIDER=deepseek`. Hosting, data retention and training-use terms
   need legal review before real data (O9).
-- In the benchmark, 11 of the 50 cases that expected a model reply fell back to reviewed static content
-  because the reply failed the output schema (O24); one prompt-injection refusal repeated
-  the injected phrase (O23).
+- In the latest benchmark (81/81 passed), 1 of the 50 cases that expected a model reply fell back to
+  reviewed static content and 1 needed a retry, both because an output safety rule caught the reply
+  (O24). The model can still occasionally phrase a reply in a way the rules reject; participants then
+  see reviewed content.
 - AI hints and personalisation inside joint sessions are not wired (O29); episodes run from their
   scripts.
 

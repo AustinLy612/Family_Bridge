@@ -18,6 +18,7 @@ import { Page } from "../../routes/Page";
 import "./joint.css";
 
 const OPEN = new Set(["invited", "accepted", "ready", "active"]);
+const PAST_SHOWN = 5;
 
 export function JointPage() {
   const { t } = useTranslation();
@@ -26,6 +27,7 @@ export function JointPage() {
   const home = user?.role === "caregiver" ? ROLE_HOME.caregiver : ROLE_HOME.adolescent;
   const q = useQuery({ queryKey: ["joint", "mine"], queryFn: joint.mine, refetchInterval: 30_000 });
   const [error, setError] = useState<unknown>(null);
+  const [showAllPast, setShowAllPast] = useState(false);
   const sessions = (q.data?.sessions ?? []).filter((s) => s.mode === "joint");
   const open = sessions.filter((s) => OPEN.has(s.status));
   const past = sessions.filter((s) => !OPEN.has(s.status));
@@ -62,12 +64,19 @@ export function JointPage() {
         {past.length > 0 && (
           <Section title={t("joint.past")}>
             <ul className="fb-joint-past">
-              {past.map((s) => (
+              {(showAllPast ? past : past.slice(0, PAST_SHOWN)).map((s) => (
                 <li key={s.id}>
                   <PastLine s={s} />
                 </li>
               ))}
             </ul>
+            {past.length > PAST_SHOWN && (
+              <div>
+                <PrimaryButton variant="secondary" onClick={() => setShowAllPast((v) => !v)}>
+                  {showAllPast ? t("joint.showFewer") : t("joint.showAll", { count: past.length })}
+                </PrimaryButton>
+              </div>
+            )}
           </Section>
         )}
       </div>
@@ -139,9 +148,12 @@ function InvitationCard({ s, href, onError }: { s: MySession; href: string; onEr
 
 function PastLine({ s }: { s: MySession }) {
   const { t, i18n } = useTranslation();
+  const date = new Date(s.opens_at).toLocaleDateString(i18n.language, { dateStyle: "medium" });
   return (
-    <span>
-      <strong>{bi(s.episode?.title, i18n.language)}</strong> · {t(`joint.status.${s.status}`)}
-    </span>
+    <>
+      <span className="fb-joint-past__title">{bi(s.episode?.title, i18n.language)}</span>
+      <span className="fb-joint-past__date">{date}</span>
+      <Chip tone="outline">{t(`joint.status.${s.status}`)}</Chip>
+    </>
   );
 }

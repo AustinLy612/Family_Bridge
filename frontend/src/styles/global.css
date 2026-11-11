@@ -42,7 +42,14 @@ p {
 
 a {
   color: var(--color-link);
-  text-underline-offset: 2px;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--motion-fast) var(--ease-out);
+}
+a:hover {
+  text-decoration-color: currentColor;
 }
 
 button,
@@ -54,9 +61,17 @@ textarea {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
   border-radius: 6px;
+}
+/* Text fields: a soft ring and a darker border instead of an outline (they show focus on click too). */
+input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px var(--color-lavender-200);
 }
 
 .visually-hidden {

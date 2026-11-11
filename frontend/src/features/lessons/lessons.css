@@ -1,30 +1,44 @@
 /* Phase 5 learning screens. Calm, card-based; no alarm colours for "not yet" (§5.13). */
 
+.fb-lesson {
+  max-width: 48rem;
+}
+.fb-lesson .fb-form {
+  max-width: none;
+}
 .fb-mood {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 .fb-mood__option {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-1);
-  min-height: calc(var(--touch-target) * 1.6);
-  padding: var(--space-2);
+  justify-content: center;
+  min-height: calc(var(--touch-target) * 2.2);
+  padding: var(--space-3) var(--space-2);
   border-radius: var(--radius-tile);
   border: 2px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-ink);
-  font-size: var(--fs-xl);
+  font-size: 2.25rem;
+  line-height: 1;
   cursor: pointer;
+  transition:
+    border-color var(--motion-fast) var(--ease-out),
+    background var(--motion-fast) var(--ease-out);
+}
+.fb-mood__option:hover {
+  background: var(--color-lavender-50);
 }
 .fb-mood__option--on {
   border-color: var(--color-selected-border);
   background: var(--color-lavender-100);
 }
 .fb-mood__label {
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   font-weight: 600;
   text-align: center;
 }

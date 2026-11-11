@@ -48,15 +48,23 @@ def get_owned(db: Session, user: User, lesson_id: uuid.UUID) -> CaregiverLesson:
     c = db.get(CaregiverLesson, lesson_id)
     if c is None or c.user_id != user.id:
         raise not_found("lesson.not_found")
+    return follow_language(c, user)
+
+
+def follow_language(c: CaregiverLesson, user: User) -> CaregiverLesson:
+    """An open lesson follows the learner's current language for the steps still to come."""
+    if c.status == LessonStatus.ongoing and c.language != user.language:
+        c.language = user.language
     return c
 
 
 def open_lesson(db: Session, user: User) -> CaregiverLesson | None:
-    return db.scalar(
+    c = db.scalar(
         select(CaregiverLesson).where(
             CaregiverLesson.user_id == user.id, CaregiverLesson.status == LessonStatus.ongoing
         )
     )
+    return follow_language(c, user) if c else None
 
 
 def _ensure_ongoing(c: CaregiverLesson) -> None:
