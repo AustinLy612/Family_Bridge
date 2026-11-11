@@ -324,11 +324,21 @@ def record_pre_mood(
     if group:
         _prepare_teaching(svc, db, user, s)
         return outcome
-    # 2. check-in greeting + one optional question (D22)
+    _inquire(svc, db, user, s)
+    return outcome
+
+
+def _inquire(svc: Services, db: Session, user: User, s: TeachingSession) -> None:
+    """2. Check-in greeting + one optional question (D22)."""
+    pre = db.get(MoodRecord, s.pre_mood_id) if s.pre_mood_id else None
     res = svc.ai.run(
         db,
         "personal_inquiry",
-        {"profile": _profile(db, user), "mood": value, "mood_note": note or ""},
+        {
+            "profile": _profile(db, user),
+            "mood": pre.value if pre else None,
+            "mood_note": (pre.note if pre else None) or "",
+        },
         role="adolescent",
         language=s.language,
         caller="lesson.checkin",
@@ -341,9 +351,25 @@ def record_pre_mood(
             "greeting": out.get("greeting", ""),
             "question": out.get("question", ""),
             "source": res.source.value,
+            "language": s.language,
         }
     )
-    return outcome
+
+
+def refresh_for_language(svc: Services, db: Session, user: User, s: TeachingSession) -> None:
+    """After a language switch, the step the learner is looking at (check-in question or skill
+    recommendation) is written again in the new language. Messages already sent stay as they
+    were. Steps stored before D92 carry no language and are left alone."""
+    if s.status != LessonStatus.ongoing:
+        return
+    if s.phase is P.personal_inquiry:
+        lang = _json(s.inquiry).get("language")
+        if lang and lang != s.language:
+            _inquire(svc, db, user, s)
+    elif s.phase is P.skill_selection:
+        lang = _json(s.recommendation).get("language")
+        if lang and lang != s.language:
+            _recommend(svc, db, user, s)
 
 
 # --- 2-3. check-in answer or skip, then recommendation -------------------------------------------
@@ -424,6 +450,7 @@ def _recommend(svc: Services, db: Session, user: User, s: TeachingSession) -> No
             "repeat_justification": rec.get("repeat_justification", ""),
             "guard": guard.action,
             "source": res.source.value,
+            "language": s.language,
         }
     )
 
@@ -762,6 +789,7 @@ def session_view(db: Session, svc: Services, s: TeachingSession) -> dict[str, An
             "reason": rec.get("reason", ""),
             "alternatives": [skill(a) for a in rec.get("alternatives", [])],
             "is_repeat": bool(rec.get("is_repeat")),
+            "repeat_justification": rec.get("repeat_justification", ""),
             "source": rec.get("source"),
         }
         if rec

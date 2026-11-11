@@ -71,8 +71,6 @@ const SCREENS: Record<string, () => ReactNode> = {
   "therapist:joint": () => <JointBoardPage />,
   "adolescent:joint": () => <JointPage />,
   "caregiver:joint": () => <JointPage />,
-  "adolescent:privacy": () => <VisibilityPage />,
-  "caregiver:privacy": () => <VisibilityPage />,
   "adolescent:help": () => <HelpPage />,
   "caregiver:help": () => <HelpPage />,
   "therapist:": () => <GroupsPage />,
@@ -92,12 +90,14 @@ const EXTRA: Partial<Record<Role, RouteObject[]>> = {
     { path: "learn/tests/:testId", element: <TestPage /> },
     { path: "learn/:sessionId", element: <LessonPage /> },
     { path: "joint/:sessionId", element: <RoomPage /> },
+    { path: "privacy", element: <VisibilityPage /> }, // opened from Settings (D92)
   ],
   caregiver: [
     { path: "learn/lesson/:lessonId", element: <CaregiverLessonPage /> },
     { path: "diary/new", element: <EntryPage /> },
     { path: "diary/:entryId", element: <EntryPage /> },
     { path: "joint/:sessionId", element: <RoomPage /> },
+    { path: "privacy", element: <VisibilityPage /> },
   ],
   therapist: [
     { path: "groups/:groupId", element: <GroupPage /> },

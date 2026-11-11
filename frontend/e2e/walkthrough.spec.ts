@@ -26,14 +26,16 @@ test.describe("adolescent tasks (demo-teen-a)", () => {
     await expect(page.getByRole("status", { name: "Who can see this?" })).toContainText(
       "Your therapist can see",
     );
-    await page.getByRole("link", { name: "Who can see my data" }).click();
+    await page.getByRole("link", { name: "Settings" }).click();
+    await page.getByRole("link", { name: "View", exact: true }).click();
     await expect(page.getByText("Your Diary Cards").first()).toBeVisible();
     await expect(page.getByText("Only what you choose to share").first()).toBeVisible();
   });
 
-  test("W2 find the pause control immediately", async () => {
+  test("W2 find help immediately", async () => {
+    // Pause moved to the joint room (D92); Get help stays on every participant screen
     await page.goto("/teen");
-    await expect(page.getByRole("button", { name: "Pause" })).toBeInViewport();
+    await expect(page.getByRole("link", { name: "Get help" })).toBeInViewport();
   });
 
   test("W3 decline a joint invitation", async ({ browser }) => {

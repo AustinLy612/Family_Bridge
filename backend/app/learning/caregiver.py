@@ -109,7 +109,18 @@ def _explain(svc: Services, db: Session, user: User, c: CaregiverLesson, variant
         "source": res.source.value,
         "grounding": res.grounding,
         "references": references(db, svc.ai, res.sources, c.language),
+        "language": c.language,
     }
+
+
+def refresh_for_language(svc: Services, db: Session, user: User, c: CaregiverLesson) -> None:
+    """After a language switch, an explanation still on screen is written again in the new
+    language (D92). Practice items and quiz answers already given are left as they are."""
+    if c.status != LessonStatus.ongoing or c.step is not S.explain:
+        return
+    lang = (c.explanation or {}).get("language")
+    if lang and lang != c.language:
+        _explain(svc, db, user, c, c.variant or "standard")
 
 
 def start(

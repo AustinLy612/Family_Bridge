@@ -429,3 +429,16 @@ def test_closed_lessons_stay_closed(client: TestClient, world: World, db: Sessio
         LessonStatus.user_terminated.value
         == ok(client.get(f"/api/v1/learn/caregiver/lessons/{lid}"))["lesson"]["status"]
     )
+
+
+def test_caregiver_explanation_follows_a_language_switch(client: TestClient, world: World) -> None:
+    """An explanation still on screen is rewritten in the new language (D92)."""
+    login(client, world.f1.carers[0])
+    ok(client.patch("/api/v1/me", json={"language": "en"}))
+    lesson = ok(client.post("/api/v1/learn/caregiver/lessons", json={"skill_id": "dt.tipp"}), 201)[
+        "lesson"
+    ]
+    en_summary = lesson["explanation"]["summary"]
+    ok(client.patch("/api/v1/me", json={"language": "zh-CN"}))
+    lesson = ok(client.get(f"/api/v1/learn/caregiver/lessons/{lesson['id']}"))["lesson"]
+    assert lesson["explanation"]["summary"] != en_summary

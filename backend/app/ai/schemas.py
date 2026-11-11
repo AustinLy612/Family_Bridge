@@ -124,7 +124,7 @@ class SelectSkillIn(In):
 class SelectSkillOut(Out):
     selected_module: T40
     selected_skill: T60
-    reason: T300
+    reason: T600  # three or four sentences (D92); 300 cut detailed English reasons
     skill_difficulty: Literal["beginner", "intermediate", "advanced"]
     alternative_skills: list[T60] = Field(min_length=2, max_length=3)
     is_repeat: bool = False

@@ -12,7 +12,6 @@ import {
   LifeBuoy,
   NotebookPen,
   ShieldAlert,
-  ShieldCheck,
   UserRound,
   Users,
   UsersRound,
@@ -35,7 +34,6 @@ const participantCommon = (learnKey: "learn" | "exploreSkills"): NavItem[] => [
   { key: "diary", path: "diary", icon: NotebookPen },
   { key: "joint", path: "joint", icon: HeartHandshake },
   { key: "help", path: "help", icon: LifeBuoy },
-  { key: "privacy", path: "privacy", icon: ShieldCheck },
 ];
 
 export const NAV: Record<Role, NavItem[]> = {

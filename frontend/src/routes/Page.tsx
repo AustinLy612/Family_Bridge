@@ -2,7 +2,6 @@
 import type { ReactNode } from "react";
 import { useNavigate } from "react-router";
 import { AppShell, type AppShellProps } from "../app/AppShell";
-import { isParticipant } from "../app/nav";
 import { useSessionControls } from "../app/session";
 
 export function Page(
@@ -18,7 +17,6 @@ export function Page(
       {...props}
       role={user.role}
       alias={user.displayAlias}
-      visibility={props.visibility ?? (isParticipant(user.role) ? { kind: "onlyYou" } : undefined)}
       onLogout={() => {
         void logout().finally(() => navigate("/", { replace: true }));
       }}

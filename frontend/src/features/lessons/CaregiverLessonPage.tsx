@@ -201,9 +201,7 @@ export function CaregiverLessonPage() {
     const live = open && l.step === "practice";
     return (
       <div className="fb-stack" data-testid="cg-practice">
-        <span className="fb-turn__meta">
-          {t("learn.cg.practiceTitle")} <SourceChip source={p.source} />
-        </span>
+        <span className="fb-turn__meta">{t("learn.cg.practiceTitle")}</span>
         <p className="fb-setting__hint">{t("learn.cg.practiceHint")}</p>
         {p.items.map((it, i) => {
           const last = it.attempts[it.attempts.length - 1];
@@ -285,9 +283,7 @@ export function CaregiverLessonPage() {
     const live = open && l.step === "quiz";
     return (
       <div className="fb-stack" data-testid="cg-quiz">
-        <span className="fb-turn__meta">
-          {t("learn.cg.quizTitle")} <SourceChip source={z.source} />
-        </span>
+        <span className="fb-turn__meta">{t("learn.cg.quizTitle")}</span>
         {z.questions.map((qq, i) => (
           <div key={i} className="fb-card fb-stack">
             <h3>{qq.stem}</h3>

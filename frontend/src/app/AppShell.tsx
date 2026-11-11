@@ -2,8 +2,9 @@
  * App shell (Plan §5.13.1): soft backdrop + large rounded white frame, left sidebar
  * (brand, user card, role navigation, Settings/Log out pinned at the bottom), content header
  * (back, icon tile, title/subtitle, tag pill, right pills), optional right rail.
- * Participant screens always show the Pause control, a "Get help" link (Plan §5.7) and the
- * "Who can see this?" indicator (§7.3).
+ * Participant screens always show a "Get help" link (Plan §5.7). A "who can see this" indicator
+ * appears only where someone other than the participant can see the page (diary, joint room);
+ * Pause lives in the joint room only, where it pauses the room for both people (D92).
  * Below 900 px the frame goes edge-to-edge and the sidebar becomes a bottom tab bar;
  * the right rail collapses below 1200 px.
  */
@@ -12,7 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink, useNavigate } from "react-router";
 import { Chip, PlaceholderArt, PrivacyIndicator, type Visibility } from "../design";
-import { LanguageSwitch, PauseControl } from "../components/Controls";
+import { LanguageSwitch } from "../components/Controls";
 import { useAccessibility } from "./accessibility";
 import { NAV, isParticipant, navHref } from "./nav";
 import { ROLE_HOME, type Role } from "./session";
@@ -26,7 +27,7 @@ export interface AppShellProps {
   tag?: string;
   showBack?: boolean;
   headerPills?: ReactNode;
-  /** Required on participant screens: who can see what is on this page. */
+  /** Shown when someone other than the participant can see this page (D92). */
   visibility?: Visibility;
   rail?: ReactNode;
   onLogout?: () => void;
@@ -34,7 +35,7 @@ export interface AppShellProps {
 }
 
 function Sidebar({ role, alias, onLogout }: { role: Role; alias: string; onLogout?: () => void }) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { illustrationsVisible } = useAccessibility();
   const home = ROLE_HOME[role];
   return (
@@ -54,7 +55,6 @@ function Sidebar({ role, alias, onLogout }: { role: Role; alias: string; onLogou
           <span className="shell-user__alias">{alias}</span>
           <span className="shell-user__meta">
             <Chip>{t(`role.${role}`)}</Chip>
-            <span className="shell-user__lang">{t(`language.${i18n.language}`)}</span>
           </span>
         </span>
       </div>
@@ -111,9 +111,6 @@ export function AppShell({
   useEffect(() => {
     setDensity(participant ? "participant" : "therapist");
   }, [participant, setDensity]);
-  if (participant && !visibility && import.meta.env.DEV) {
-    console.warn(`AppShell: participant screen "${title}" has no visibility indicator (Plan §7.3).`);
-  }
   return (
     <div className="shell-backdrop">
       <a className="skip-link" href="#main">
@@ -157,7 +154,6 @@ export function AppShell({
                   {t("shell.getHelp")}
                 </NavLink>
               )}
-              {participant && <PauseControl />}
             </div>
           </header>
           <div className="shell-content">{children}</div>

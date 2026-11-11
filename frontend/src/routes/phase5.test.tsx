@@ -157,7 +157,8 @@ describe("adolescent lesson", () => {
     fireEvent.click(screen.getByRole("radio", { name: /Okay/ }));
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
     expect(await screen.findByText("Thanks for sharing.")).toBeInTheDocument();
-    expect(screen.getByText("AI-generated from the manual")).toBeInTheDocument();
+    // provenance is shown once, on the lesson steps, not on every coach message (D92)
+    expect(screen.queryByText("AI-generated from the manual")).toBeNull();
     expect(screen.getByRole("button", { name: "Share" })).toBeDisabled();
     fireEvent.click(screen.getByRole("button", { name: "Just pick a skill for me" }));
     expect(await screen.findByText("A calm first step.")).toBeInTheDocument();
@@ -170,7 +171,7 @@ describe("adolescent lesson", () => {
     expect(screen.getByRole("button", { name: "Let's do this one" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /What skills/ })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Choose another skill" })).toBeInTheDocument();
-    expect(screen.getByText("AI · general DBT knowledge")).toBeInTheDocument();
+    expect(screen.queryByText("AI · general DBT knowledge")).toBeNull();
   });
 
   it("streams a reply sentence by sentence and discards it on replace", async () => {
@@ -213,7 +214,6 @@ describe("adolescent lesson", () => {
     fireEvent.click(screen.getByRole("button", { name: "Send" }));
     expect(await screen.findByText("Authored fallback text.")).toBeInTheDocument();
     expect(screen.queryByText("First sentence.")).not.toBeInTheDocument();
-    expect(screen.getByText("Authored content")).toBeInTheDocument();
   });
 
   it("goes to the help screen when the server stops the lesson mid-reply", async () => {
@@ -533,7 +533,7 @@ describe("caregiver structured lesson", () => {
       }),
     );
     expect(screen.getByRole("button", { name: "Next: practise (optional)" })).toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: "Pause" }).length).toBeGreaterThan(0);
+    expect(screen.queryByRole("button", { name: "Pause" })).toBeNull(); // Pause is in the joint room only (D92)
   });
 
   it("wrap-up reflection is optional and private", async () => {

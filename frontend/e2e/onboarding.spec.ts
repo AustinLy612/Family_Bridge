@@ -51,7 +51,8 @@ test("onboarding for every role, end to end", async ({ page, browser }) => {
   await expect(again.getByRole("alert")).toContainText("can't be used");
 
   // Transparency: the caregiver sees the real viewers; the teen is listed as family only.
-  await carer.getByRole("link", { name: "Who can see my data" }).first().click();
+  await carer.goto("/caregiver/settings");
+  await carer.getByRole("link", { name: "View", exact: true }).click();
   const list = carer.getByRole("list", { name: "People and services that can see your data" });
   await expect(list).toContainText(`Dr E2E ${RUN} (Therapist)`);
   await expect(list).toContainText(`Teen ${RUN} (Teen)`);

@@ -108,6 +108,7 @@ export interface Lesson {
     reason: string;
     alternatives: SkillRef[];
     is_repeat: boolean;
+    repeat_justification?: string;
     source: ContentSource | null;
   } | null;
   skill: SkillRef | null;

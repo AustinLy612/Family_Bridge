@@ -272,7 +272,9 @@ class AIService:
                 yield StreamEvent("delta", buffer)
         attempt = _Attempt(failures=failures)
         if not failures:
-            attempt = self._finish_stream(spec, "".join(released), meta_raw, ctx, language)
+            attempt = self._finish_stream(
+                spec, "".join(released), meta_raw, ctx, language, data, db
+            )
         result = self._conclude(
             db,
             spec,
@@ -603,6 +605,8 @@ class AIService:
         meta_raw: str | None,
         ctx: dict[str, Any],
         language: str,
+        inputs: In | None = None,
+        db: Session | None = None,
     ) -> _Attempt:
         meta: dict[str, Any] = {}
         if meta_raw is not None:
@@ -613,13 +617,20 @@ class AIService:
             except json.JSONDecodeError:
                 meta = {}
         defaulted = False
-        if not meta and content.strip() and not ctx.get("_assess_risk"):
+        if not meta and content.strip():
             # The model sometimes drops the trailing META line. As in DBT_Revised, keep the reply
             # with neutral defaults: no citations, so it is labelled general knowledge; it still
-            # goes through every output rule below. Not when this turn had to judge risk inline:
-            # a missing verdict is never assumed safe.
+            # goes through every output rule below. A missing risk verdict is never assumed safe:
+            # when this turn had to judge risk inline, the separate assess_risk check gives the
+            # verdict (D92), and without one the turn falls back as before.
             meta = {"message_type": "explanation", "grounding": "general", "confidence": "low"}
             defaulted = True
+            if ctx.get("_assess_risk"):
+                verdict = self._separate_risk(db, inputs, language)
+                if verdict is None:
+                    meta, defaulted = {}, False
+                else:
+                    meta.update(verdict)
         try:
             v = validate({**meta, "content": content.strip()}, spec.output)
         except OutputInvalidError as exc:
@@ -638,6 +649,34 @@ class AIService:
         if defaulted:
             log.info("ai_metadata_defaulted", function=spec.name)
         return _Attempt(data=data, repaired=v.repaired or defaulted)
+
+    def _separate_risk(
+        self, db: Session | None, data: In | None, language: str
+    ) -> dict[str, Any] | None:
+        """Risk verdict for a turn whose inline verdict is missing, from assess_risk."""
+        message = str(getattr(data, "message", "") or "")
+        if not message.strip():
+            return None
+        try:
+            res = self.run(
+                db,
+                "assess_risk",
+                {"message": message[:2000], "recent": [], "keyword_terms": []},
+                role="any",
+                language=language,
+                caller="lesson.turn.risk",
+            )
+        except Exception:
+            return None
+        out = res.output
+        if res.is_fallback or not out:
+            return None
+        level = str(out["risk_level"])
+        return {
+            "risk_level": level,
+            "should_stop": bool(out["should_stop"]) or level == "high",
+            "risk_reasoning": str(out.get("reasoning") or "")[:300],
+        }
 
     def _sentence_violations(
         self, released: list[str], sentence: str, sources: Sequence[SourceChunk]

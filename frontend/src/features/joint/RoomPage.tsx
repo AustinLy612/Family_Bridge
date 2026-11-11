@@ -16,6 +16,7 @@ import { setRoomPause } from "../../app/roomPause";
 import { useSafetyOutcome } from "../../app/safety";
 import { ROLE_HOME, useSession } from "../../app/session";
 import { ErrorNotice, Notice, TextAreaField } from "../../components/Forms";
+import { PauseControl } from "../../components/Controls";
 import { CareCard } from "../../components/Safety";
 import { Chip, PrimaryButton, ProgressBar } from "../../design";
 import { Page } from "../../routes/Page";
@@ -59,6 +60,7 @@ export function RoomPage() {
       subtitle={view?.solo ? t("joint.solo.title") : t("joint.room.subtitle")}
       icon={<HeartHandshake size={22} />}
       visibility={{ kind: "therapist" }}
+      headerPills={<PauseControl />}
     >
       <div className="fb-stack fb-joint-room" data-testid="joint-room">
         <ErrorNotice error={info.error} />

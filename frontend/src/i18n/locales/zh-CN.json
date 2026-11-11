@@ -399,11 +399,12 @@
     }
   },
   "account": {
+    "privacyHint": "看看治疗师、家人和研究团队分别能看到什么、不能看到什么。",
+    "privacyOpen": "查看",
     "profile": "个人资料",
     "username": "用户名：{{username}}",
     "save": "保存",
     "saved": "已保存。",
-    "languageSaved": "语言、显示和舒适度设置会自动保存到你的账户。",
     "changePassword": "更改密码",
     "currentPassword": "当前密码",
     "passwordChanged": "密码已更改，其他设备已退出登录。",
@@ -1109,7 +1110,6 @@
       "preparing": "正在准备这节课…",
       "reply": "你的回复",
       "send": "发送",
-      "end": "今天就练到这里",
       "finish": "完成",
       "saveExit": "先保存，稍后继续",
       "stop": "结束这节课",
@@ -1150,6 +1150,8 @@
       "last": "最近一次：{{date}}"
     },
     "history": {
+      "showAll": "显示全部（{{count}}）",
+      "showFewer": "收起",
       "title": "以前的课",
       "empty": "还没有以前的课。"
     },

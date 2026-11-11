@@ -1,7 +1,7 @@
 /**
  * Accessibility audit (Plan §5.11, Phase 10 task 2): axe-core (WCAG 2.0/2.1/2.2 A and AA) on every
  * participant screen in both languages, plus public pages and the joint room; keyboard checks
- * (skip link first, Pause reachable, visible focus, no keyboard trap on a form).
+ * (skip link first, Get help reachable, visible focus, no keyboard trap on a form).
  * A manual screen-reader pass is a separate, human step (docs/dev/ACCESSIBILITY_AUDIT.md).
  * Needs `seed-demo`.
  */
@@ -145,7 +145,7 @@ test("reflow: no horizontal scrolling at 320 CSS px (WCAG 1.4.10)", async ({ pag
   }
 });
 
-test("keyboard: skip link first, Pause reachable, visible focus", async ({ page }) => {
+test("keyboard: skip link first, Get help reachable, visible focus", async ({ page }) => {
   await signInDemo(page, "demo-teen-a", "/teen");
   await page.goto("/teen/diary/new");
   await page.keyboard.press("Tab");
@@ -154,7 +154,7 @@ test("keyboard: skip link first, Pause reachable, visible focus", async ({ page 
   await page.keyboard.press("Enter");
   await expect(page.locator("#main")).toBeFocused();
 
-  // Pause is reachable by keyboard from the top of the page
+  // Get help is reachable by keyboard from the top of the page (Pause is in the joint room, D92)
   await page.goto("/teen");
   let reached = false;
   for (let i = 0; i < 40 && !reached; i++) {
@@ -163,15 +163,15 @@ test("keyboard: skip link first, Pause reachable, visible focus", async ({ page 
       (await page
         .locator(":focus")
         .getAttribute("aria-label")
-        .catch(() => null)) === "Pause" ||
+        .catch(() => null)) === "Get help" ||
       (
         (await page
           .locator(":focus")
           .textContent()
           .catch(() => "")) ?? ""
-      ).trim() === "Pause";
+      ).trim() === "Get help";
   }
-  expect(reached, "Pause control reachable with Tab").toBe(true);
+  expect(reached, "Get help reachable with Tab").toBe(true);
   const outline = await page.locator(":focus").evaluate((el) => {
     const s = getComputedStyle(el);
     return `${s.outlineStyle} ${s.outlineWidth} ${s.boxShadow}`;

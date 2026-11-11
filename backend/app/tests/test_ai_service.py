@@ -493,12 +493,41 @@ def test_stream_without_metadata_keeps_the_reply_as_general_knowledge(
     assert final.output["risk_level"] == "none" and not final.output["should_stop"]
 
 
-def test_stream_without_metadata_falls_back_when_risk_was_requested(
+def test_stream_without_metadata_takes_the_risk_verdict_from_assess_risk(
     db: Session, content: ContentBundle, settings: Settings
 ) -> None:
-    """A turn that had to judge risk inline never treats a missing verdict as safe."""
+    """A turn that had to judge risk inline never treats a missing verdict as safe: the
+    separate assess_risk check gives it (D92), and its verdict is applied as it is."""
     ai, mock = make_ai(content, settings)
-    mock.script.extend(["Let's breathe slowly.", "Let's breathe slowly again."])
+    mock.script.append("Let's breathe slowly.")  # no META; assess_risk gets the mock default
+    events = list(
+        ai.stream(db, "teaching_turn", _turn_inputs(), role="adolescent", language="en", caller="t")
+    )
+    final = events[-1].result
+    assert final is not None and not final.is_fallback and final.output is not None
+    assert final.output["risk_level"] == "none" and not final.output["should_stop"]
+
+    mock.script.extend(
+        [
+            "Let's breathe slowly.",
+            '{"risk_level": "high", "categories": ["risk_disclosure"], "should_stop": true,'
+            ' "reasoning": "x"}',
+        ]
+    )
+    events = list(
+        ai.stream(db, "teaching_turn", _turn_inputs(), role="adolescent", language="en", caller="t")
+    )
+    final = events[-1].result
+    assert final is not None and final.output is not None
+    assert final.output["risk_level"] == "high" and final.output["should_stop"]
+
+
+def test_stream_without_metadata_falls_back_without_any_risk_verdict(
+    db: Session, content: ContentBundle, settings: Settings
+) -> None:
+    """No inline verdict and no valid assess_risk verdict: the turn falls back."""
+    ai, mock = make_ai(content, settings)
+    mock.script.extend(["Let's breathe slowly.", "not json", "still not json"])
     r = ai.run(db, "teaching_turn", _turn_inputs(), role="adolescent", language="en", caller="t")
     assert r.is_fallback and "missing_metadata" in r.failures
 

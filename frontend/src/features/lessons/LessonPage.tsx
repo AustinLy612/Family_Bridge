@@ -11,7 +11,6 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router";
 import { ApiError, postStream } from "../../api/client";
 import { learn, type Lesson, type LessonOut, type Turn } from "../../api/learning";
-import type { ContentSource } from "../../api/types";
 import { helpPath, useSafetyOutcome } from "../../app/safety";
 import { ROLE_HOME } from "../../app/session";
 import { ErrorNotice, Notice, TextAreaField } from "../../components/Forms";
@@ -19,6 +18,7 @@ import { CareCard } from "../../components/Safety";
 import { PrimaryButton, SelectCard } from "../../design";
 import { Page } from "../../routes/Page";
 import { MoodPicker, Section, SourceChip, Thinking } from "./common";
+import { splitQuestion } from "./text";
 
 const HOME = ROLE_HOME.adolescent;
 
@@ -26,17 +26,16 @@ function Conversation({ turns, live }: { turns: Turn[]; live: string | null }) {
   const { t } = useTranslation();
   return (
     <div className="fb-convo" aria-live="polite" aria-label={t("learn.lesson.conversation")}>
-      {turns.map((m) => (
-        <div key={m.seq} className={`fb-turn fb-turn--${m.role}`}>
-          {m.role === "coach" && (
-            <span className="fb-turn__meta">
-              {t("learn.lesson.coach")} <SourceChip source={m.source} />
-            </span>
-          )}
-          <span>{m.content}</span>
-          {m.question && <span className="fb-turn__question">{m.question}</span>}
-        </div>
-      ))}
+      {turns.map((m) => {
+        const [body, question] = splitQuestion(m.content, m.question);
+        return (
+          <div key={m.seq} className={`fb-turn fb-turn--${m.role}`}>
+            {m.role === "coach" && <span className="fb-turn__meta">{t("learn.lesson.coach")}</span>}
+            <span>{body}</span>
+            {question && <span className="fb-turn__question">{question}</span>}
+          </div>
+        );
+      })}
       {live !== null && (
         <div className="fb-turn fb-turn--coach" data-testid="live-reply">
           <span className="fb-turn__meta">{t("learn.lesson.coachWriting")}</span>
@@ -152,6 +151,7 @@ export function LessonPage() {
   }
 
   const open = lesson.status === "ongoing";
+  const practising = lesson.phase === "teaching";
   const title = lesson.skill?.name ?? t("learn.lesson.title");
   return (
     <Page title={title} subtitle={lesson.skill?.module} icon={<BookOpen size={22} />} showBack>
@@ -180,7 +180,10 @@ export function LessonPage() {
               type="button"
               className="fb-btn fb-btn--secondary"
               disabled={busy}
-              onClick={() => void run(() => learn.stop(sessionId))}
+              onClick={() =>
+                // One way out (D92): stopping during practice still gives you the summary.
+                void run(() => (practising ? learn.end(sessionId) : learn.stop(sessionId)))
+              }
             >
               {t("learn.lesson.stop")}
             </button>
@@ -213,9 +216,7 @@ export function LessonPage() {
               void run(() => learn.checkin(sessionId, checkin.trim() || null));
             }}
           >
-            <span className="fb-turn__meta">
-              {t("learn.lesson.coach")} <SourceChip source={lesson.checkin?.source} />
-            </span>
+            <span className="fb-turn__meta">{t("learn.lesson.coach")}</span>
             <p>{lesson.checkin?.greeting}</p>
             <TextAreaField
               label={lesson.checkin?.question ?? ""}
@@ -253,12 +254,13 @@ export function LessonPage() {
         return (
           <div className="fb-stack">
             <div className="fb-card fb-stack">
-              <span className="fb-turn__meta">
-                {t("learn.choose.suggested")} <SourceChip source={rec.source} />
-              </span>
+              <span className="fb-turn__meta">{t("learn.choose.suggested")}</span>
               <h2 className="fb-card__title">{rec.skill.name}</h2>
               <p className="fb-setting__hint">{rec.skill.module}</p>
               <p>{rec.reason}</p>
+              {rec.is_repeat && rec.repeat_justification && (
+                <p className="fb-setting__hint">{rec.repeat_justification}</p>
+              )}
               <PrimaryButton
                 disabled={busy}
                 onClick={() => void run(() => learn.choose(sessionId, rec.skill.id, "recommended"))}
@@ -324,14 +326,6 @@ export function LessonPage() {
                 >
                   {t("learn.lesson.send")}
                 </PrimaryButton>
-                <button
-                  type="button"
-                  className="fb-btn fb-btn--secondary"
-                  disabled={busy}
-                  onClick={() => void run(() => learn.end(sessionId))}
-                >
-                  {t("learn.lesson.end")}
-                </button>
               </div>
             </form>
           </div>
@@ -395,9 +389,7 @@ function Summary({ lesson }: { lesson: Lesson }) {
   if (!s) return null;
   return (
     <div className="fb-card fb-stack" data-testid="lesson-summary">
-      <span className="fb-turn__meta">
-        {t("learn.summary.title")} <SourceChip source={s.source as ContentSource | null} />
-      </span>
+      <span className="fb-turn__meta">{t("learn.summary.title")}</span>
       <p>{s.summary_text}</p>
       {s.key_points.length > 0 && (
         <>

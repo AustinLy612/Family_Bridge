@@ -171,7 +171,9 @@ def start_session(body: StartIn, user: AdolescentUser, db: Db, svc: Svc) -> dict
 
 @router.get("/learn/sessions/{session_id}")
 def get_session(session_id: uuid.UUID, user: AdolescentUser, db: Db, svc: Svc) -> dict[str, Any]:
-    return _lesson_out(db, svc, tc.get_owned(db, user, session_id))
+    s = tc.get_owned(db, user, session_id)
+    tc.refresh_for_language(svc, db, user, s)
+    return _lesson_out(db, svc, s)
 
 
 @router.post("/learn/sessions/{session_id}/mood")
@@ -367,7 +369,9 @@ def caregiver_start(
 
 @router.get("/learn/caregiver/lessons/{lesson_id}")
 def caregiver_get(lesson_id: uuid.UUID, user: CaregiverUser, db: Db, svc: Svc) -> dict[str, Any]:
-    return _cg_out(db, svc, cg.get_owned(db, user, lesson_id))
+    c = cg.get_owned(db, user, lesson_id)
+    cg.refresh_for_language(svc, db, user, c)
+    return _cg_out(db, svc, c)
 
 
 class AdaptIn(Strict):

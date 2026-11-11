@@ -1,11 +1,12 @@
 /**
  * Account settings (Phase 1 task 7): alias, language and accessibility (saved on the account by
- * ServerPrefsSync), password change, research consent (D32), sign out everywhere, and a link to
- * "Who can see my data" (always reachable from settings, Plan §5.2).
+ * ServerPrefsSync), password change, research consent (D32), sign out everywhere, and the
+ * "Who can see my data" card (reachable only from settings since D92, Plan §5.2).
  */
 import * as Switch from "@radix-ui/react-switch";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useId, useState, type FormEvent } from "react";
+import { ShieldCheck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router";
 import { patch, post, put } from "../../api/client";
@@ -169,6 +170,23 @@ function ResearchConsentCard() {
   );
 }
 
+/** "Who can see my data" lives in settings (D92), as a card like the others. */
+function PrivacyCard({ href }: { href: string }) {
+  const { t } = useTranslation();
+  return (
+    <section className="fb-card" aria-labelledby="privacy-title">
+      <h2 id="privacy-title" className="fb-card__title">
+        {t("nav.privacy")}
+      </h2>
+      <p className="fb-setting__hint">{t("account.privacyHint")}</p>
+      <Link className="fb-btn fb-btn--secondary" to={href}>
+        <ShieldCheck size={18} aria-hidden />
+        {t("account.privacyOpen")}
+      </Link>
+    </section>
+  );
+}
+
 function SessionsCard() {
   const { t } = useTranslation();
   const { apply } = useSessionControls();
@@ -203,14 +221,11 @@ export function SettingsPage() {
     <Page title={t("nav.settings")}>
       <div className="fb-stack">
         <ProfileCard />
-        <section className="fb-card">
-          <p className="fb-setting__hint">{t("account.languageSaved")}</p>
-        </section>
         <AccessibilityPanel />
         {participant && (
           <>
             <ResearchConsentCard />
-            <Link to={`${ROLE_HOME[user.role]}/privacy`}>{t("nav.privacy")}</Link>
+            <PrivacyCard href={`${ROLE_HOME[user.role]}/privacy`} />
           </>
         )}
         <PasswordCard />

@@ -399,11 +399,12 @@
     }
   },
   "account": {
+    "privacyHint": "See what your therapist, your family and the research team can and cannot see.",
+    "privacyOpen": "View",
     "profile": "Profile",
     "username": "Username: {{username}}",
     "save": "Save",
     "saved": "Saved.",
-    "languageSaved": "Language, display and comfort settings are saved to your account automatically.",
     "changePassword": "Change password",
     "currentPassword": "Current password",
     "passwordChanged": "Password changed. Other devices have been signed out.",
@@ -1109,7 +1110,6 @@
       "preparing": "Getting the lesson ready…",
       "reply": "Your reply",
       "send": "Send",
-      "end": "That's enough for today",
       "finish": "Finish",
       "saveExit": "Save and come back later",
       "stop": "Stop the lesson",
@@ -1150,6 +1150,8 @@
       "last": "Last: {{date}}"
     },
     "history": {
+      "showAll": "Show all ({{count}})",
+      "showFewer": "Show fewer",
       "title": "Past lessons",
       "empty": "No past lessons yet."
     },

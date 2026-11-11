@@ -118,18 +118,22 @@ export function ProgressSection() {
   );
 }
 
-/** The participant's own past lessons (D57). */
+const HISTORY_SHOWN = 5;
+
+/** The participant's own past lessons (D57); the latest five, the rest folded (D92). */
 export function HistorySection({ hrefFor }: { hrefFor: (item: HistoryItem) => string }) {
   const { t, i18n } = useTranslation();
   const q = useQuery({ queryKey: ["learn", "history"], queryFn: learn.history });
+  const [showAll, setShowAll] = useState(false);
   const items = q.data?.lessons ?? [];
+  const shown = showAll ? items : items.slice(0, HISTORY_SHOWN);
   return (
     <Section title={t("learn.history.title")}>
       {items.length === 0 ? (
         <p className="fb-setting__hint">{t("learn.history.empty")}</p>
       ) : (
         <List label={t("learn.history.title")}>
-          {items.slice(0, 20).map((h) => (
+          {shown.map((h) => (
             <ListRow
               key={h.id}
               icon={<History size={20} aria-hidden />}
@@ -139,6 +143,16 @@ export function HistorySection({ hrefFor }: { hrefFor: (item: HistoryItem) => st
             />
           ))}
         </List>
+      )}
+      {items.length > HISTORY_SHOWN && (
+        <button
+          type="button"
+          className="fb-btn fb-btn--secondary"
+          aria-expanded={showAll}
+          onClick={() => setShowAll((v) => !v)}
+        >
+          {showAll ? t("learn.history.showFewer") : t("learn.history.showAll", { count: items.length })}
+        </button>
       )}
     </Section>
   );

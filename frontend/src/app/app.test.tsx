@@ -1,5 +1,6 @@
-import { act, screen, waitFor, within } from "@testing-library/react";
+import { act, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { PauseControl } from "../components/Controls";
 import { CAREGIVER, TEEN, THERAPIST, renderApp } from "../test/render";
 
 describe("placeholder start page + language switch (Phase 0 acceptance)", () => {
@@ -56,16 +57,7 @@ describe("role-gated route trees", () => {
     const labels = within(nav)
       .getAllByRole("link")
       .map((a) => a.textContent);
-    expect(labels).toEqual([
-      "首页",
-      "学习",
-      "小组回顾",
-      "日记卡",
-      "共同活动",
-      "帮助",
-      "谁能看到我的数据",
-      "个人资料",
-    ]);
+    expect(labels).toEqual(["首页", "学习", "小组回顾", "日记卡", "共同活动", "帮助", "个人资料"]);
   });
 
   it("uses 'Explore skills' for caregivers and has no Profile entry", () => {
@@ -77,10 +69,21 @@ describe("role-gated route trees", () => {
 });
 
 describe("participant screens (§6.2, §7.3)", () => {
-  it("always show Pause and the who-can-see indicator", () => {
+  it("show Get help, without a header Pause or an 'only you' label (D92)", () => {
     renderApp("/teen/joint", TEEN);
-    expect(screen.getByRole("button", { name: "暂停" })).toBeInTheDocument();
-    expect(screen.getByRole("status", { name: "谁能看到这里？" })).toHaveTextContent("仅你可见");
+    expect(screen.getByRole("link", { name: "获取帮助" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "暂停" })).toBeNull();
+    expect(screen.queryByText("仅你可见")).toBeNull();
+  });
+
+  it("still say when the therapist can see the page (no hidden monitoring)", () => {
+    renderApp("/teen/diary", TEEN);
+    expect(screen.getByRole("status", { name: "谁能看到这里？" })).toHaveTextContent("你的治疗师可见");
+  });
+
+  it("reach 'Who can see my data' from Settings, not the sidebar (D92)", () => {
+    renderApp("/teen/settings", TEEN);
+    expect(screen.getByRole("link", { name: "查看" })).toHaveAttribute("href", "/teen/privacy");
   });
 
   it("therapist screens have no participant Pause control", () => {
@@ -90,7 +93,7 @@ describe("participant screens (§6.2, §7.3)", () => {
 
   it("Pause opens a calm layer without a timer, Escape resumes and focus returns", async () => {
     const user = userEvent.setup();
-    renderApp("/teen", TEEN);
+    render(<PauseControl />); // shown in the joint room header (D92)
     const pause = screen.getByRole("button", { name: "暂停" });
     await user.click(pause);
     const dialog = screen.getByRole("dialog", { name: "已暂停" });

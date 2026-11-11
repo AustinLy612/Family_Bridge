@@ -23,8 +23,8 @@ path taken, and the participant's own words. Read the prompt aloud. Do not demon
 
 | # | Account | Prompt to the participant | Success criterion |
 |---|---|---|---|
-| W1 | `demo-teen-a` | "Find out who can see your Diary Card, and what your mum can see." | Opens *Who can see my data* or the diary's *Who can see this?* note, and says that the therapist sees the card and the caregiver sees only what is shared. |
-| W2 | `demo-teen-a` | "Imagine you need a break right now. Show me how you would pause." | Finds the **Pause** control in the header without scrolling or opening a menu. |
+| W1 | `demo-teen-a` | "Find out who can see your Diary Card, and what your mum can see." | Opens *Who can see my data* (in Settings since D92) or the diary's *Who can see this?* note, and says that the therapist sees the card and the caregiver sees only what is shared. |
+| W2 | `demo-teen-a` | "Imagine you need help right now. Show me where you would go." | Finds **Get help** in the header without scrolling or opening a menu. (Was "find Pause"; Pause is in the joint room only since D92.) |
 | W3 | `demo-teen-a` | "You have been invited to a joint activity. Decline it." | Joint sessions → the invitation card → "Not this time". No reason is asked; the card moves to Earlier as "You said not this time". In the automated run, `demo-therapist` sends the invitation first. |
 | W4 | `demo-teen-a` | "Your group covered a skill this week. Do a short lesson on it." | Starts a lesson from *Group review*, replies, and finishes it (mood after). |
 | W5 | `demo-teen-a` | "Fill in today's Diary Card and tick the homework you did." | Saves an entry with at least one item and a homework tick, and sees "Saved." |

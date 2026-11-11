@@ -75,7 +75,7 @@ export function TestPage() {
       icon={<ClipboardCheck size={22} />}
       showBack
     >
-      <div className="fb-stack">
+      <div className="fb-stack fb-lesson">
         <ErrorNotice error={error} />
         {test.status === "generating" && <Notice>{t("learn.test.generating")}</Notice>}
         {test.status === "unavailable" && <Notice tone="warn">{t("learn.test.unavailable")}</Notice>}

@@ -19,7 +19,7 @@ axe-core 4.14 (`@axe-core/playwright`, rules tagged `wcag2a`, `wcag2aa`, `wcag21
 Keyboard checks (same file):
 
 - The first Tab stop is the skip link, and it moves focus to `#main`.
-- **Pause** is reachable with Tab from the top of a page.
+- **Get help** is reachable with Tab from the top of a page. (Pause moved to the joint room header in D92.)
 - The focused control has a visible focus indicator (outline or box shadow).
 
 Earlier phases already test focus and keyboard use in their own flows (consent, lessons, diary

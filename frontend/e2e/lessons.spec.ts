@@ -222,7 +222,7 @@ for (const lang of ["en", "zh-CN"] as const) {
     await startLesson(teen, lang);
     await teen.getByRole("button", { name: tr(lang, "learn.checkin.skip") }).click();
     await teen.getByRole("button", { name: tr(lang, "learn.choose.confirm") }).click();
-    await teen.getByRole("button", { name: tr(lang, "learn.lesson.end") }).click();
+    await teen.getByRole("button", { name: tr(lang, "learn.lesson.stop") }).click();
     await finishWithMood(teen, lang);
 
     // 3. group review: the skill is fixed, so the lesson goes straight to teaching
@@ -307,7 +307,8 @@ test("a rule-violating model sentence never reaches the browser; high risk stops
     if (r.url().endsWith("/messages")) void r.text().then((t) => bodies.push(t));
   });
   await reply(teen, lang, `Tell me more ${RULE_TRIGGER}`);
-  await expect(teen.getByText("Authored content").last()).toBeVisible();
+  // the reviewed fallback replaces the reply (no per-message provenance label since D92)
+  await expect(teen.getByText(/this reply is not available right now/).last()).toBeVisible();
   await expect(teen.locator("body")).not.toContainText("too sensitive");
   await expect.poll(() => bodies.length).toBeGreaterThan(0);
   expect(bodies.join("")).not.toContain("too sensitive");

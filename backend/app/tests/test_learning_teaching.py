@@ -386,3 +386,29 @@ def test_open_lesson_follows_the_learners_current_language(
     db.expire_all()
     row = db.get(TeachingSession, closed["id"])
     assert row is not None and row.language == "zh-CN"  # closed lessons keep theirs
+
+
+def test_language_switch_rewrites_the_step_on_screen(
+    client: TestClient, world: World, db: Session
+) -> None:
+    """The check-in question and the recommendation follow a language switch (D92)."""
+    login(client, world.f1.teen)
+    ok(client.patch("/api/v1/me", json={"language": "en"}))
+    profile(client)
+    sid = start(client)["id"]
+    lesson = ok(client.post(f"/api/v1/learn/sessions/{sid}/mood", json={"value": 3}))["lesson"]
+    en_question = lesson["checkin"]["question"]
+    ok(client.patch("/api/v1/me", json={"language": "zh-CN"}))
+    lesson = ok(client.get(f"/api/v1/learn/sessions/{sid}"))["lesson"]
+    assert lesson["checkin"]["question"] and lesson["checkin"]["question"] != en_question
+    again = ok(client.get(f"/api/v1/learn/sessions/{sid}"))["lesson"]
+    assert again["checkin"]["question"] == lesson["checkin"]["question"]  # no second rewrite
+
+    lesson = ok(client.post(f"/api/v1/learn/sessions/{sid}/checkin", json={"skip": True}))["lesson"]
+    zh_reason = lesson["recommendation"]["reason"]
+    ok(client.patch("/api/v1/me", json={"language": "en"}))
+    lesson = ok(client.get(f"/api/v1/learn/sessions/{sid}"))["lesson"]
+    assert lesson["recommendation"]["reason"] != zh_reason
+    db.expire_all()
+    row = db.get(TeachingSession, sid)
+    assert row is not None and json.loads(str(row.recommendation))["language"] == "en"

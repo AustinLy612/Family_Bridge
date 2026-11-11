@@ -82,7 +82,7 @@ export async function completeOnboarding(page: Page, home: string) {
   }
   await page.getByRole("button", { name: "Agree and continue" }).click();
   await expect(page).toHaveURL(new RegExp(`${home}$`));
-  await expect(page.getByRole("button", { name: "Pause" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Get help" })).toBeVisible();
 }
 
 /** Sign in as a seeded demo account, switch it to English and finish first-run onboarding. */

@@ -79,10 +79,6 @@
   gap: var(--space-2);
   flex-wrap: wrap;
 }
-.shell-user__lang {
-  color: var(--color-ink-muted);
-  font-size: var(--fs-xs);
-}
 .shell-nav ul {
   list-style: none;
   margin: 0;

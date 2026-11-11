@@ -1,10 +1,17 @@
 /* Phase 5 learning screens. Calm, card-based; no alarm colours for "not yet" (§5.13). */
 
-.fb-lesson {
-  max-width: 48rem;
-}
-.fb-lesson .fb-form {
+/* Lessons and quick checks use the full content width (D92): cards, text and choices fill the
+   page instead of a narrow reading column. */
+.fb-lesson .fb-form,
+.fb-lesson p,
+.fb-lesson .fb-convo {
   max-width: none;
+}
+.fb-lesson .fb-select-grid {
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+.fb-lesson .fb-select {
+  min-height: 7rem;
 }
 .fb-mood {
   display: grid;
@@ -15,15 +22,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-1);
+  gap: var(--space-3);
   justify-content: center;
-  min-height: calc(var(--touch-target) * 2.2);
-  padding: var(--space-3) var(--space-2);
+  min-height: 10rem;
+  padding: var(--space-5) var(--space-3);
   border-radius: var(--radius-tile);
   border: 2px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-ink);
-  font-size: 2.25rem;
+  font-size: 3.5rem;
   line-height: 1;
   cursor: pointer;
   transition:
@@ -37,8 +44,11 @@
   border-color: var(--color-selected-border);
   background: var(--color-lavender-100);
 }
+.fb-mood {
+  gap: var(--space-4);
+}
 .fb-mood__label {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-lg);
   font-weight: 600;
   text-align: center;
 }
@@ -120,4 +130,11 @@
   padding-left: var(--space-5);
   font-size: var(--fs-sm);
   color: var(--color-ink-muted);
+}
+
+@media (max-width: 640px) {
+  .fb-mood__option {
+    min-height: 6rem;
+    font-size: 2.25rem;
+  }
 }
