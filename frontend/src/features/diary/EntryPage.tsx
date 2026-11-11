@@ -218,7 +218,7 @@ function EntryBody({
             setHomework(ids);
           }}
         />
-        <div className="fb-card fb-form">
+        <div className="fb-card fb-form fb-form--wide">
           <ErrorNotice error={error} />
           {saved && <Notice>{t("diary.saved")}</Notice>}
           <PrimaryButton type="submit" disabled={busy}>

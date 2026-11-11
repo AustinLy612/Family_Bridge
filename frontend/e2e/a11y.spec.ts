@@ -148,6 +148,9 @@ test("reflow: no horizontal scrolling at 320 CSS px (WCAG 1.4.10)", async ({ pag
 test("keyboard: skip link first, Get help reachable, visible focus", async ({ page }) => {
   await signInDemo(page, "demo-teen-a", "/teen");
   await page.goto("/teen/diary/new");
+  // wait for the page to render before tabbing (the first Tab raced the data load)
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  await page.locator("body").focus();
   await page.keyboard.press("Tab");
   const first = page.locator(":focus");
   await expect(first).toHaveClass(/skip-link/);

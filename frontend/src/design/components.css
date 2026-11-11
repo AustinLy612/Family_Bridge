@@ -500,6 +500,23 @@
   color: var(--color-ink-muted);
   font-size: var(--fs-sm);
   font-weight: 400;
+  line-height: 1.6;
+}
+/* Short notes inside cards use the card width, so they do not wrap a lone word or character. */
+.fb-card p.fb-setting__hint {
+  max-width: none;
+}
+/* Even spacing inside cards (D93): a note is never glued to the button or row after it. */
+.fb-card > p + .fb-btn,
+.fb-card > p + button,
+.fb-card > p + a.fb-btn,
+.fb-card > p + .fb-actions {
+  margin-top: var(--space-4);
+}
+.fb-card > .fb-setting + p,
+.fb-card > .fb-setting + .fb-notice,
+.fb-card > p + p {
+  margin-top: var(--space-3);
 }
 .fb-switch {
   position: relative;
@@ -605,6 +622,9 @@
   gap: var(--space-4);
   max-width: 34rem;
 }
+.fb-form--wide {
+  max-width: none;
+}
 .fb-form--inline {
   grid-template-columns: 1fr auto;
   align-items: end;
@@ -646,6 +666,28 @@
   height: 24px;
   accent-color: var(--color-cta-bg);
   flex: none;
+}
+/* A checkbox row: the label wraps the box and its text (homework, skills, share items). */
+label.fb-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: auto;
+  height: auto;
+  min-height: var(--touch-target);
+  padding: var(--space-2) 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+label.fb-checkbox > input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  margin: 0.1em 0 0;
+  accent-color: var(--color-cta-bg);
+  flex: none;
+}
+label.fb-checkbox > span {
+  min-width: 0;
 }
 .fb-fieldset {
   display: grid;
