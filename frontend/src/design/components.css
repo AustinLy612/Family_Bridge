@@ -217,16 +217,17 @@
 /* ---------- SelectCard ---------- */
 .fb-select-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
-  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: var(--space-3);
 }
 .fb-select {
   position: relative;
   display: grid;
-  align-content: start;
-  gap: var(--space-2);
-  min-height: 13rem;
-  padding: var(--space-4);
+  align-content: center;
+  gap: var(--space-1);
+  /* Sized to the label (D94): tiles were 13rem tall and mostly empty. */
+  min-height: 4.5rem;
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-card);
   border: 3px solid transparent;
   text-align: start;
@@ -256,8 +257,9 @@
   border-color: var(--color-selected-border);
 }
 .fb-select__title {
-  font-size: var(--fs-lg);
-  font-weight: 800;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  line-height: 1.35;
 }
 .fb-select__caption {
   color: var(--color-ink-muted);

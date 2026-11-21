@@ -16,6 +16,7 @@ import { Chip, PlaceholderArt, PrivacyIndicator, type Visibility } from "../desi
 import { LanguageSwitch } from "../components/Controls";
 import { useAccessibility } from "./accessibility";
 import { NAV, isParticipant, navHref } from "./nav";
+import { BrandMark } from "../design/components/BrandMark";
 import { ROLE_HOME, type Role } from "./session";
 
 export interface AppShellProps {
@@ -41,9 +42,7 @@ function Sidebar({ role, alias, onLogout }: { role: Role; alias: string; onLogou
   return (
     <aside className="shell-sidebar">
       <NavLink to={home} className="shell-brand">
-        <span className="shell-brand__mark" aria-hidden>
-          FB
-        </span>
+        <BrandMark />
         <span className="shell-brand__name">FamilyBridge</span>
       </NavLink>
 

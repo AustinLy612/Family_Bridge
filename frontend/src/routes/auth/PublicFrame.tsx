@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
+import { BrandMark } from "../../design/components/BrandMark";
 import { LanguageSwitch } from "../../components/Controls";
 
 export function PublicFrame({ children, wide = false }: { children: ReactNode; wide?: boolean }) {
@@ -11,9 +12,7 @@ export function PublicFrame({ children, wide = false }: { children: ReactNode; w
       <main id="main" className={`start-page${wide ? " start-page--wide" : ""}`}>
         <header className="start-page__header">
           <Link to="/" className="shell-brand">
-            <span className="shell-brand__mark" aria-hidden>
-              FB
-            </span>
+            <BrandMark />
             <span className="shell-brand__name">{t("app.name")}</span>
           </Link>
           <LanguageSwitch />

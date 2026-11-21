@@ -60,7 +60,7 @@
   },
   "provenance": {
     "ai": "AI 根据手册生成",
-    "authored": "人工编写内容",
+    "authored": "由人工撰写",
     "general": "AI · 通用 DBT 知识"
   },
   "placeholder": {
@@ -128,9 +128,9 @@
       "statSkills": "已探索技能",
       "statDiary": "本周日记卡",
       "moduleMindfulness": "正念",
-      "moduleDistress": "痛苦耐受",
+      "moduleDistress": "痛苦忍受",
       "moduleEmotion": "情绪调节",
-      "moduleMiddlePath": "走中间路线",
+      "moduleMiddlePath": "走在中道上",
       "moduleCaption": "演示模块卡片",
       "selected": "已选择",
       "detailTime": "预计时间",
@@ -139,7 +139,7 @@
       "detailPracticeValue": "简短情境",
       "inviteTitle": "共同活动邀请（示例）",
       "accept": "参加这次活动",
-      "decline": "这次先不了",
+      "decline": "这次不参加",
       "endSession": "结束活动",
       "listTitle": "小组回顾：示例技能",
       "listSubtitle": "由你的治疗师记录（演示）",
@@ -215,16 +215,16 @@
       "adolescent_exists": "这个家庭已有青少年账户或待使用的青少年邀请码。"
     },
     "consent": {
-      "required_declined": "未同意必选项目，无法完成入门流程。",
+      "required_declined": "必选项目未同意，无法完成初始设置。",
       "decisions_incomplete": "请回答每一项。",
       "version_changed": "同意书内容已更新，请重新加载并再次阅读。",
       "required_contact_therapist": "如需更改此项，请和你的治疗师谈谈。",
       "missing": "同意书内容暂不可用。"
     },
     "onboarding": {
-      "required": "请先完成入门流程。",
-      "already_completed": "入门流程已完成。",
-      "participants_only": "入门流程适用于青少年和照顾者。"
+      "required": "请先完成初始设置。",
+      "already_completed": "初始设置已经完成。",
+      "participants_only": "初始设置仅适用于青少年和照顾者。"
     },
     "group": {
       "unknown_therapist": "找不到所选的某位治疗师。",
@@ -291,7 +291,7 @@
       "unknown_homework": "这一天没有开放这项作业。"
     },
     "task": {
-      "invalid_window": "请检查日期：“截至”不能早于“开始”，且相隔不超过约两个月。",
+      "invalid_window": "请检查日期：截止日期不能早于开始日期，两者相隔也不能超过约两个月。",
       "invalid_roles": "请选择作业对象。",
       "unknown_skill": "有一项关联技能无法识别。",
       "title_required": "请填写作业内容。",
@@ -373,7 +373,7 @@
     "notNow": "我不同意"
   },
   "visibility": {
-    "subtitle": "此列表来自你账户的实际设置。",
+    "subtitle": "以下内容根据你账户的当前设置生成。",
     "listTitle": "可以看到你数据的人和服务",
     "changeHint": "如需更改谁可以查看你的记录，请和你的治疗师谈谈。研究选项可以在设置中更改。",
     "kind": {
@@ -394,7 +394,7 @@
       "only_what_you_share": "只有你选择分享的内容",
       "joint_shared_steps": "共同活动中的共享步骤",
       "account_only": "仅账户信息（应用内名称、状态），不包括你的记录",
-      "pseudonymous_lesson_text": "以代号发送的课程和练习文字",
+      "pseudonymous_lesson_text": "课程和练习中的文字（以代号发送，不含姓名）",
       "pseudonymous_usage": "不含姓名的使用数据"
     }
   },
@@ -490,8 +490,8 @@
     "familySubtitle": "成员、邀请码以及共同活动的适宜性。",
     "members": "成员",
     "noMembers": "还没有人加入。",
-    "onboarded": "已完成入门",
-    "notOnboarded": "尚未完成入门",
+    "onboarded": "已完成初始设置",
+    "notOnboarded": "尚未完成初始设置",
     "newInvitation": "新邀请码",
     "inviteRole": "账户类型",
     "oneAdolescent": "每个家庭只有一个青少年账户；这个家庭已有一个，或有待使用的代码。",
@@ -563,7 +563,7 @@
       "taskDetailsHint": "参与者会看到这段文字，请简短、友善。",
       "forRoles": "对象",
       "startsOn": "开始",
-      "dueOn": "截至",
+      "dueOn": "截止",
       "linkSkills": "关联技能（可选，已选 {{n}} 项）",
       "addTask": "添加作业",
       "homework": "小组作业",
@@ -608,11 +608,11 @@
         "explore": "自主探索"
       },
       "why": "选择此技能的原因",
-      "checkin": "签到问题",
+      "checkin": "课前小问题",
       "checkinState": {
         "answered": "已回答",
         "skipped": "已跳过",
-        "not_reached": "未到达"
+        "not_reached": "未进行到"
       },
       "mood": "课前 → 课后心情（1–5）",
       "moodValues": "{{before}} → {{after}}",
@@ -632,9 +632,9 @@
       "quizRow": "答对 {{correct}}/{{answered}}",
       "reflection": "反思",
       "reflectionState": {
-        "written": "已写",
+        "written": "已填写",
         "skipped": "已跳过",
-        "not_reached": "未到达"
+        "not_reached": "未进行到"
       },
       "openWords": "查看参与者原话",
       "auditNote": "查看操作会记录在审计日志中。",
@@ -693,8 +693,8 @@
       "enrolment": "入组",
       "families": "家庭",
       "invitations": "邀请码已使用 / 已发出",
-      "onboardedTeens": "已完成引导的青少年",
-      "onboardedCarers": "已完成引导的照顾者",
+      "onboardedTeens": "已完成初始设置的青少年",
+      "onboardedCarers": "已完成初始设置的照顾者",
       "diary": "日记卡（要求：每周 {{n}} 天）",
       "diaryDays": "{{who}}：有记录天数 / 应有天数",
       "diaryEntries": "{{who}}：记录条数",
@@ -708,9 +708,9 @@
       "started": "开始",
       "completed": "完成",
       "stopped": "提前结束",
-      "stoppedSafety": "因安全暂停",
+      "stoppedSafety": "因安全原因暂停",
       "bySource": "技能的选择方式",
-      "checkin": "签到问题回答 / 跳过",
+      "checkin": "课前小问题（回答 / 跳过）",
       "tests": "小测验“掌握了” / 已参加",
       "mood": "平均心情 课前 → 课后（1–5）",
       "quiz": "小测验答对 / 作答",
@@ -770,7 +770,7 @@
         "participant": "由参与者暂停",
         "disconnect": "因断线暂停",
         "therapist": "由你暂停",
-        "safety": "需要你继续或结束"
+        "safety": "安全暂停，等待你决定继续或结束"
       },
       "step": "第 {{n}} 步，共 {{total}} 步",
       "role": {
@@ -791,7 +791,7 @@
       "comingSoonHint": "计划中的世界和关卡。内容会随最终脚本提供。",
       "worldLevel": "{{world}} · 第 {{level}} 部分",
       "minutesRange": "{{from}}–{{to}} 分钟",
-      "summarySubtitle": "按评分规则编码的结果、出席、感受评分和反思。对方家庭成员看不到这些。",
+      "summarySubtitle": "按评分标准编码的结果、出席情况、感受评分和反思。其他家庭成员看不到这些内容。",
       "back": "返回共同活动",
       "audited": "打开这份小结会记录在审计日志中。",
       "record": "共同结果",
@@ -802,9 +802,9 @@
       },
       "stepsDone": "完成的步骤",
       "skipped": "跳过 {{n}} 步",
-      "sharedTags": "共同回应（规则标签）",
+      "sharedTags": "共同回应（标准标签）",
       "noRecord": "还没有共同结果。",
-      "rubric": "按规则编码的结果",
+      "rubric": "按评分标准编码的结果",
       "stepCol": "步骤",
       "attendance": "出席",
       "distress": "感受评分（0–10）",
@@ -871,12 +871,12 @@
     "categoryLabel": "事件类型",
     "category": {
       "discomfort_or_trauma_cue": "不适或创伤线索",
-      "risk_disclosure": "风险表露",
+      "risk_disclosure": "透露风险信息",
       "urge_threshold": "日记卡冲动评分超过阈值",
       "suspected_abuse": "疑似虐待",
-      "parental_coercion": "家长强迫",
+      "parental_coercion": "家长施压或强迫",
       "privacy_breach": "隐私泄露",
-      "delayed_clinician_response": "临床响应延迟"
+      "delayed_clinician_response": "临床回应延迟"
     },
     "sourceLabel": "来源",
     "source": {
@@ -1129,7 +1129,7 @@
       "attempt": "第 {{n}} 次",
       "question": "第 {{n}} 题，共 {{total}} 题",
       "generating": "正在准备题目，稍等一下…",
-      "unavailable": "现在没法准备题目。稍后可以再试一次。",
+      "unavailable": "暂时无法生成题目，稍后可以再试。",
       "stopped": "这次小测验已结束。",
       "right": "对！",
       "notQuite": "还差一点。",
@@ -1137,11 +1137,11 @@
       "backToLesson": "回到这节课",
       "outcome": {
         "got_it": "你掌握了！",
-        "another_look": "值得再看看"
+        "another_look": "可以再看看"
       },
       "outcomeBody": {
         "got_it": "你对这个技能已经很熟悉了。想再练练也可以随时回来。",
-        "another_look": "这个技能值得再看一看——要不要再试一次？"
+        "another_look": "这个技能可以再看一看，要不要再试一次？"
       }
     },
     "progress": {
@@ -1174,7 +1174,7 @@
       "groupHint": "小组课上讲过的技能（可选）"
     },
     "profile": {
-      "subtitle": "帮助练习更贴近你的生活。只有你和你的治疗师能看到。",
+      "subtitle": "让练习更贴近你的生活。只有你和你的治疗师能看到。",
       "age": "年龄",
       "grade": "年级",
       "chooseGrade": "请选择年级",
@@ -1277,7 +1277,7 @@
     "empty": "最近30天还没有记录。",
     "entryFor": "{{date}}的记录",
     "savedAt": "保存于{{time}}",
-    "date": "这条记录是关于哪一天的？",
+    "date": "这是哪一天的记录？",
     "todayOption": "今天（{{date}}）",
     "skipAnything": "按你的感觉填写，任何一项都可以跳过。",
     "saved": "已保存。",
@@ -1287,36 +1287,36 @@
     "versions": "保存过的版本（{{n}}）",
     "versionN": "第{{n}}版 · {{time}}",
     "sharedWithMe": {
-      "title": "与我分享的",
-      "empty": "还没有人与你分享内容。",
+      "title": "家人分享给我的",
+      "empty": "还没有人分享内容给你。",
       "from": "来自{{alias}} · {{date}}的记录",
       "sharedOn": "分享于{{date}}"
     },
     "share": {
       "title": "与家人分享",
-      "intro": "选择要分享这条记录中的哪些内容。其他内容不会被分享，你也可以随时停止分享。",
+      "intro": "选择这条记录中要分享的内容。没选的内容不会被分享，你也可以随时停止分享。",
       "existing": "这条记录已分享的内容",
-      "sharedWith": "{{date}}与{{alias}}分享",
-      "revoked": "{{date}}已停止与{{alias}}分享",
+      "sharedWith": "{{date}} 已分享给{{alias}}",
+      "revoked": "{{date}} 已停止分享给{{alias}}",
       "revoke": "停止分享",
-      "noRecipients": "你的家人中暂时没有可以分享的对象。",
+      "noRecipients": "暂时没有可以分享的家人。",
       "who": "分享给",
       "what": "要分享的内容",
       "preview": "预览",
       "previewTitle": "{{alias}}将看到：",
-      "snapshot": "对方看到的是这条记录现在的样子，之后的修改不会被分享。",
+      "snapshot": "对方看到的是这条记录现在的内容，之后的修改不会同步给对方。",
       "confirm": "分享",
       "change": "修改"
     },
     "homework": {
       "title": "作业",
-      "hint": "勾选你完成了的小组作业。"
+      "hint": "勾选你已完成的小组作业。"
     }
   },
   "homework": {
     "title": "本周作业",
     "hint": "来自你的小组。完成后在日记卡中勾选即可。",
-    "openUntil": "开放至 {{date}}",
+    "openUntil": "{{date}} 前完成",
     "done": "已完成",
     "tickInDiary": "打开日记卡勾选作业"
   },
@@ -1324,30 +1324,30 @@
     "subtitle": "由治疗师安排、你和家人一起做的活动。",
     "optional": "共同活动永远是自愿的。你可以随时拒绝、暂停或停止，也不需要说明原因。",
     "invitations": "邀请",
-    "none": "现在这里没有内容。",
-    "past": "之前的",
+    "none": "目前没有活动。",
+    "past": "以往的活动",
     "window": "开放时间：{{from}} 至 {{to}}",
     "objective": "练习的技能",
     "duration": "大约",
     "minutes": "{{n}} 分钟",
     "canStop": "你可以拒绝，也可以随时停止，不需要说明原因。",
-    "accept": "好，我愿意",
-    "decline": "这次先不了",
+    "accept": "好的，参加",
+    "decline": "这次不参加",
     "join": "进入",
     "status": {
-      "invited": "邀请",
-      "accepted": "你已同意",
+      "invited": "待回复",
+      "accepted": "你已接受",
       "ready": "可以进入",
       "active": "进行中",
       "completed": "已完成",
       "ended": "提前结束",
-      "you_declined": "你选择了这次先不",
-      "wont_run": "这次活动不会进行",
+      "you_declined": "你这次没有参加",
+      "wont_run": "这次活动不进行了",
       "time_passed": "这次活动的时间已过"
     },
     "solo": {
       "title": "自己练习",
-      "hint": "一个人试试一个简短的占位活动。不会分享给你的家人。",
+      "hint": "自己试一个简短的练习，不会分享给家人。",
       "start": "开始练习"
     },
     "step": {
@@ -1372,7 +1372,7 @@
       "ended": "这次活动先到这里。",
       "endedBody": "没关系。你可以和治疗师商量下次的时间。",
       "partnerHere": "你的家人在这里。",
-      "partnerAway": "你的家人的连接断开了，他们的进度已保存。",
+      "partnerAway": "你的家人暂时断线了，进度已保存。",
       "lobby": "准备开始",
       "where": "你在哪里参加？（可不填）",
       "location": {
@@ -1382,7 +1382,7 @@
       "waitingPartner": "正在等你的家人，没有时间限制。",
       "ready": "我准备好了",
       "held": "活动暂时停下来了",
-      "heldBody": "治疗师会接着处理。你做过的内容都不会丢失。",
+      "heldBody": "治疗师会来跟进。你做过的内容都不会丢失。",
       "paused": "已暂停",
       "pausedBody": "你们任何一方准备好后都可以继续，什么都不会丢失。",
       "pausedSolo": "准备好后再继续，什么都不会丢失。",

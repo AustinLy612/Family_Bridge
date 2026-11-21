@@ -134,7 +134,7 @@ describe("provenance labels (D6)", () => {
 
   it.each([
     ["en", ["AI-generated from the manual", "AI · general DBT knowledge", "Authored content"]],
-    ["zh-CN", ["AI 根据手册生成", "AI · 通用 DBT 知识", "人工编写内容"]],
+    ["zh-CN", ["AI 根据手册生成", "AI · 通用 DBT 知识", "由人工撰写"]],
   ])("labels every source in %s", async (lang, labels) => {
     await i18n.changeLanguage(lang);
     render(

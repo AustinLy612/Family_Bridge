@@ -29,6 +29,7 @@
   --color-amber-100: #fdeecb;
   --color-blue: #2e24f4; /* links, focus ring, secondary accent */
   --color-blue-100: #e0defd;
+  --color-brand-tile: #8664a3; /* brand mark tile: lighter plum (D94) */
   --color-plum: #5b3a74; /* links and focus ring: sits with the lavender palette (≥ 4.5:1 on surface) */
   --color-red: #d24734; /* therapist destructive actions ONLY */
 
