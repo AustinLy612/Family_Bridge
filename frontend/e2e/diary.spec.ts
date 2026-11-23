@@ -8,7 +8,7 @@
  * One therapist and family per run (invitation codes are rate-limited per IP).
  */
 import { expect as baseExpect, test, type Browser, type Page } from "@playwright/test";
-import { RUN, completeOnboarding, demoAdmin, readCode, redeem, signIn, signOut } from "./helpers";
+import { RUN, completeOnboarding, demoAdmin, readCode, redeem, signIn, signOut, openModule } from "./helpers";
 
 test.use({ actionTimeout: 15_000 });
 const expect = baseExpect.configure({ timeout: 20_000 });
@@ -27,12 +27,14 @@ async function setUp(browser: Browser): Promise<World> {
   const page = await browser.newPage();
   const admin = demoAdmin();
   await signIn(page, admin.username, admin.password);
+  await openModule(page, "Administration");
   await page.getByRole("button", { name: "New therapist code" }).click();
   const therapistCode = await readCode(page);
   await signOut(page);
   await page.close();
 
   const therapist = await redeem(browser, therapistCode, `e2e-dt-${id}`, `Dr Diary ${id}`);
+  await openModule(therapist, "Family Bridge");
   await therapist.getByLabel("New group name").fill(`Diary group ${id}`);
   await therapist.getByRole("button", { name: "Create" }).click();
   await therapist.getByRole("link", { name: new RegExp(`Diary group ${id}`) }).click();

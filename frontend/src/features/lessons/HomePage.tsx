@@ -1,13 +1,13 @@
 /**
- * Participant home (Plan §5.13.1): continue an open lesson, start learning, and Group review as
- * its own area (D24). Lessons are never tasks. The only list of things to do is the group's
+ * Family Bridge overview for participants (D95; was the participant home, Plan §5.13.1): the way
+ * into group review (D24), diary cards and joint activities. One-to-one lessons moved to the
+ * Personal Learning module and the Portal's shortcut; lessons are never tasks. The only list of things to do is the group's
  * homework (D69), shown read-only: ticking happens in the diary, and nothing is ever "overdue".
  */
 import { useQuery } from "@tanstack/react-query";
-import { BookOpen, Check, ClipboardList, House, UsersRound } from "lucide-react";
+import { Check, ClipboardList, HeartHandshake, House, NotebookPen, UsersRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { diary } from "../../api/diary";
-import { learn } from "../../api/learning";
 import { ROLE_HOME, useSession } from "../../app/session";
 import { Chip, HeroBanner, List, ListRow } from "../../design";
 import { useDateFormat } from "../diary/util";
@@ -18,47 +18,36 @@ export function HomePage() {
   const user = useSession();
   const teen = user?.role === "adolescent";
   const home = teen ? ROLE_HOME.adolescent : ROLE_HOME.caregiver;
-  const current = useQuery({
-    queryKey: ["learn", teen ? "current" : "caregiver-current"],
-    queryFn: async () => {
-      if (teen) {
-        const l = (await learn.current()).lesson;
-        return l ? { id: l.id, href: `${home}/learn/${l.id}`, skill: l.skill?.name ?? null } : null;
-      }
-      const l = (await learn.caregiverCurrent()).lesson;
-      return l ? { id: l.id, href: `${home}/learn/lesson/${l.id}`, skill: l.skill.name } : null;
-    },
-    enabled: !!user,
-  });
-  const open = current.data ?? null;
   if (!user) return null;
   return (
-    <Page title={t("nav.home")} icon={<House size={22} />}>
+    <Page
+      title={t("nav.module.family")}
+      subtitle={t("portal.familyHome.subtitle")}
+      icon={<House size={22} />}
+    >
       <div className="fb-stack">
         <HeroBanner
           title={t("learn.home.hello", { alias: user.displayAlias })}
-          body={t(teen ? "learn.home.bodyTeen" : "learn.home.bodyCarer")}
+          body={t(teen ? "portal.familyHome.bodyTeen" : "portal.familyHome.bodyCarer")}
         />
-        <List label={t("nav.home")}>
-          {open && (
-            <ListRow
-              icon={<BookOpen size={20} aria-hidden />}
-              title={t("learn.open.title")}
-              subtitle={open.skill ?? undefined}
-              to={open.href}
-            />
-          )}
-          <ListRow
-            icon={<BookOpen size={20} aria-hidden />}
-            title={t(teen ? "nav.learn" : "nav.exploreSkills")}
-            subtitle={t(teen ? "learn.home.learnHint" : "learn.home.exploreHint")}
-            to={`${home}/learn`}
-          />
+        <List label={t("nav.module.family")}>
           <ListRow
             icon={<UsersRound size={20} aria-hidden />}
             title={t("nav.groupReview")}
             subtitle={t("learn.home.groupHint")}
             to={`${home}/group-review`}
+          />
+          <ListRow
+            icon={<NotebookPen size={20} aria-hidden />}
+            title={t("nav.diary")}
+            subtitle={t("portal.familyHome.diaryHint")}
+            to={`${home}/diary`}
+          />
+          <ListRow
+            icon={<HeartHandshake size={20} aria-hidden />}
+            title={t("nav.joint")}
+            subtitle={t("joint.subtitle")}
+            to={`${home}/joint`}
           />
         </List>
         <Homework home={home} />

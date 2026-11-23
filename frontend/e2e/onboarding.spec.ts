@@ -12,6 +12,8 @@ test("onboarding for every role, end to end", async ({ page, browser }) => {
 
   // Admin issues a therapist code.
   await signIn(page, admin.username, admin.password);
+  await expect(page).toHaveURL(/\/portal$/);
+  await page.getByRole("link", { name: "Open Administration" }).click();
   await expect(page).toHaveURL(/\/admin$/);
   await page.getByRole("button", { name: "New therapist code" }).click();
   const therapistCode = await readCode(page);
@@ -19,6 +21,8 @@ test("onboarding for every role, end to end", async ({ page, browser }) => {
 
   // Therapist redeems (staff skip participant consent), creates a group and a family.
   const tPage = await redeem(browser, therapistCode, `e2e-t-${RUN}`, `Dr E2E ${RUN}`);
+  await expect(tPage).toHaveURL(/\/portal$/);
+  await tPage.getByRole("link", { name: "Open Family Bridge" }).click();
   await expect(tPage).toHaveURL(/\/therapist$/);
   await tPage.getByLabel("New group name").fill(`E2E group ${RUN}`);
   await tPage.getByRole("button", { name: "Create" }).click();

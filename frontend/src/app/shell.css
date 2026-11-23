@@ -123,6 +123,24 @@
 .shell-nav__link.active {
   background: var(--color-nav-active-bg);
 }
+/* Module tree (D95): the open module lists its screens, indented under a soft guide line. */
+.shell-module__chevron {
+  margin-left: auto;
+  color: var(--color-ink-muted);
+  transform: rotate(-90deg);
+  transition: transform var(--motion-fast) var(--ease-out);
+}
+.shell-module--open .shell-module__chevron {
+  transform: none;
+}
+.shell-module__head--current {
+  font-weight: 800;
+}
+.shell-nav ul.shell-module__items {
+  margin: 4px 0 4px calc(var(--space-3) + 9px);
+  padding-left: var(--space-2);
+  border-left: 2px solid var(--color-lavender-200);
+}
 .shell-sidebar__bottom {
   margin-top: auto;
   display: grid;
@@ -269,6 +287,18 @@
     display: flex;
     gap: 2px;
     margin: 0;
+  }
+  .shell-nav ul.shell-module__items {
+    margin: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+  .shell-module--open {
+    display: flex;
+    gap: 2px;
+  }
+  .shell-module__chevron {
+    display: none;
   }
   .shell-nav__link {
     flex-direction: column;

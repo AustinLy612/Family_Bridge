@@ -11,7 +11,7 @@ import { expect as baseExpect, test, type Browser, type Page } from "@playwright
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { RUN, completeOnboarding, demoAdmin, readCode, redeem, signIn, signOut } from "./helpers";
+import { RUN, completeOnboarding, demoAdmin, readCode, redeem, signIn, signOut, openModule } from "./helpers";
 
 type Lang = "en" | "zh-CN";
 type Tree = { [k: string]: string | Tree };
@@ -57,12 +57,14 @@ async function setUp(browser: Browser): Promise<World> {
   const page = await browser.newPage();
   const admin = demoAdmin();
   await signIn(page, admin.username, admin.password);
+  await openModule(page, "Administration");
   await page.getByRole("button", { name: "New therapist code" }).click();
   const therapistCode = await readCode(page);
   await signOut(page);
   await page.close();
 
   const therapist = await redeem(browser, therapistCode, `e2e-lt-${id}`, `Dr Learn ${id}`);
+  await openModule(therapist, "Family Bridge");
   await therapist.getByLabel("New group name").fill(`Learn group ${id}`);
   await therapist.getByRole("button", { name: "Create" }).click();
   await therapist.getByRole("link", { name: new RegExp(`Learn group ${id}`) }).click();

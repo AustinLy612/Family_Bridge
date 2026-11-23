@@ -32,6 +32,14 @@ export async function signIn(page: Page, username: string, password: string) {
   await page.getByRole("button", { name: "Sign in" }).click();
 }
 
+/** From the Portal (D95), open a module by its card's main link, e.g. "Family Bridge". */
+export async function openModule(
+  page: Page,
+  module: "Family Bridge" | "Personal Learning" | "Administration",
+) {
+  await page.getByRole("link", { name: `Open ${module}` }).click();
+}
+
 export async function signOut(page: Page) {
   await page.getByRole("button", { name: "Log out" }).click();
   await expect(page.getByRole("button", { name: "Sign in" })).toBeVisible();
@@ -81,15 +89,20 @@ export async function completeOnboarding(page: Page, home: string) {
     await page.getByRole("checkbox", { name }).check();
   }
   await page.getByRole("button", { name: "Agree and continue" }).click();
-  await expect(page).toHaveURL(new RegExp(`${home}$`));
+  // everyone lands on the shared Portal (D95); the role's screens keep their URLs
+  await expect(page).toHaveURL(/\/portal$/);
   await expect(page.getByRole("link", { name: "Get help" })).toBeVisible();
+  await page.goto(home);
 }
 
-/** Sign in as a seeded demo account, switch it to English and finish first-run onboarding. */
+/**
+ * Sign in as a seeded demo account, switch it to English and finish first-run onboarding. Sign-in
+ * lands on the Portal (D95); the helper then opens `home` so specs start on the role's screens.
+ */
 export async function signInDemo(page: Page, username: string, home: string) {
   const account = demoAccount(username);
   await signIn(page, account.username, account.password);
-  await page.waitForURL(/\/(onboarding|teen|caregiver|therapist|admin)(\/|$)/);
+  await page.waitForURL(/\/(onboarding|portal|teen|caregiver|therapist|admin)(\/|$)/);
   if ((await page.locator("html").getAttribute("lang")) !== "en") {
     // demo accounts are saved in Chinese; the switch is stored on the account (ServerPrefsSync)
     const saved = page.waitForResponse(
@@ -104,8 +117,10 @@ export async function signInDemo(page: Page, username: string, home: string) {
     for (const box of await page.getByRole("checkbox").all()) await box.check();
     await page.getByRole("button", { name: "Agree and continue" }).click();
   }
-  await page.waitForURL(new RegExp(`${home}$`));
+  await page.waitForURL(/\/portal$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.getByRole("heading", { level: 1, name: "Portal" })).toBeVisible();
+  if (home !== "/portal") await page.goto(home);
 }
 
 /**

@@ -109,6 +109,8 @@ test("W6 therapist reviews a family within the target time", async ({ page }) =>
   await page.getByRole("main").getByRole("link", { name: "Learning review" }).click();
   await expect(page.getByTestId("learning-panel-adolescent")).toBeVisible();
 
+  // the learning review sits in Personal Learning (D95); Schedule is back in Family Bridge
+  await page.getByRole("link", { name: "Family Bridge" }).click();
   await page.getByRole("link", { name: "Schedule" }).click();
   await expect(page.getByTestId("task").filter({ hasText: "(demo)" }).first()).toBeVisible();
 

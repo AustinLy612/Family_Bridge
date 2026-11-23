@@ -35,7 +35,14 @@
     "openMenu": "打开菜单",
     "closeMenu": "关闭菜单",
     "safetyOversight": "安全监督",
-    "aiLayer": "AI 层"
+    "aiLayer": "AI 层",
+    "portal": "门户",
+    "familyHome": "概览",
+    "module": {
+      "family": "家桥",
+      "learning": "个人学习",
+      "admin": "平台管理"
+    }
   },
   "role": {
     "adolescent": "青少年",
@@ -1419,5 +1426,50 @@
     },
     "showAll": "显示全部（{{count}}）",
     "showFewer": "收起"
+  },
+  "portal": {
+    "subtitle": "你的账户和 FamilyBridge 的各个部分，都从这里进入。",
+    "hello": "欢迎回来，{{alias}}",
+    "body": "选择接下来要去的地方。账户信息和设置在下方。",
+    "modulesTitle": "功能区",
+    "includes": "包括",
+    "enter": "进入{{module}}",
+    "continueLesson": "继续上次的课",
+    "alwaysHere": "随时可用",
+    "shared": {
+      "help": "现在就能获得支持的方式，包括危机求助电话。",
+      "safetyQueue": "你的小组中需要查看的安全事件。",
+      "metrics": "小组的可行性指标，只有计数。",
+      "safetyOversight": "所有小组的安全事件。"
+    },
+    "accountTitle": "你的账户",
+    "username": "用户名",
+    "role": "角色",
+    "account": {
+      "profile": "年龄、年级和兴趣，让练习更贴近你的生活。",
+      "settings": "显示名称、语言、无障碍、密码和研究选项。"
+    },
+    "modules": {
+      "family": {
+        "adolescent": "和家人一起学习：小组课上的技能、你的日记卡，以及和家人一起做的活动。",
+        "caregiver": "和家人一起学习：小组课上的技能、你的日记卡，以及和孩子一起做的活动。",
+        "therapist": "你的小组和家庭、日记卡与作业，以及家庭共同活动。"
+      },
+      "learning": {
+        "adolescent": "一对一的 DBT 技能课程和练习，按你的节奏来。",
+        "caregiver": "探索 DBT 技能并练习，按你的节奏来。",
+        "therapist": "参与者的个人学习：练习过的技能，以及需要你审核的 AI 课程内容。",
+        "admin": "个人课程背后的技能知识库和 AI 层。"
+      },
+      "admin": {
+        "admin": "治疗师账户、站点设置和研究数据导出。"
+      }
+    },
+    "familyHome": {
+      "subtitle": "家庭学习：小组回顾、日记卡和共同活动。",
+      "bodyTeen": "小组课上的技能、你的日记卡和家庭共同活动，都在这里。",
+      "bodyCarer": "小组课上的技能、你的日记卡和与孩子的共同活动，都在这里。",
+      "diaryHint": "记录情绪、冲动和技能使用。分享什么由你决定。"
+    }
   }
 }

@@ -90,7 +90,7 @@ describe("API client", () => {
 });
 
 describe("sign in", () => {
-  it("signs a therapist in and lands on their groups", async () => {
+  it("signs a therapist in and lands on the Portal (D95)", async () => {
     const u = user({ role: "therapist", display_alias: "Dr Lin", username: "dr-lin" });
     const calls = mockApi({
       "GET /auth/session": signedOut,
@@ -103,7 +103,7 @@ describe("sign in", () => {
     await ui.type(await screen.findByLabelText("用户名"), "dr-lin");
     await ui.type(screen.getByLabelText("密码"), "calm-river-stone-42");
     await ui.click(screen.getByRole("button", { name: "登录" }));
-    await waitFor(() => expect(router.state.location.pathname).toBe("/therapist"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/portal"));
     expect(calls.find((c) => c.key === "POST /auth/login")?.body).toEqual({
       username: "dr-lin",
       password: "calm-river-stone-42",
@@ -157,7 +157,7 @@ describe("onboarding cannot be skipped (Plan §5.2)", () => {
     await ui.click(terms);
     await ui.click(access);
     await ui.click(screen.getByRole("button", { name: "Agree and continue" }));
-    await waitFor(() => expect(router.state.location.pathname).toBe("/teen"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/portal"));
     expect(calls.find((c) => c.key === "POST /onboarding/accept")?.body).toEqual({
       version: 1,
       language: "en",

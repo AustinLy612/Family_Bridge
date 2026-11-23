@@ -6,7 +6,7 @@
  * metrics load for their own group. One therapist and family per run (codes are rate-limited).
  */
 import { expect as baseExpect, test, type Browser, type Page } from "@playwright/test";
-import { RUN, completeOnboarding, demoAdmin, readCode, redeem, signIn, signOut } from "./helpers";
+import { RUN, completeOnboarding, demoAdmin, readCode, redeem, signIn, signOut, openModule } from "./helpers";
 
 test.use({ actionTimeout: 15_000 });
 const expect = baseExpect.configure({ timeout: 20_000 });
@@ -26,12 +26,14 @@ async function setUp(browser: Browser): Promise<World> {
   const page = await browser.newPage();
   const admin = demoAdmin();
   await signIn(page, admin.username, admin.password);
+  await openModule(page, "Administration");
   await page.getByRole("button", { name: "New therapist code" }).click();
   const therapistCode = await readCode(page);
   await signOut(page);
   await page.close();
 
   const therapist = await redeem(browser, therapistCode, `e2e-dash-${id}`, `Dr Dash ${id}`);
+  await openModule(therapist, "Family Bridge");
   await therapist.getByLabel("New group name").fill(`Dash group ${id}`);
   await therapist.getByRole("button", { name: "Create" }).click();
   await therapist.getByRole("link", { name: new RegExp(`Dash group ${id}`) }).click();
@@ -171,6 +173,8 @@ test("diary review uses the expectation; a safety event is handled without trans
   await expect(therapist.locator("body")).not.toContainText("cold water helps me");
 
   // content review and metrics for the therapist's own group
+  // Content review lives in the Personal Learning module (D95): open it from the sidebar
+  await therapist.getByRole("link", { name: "Personal Learning" }).click();
   await therapist.getByRole("link", { name: "Content review" }).click();
   await expect(therapist.getByRole("radiogroup", { name: "Show" })).toBeVisible();
   await therapist.getByRole("link", { name: "Metrics" }).click();

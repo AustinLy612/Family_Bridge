@@ -79,6 +79,8 @@ for (const [user, home] of [
     await signInDemo(page, user, home);
     for (const lang of ["English", "简体中文"] as const) {
       await setLanguage(page, lang);
+      await page.goto("/portal"); // shared landing page (D95)
+      await audit(page, `${lang} /portal`);
       for (const screen of SCREENS[home] ?? []) {
         await page.goto(`${home}${screen}`);
         await audit(page, `${lang} ${home}${screen}`);
@@ -133,13 +135,17 @@ test("reflow: no horizontal scrolling at 320 CSS px (WCAG 1.4.10)", async ({ pag
     ["demo-carer-a", "/caregiver"],
   ] as const) {
     await signInDemo(page, user, home);
-    for (const screen of ["", "/learn", "/diary/new", "/joint", "/help", "/privacy"]) {
-      await page.goto(`${home}${screen}`);
+    for (const url of [
+      "/portal",
+      ...["", "/learn", "/diary/new", "/joint", "/help", "/privacy"].map((s) => `${home}${s}`),
+    ]) {
+      const screen = url;
+      await page.goto(url);
       await page.waitForLoadState("networkidle");
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
       );
-      expect(overflow, `${home}${screen} scrolls sideways by ${overflow}px`).toBeLessThanOrEqual(0);
+      expect(overflow, `${screen} scrolls sideways by ${overflow}px`).toBeLessThanOrEqual(0);
     }
     await page.context().clearCookies();
   }

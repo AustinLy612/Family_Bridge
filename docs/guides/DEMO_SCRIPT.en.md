@@ -27,7 +27,9 @@ completion, and error recovery.**
    | A | `demo-teen-a` | Maple (adolescent) |
    | C | `demo-carer-a` | Maple's mum (caregiver) |
 
-3. Set the language per account under **Settings** to match the audience.
+3. Set the language per account under **Settings** to match the audience. Every account signs in
+   to the **Portal**; open **Family Bridge** (groups, diary cards, joint sessions) or
+   **Personal Learning** (lessons) from there or from the sidebar. Help is always in the header.
 4. Say at the start: *"This is a prototype with made-up people. It is not watched in real time.
    If anything today feels hard, you can stop at any time."*
 

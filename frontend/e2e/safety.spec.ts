@@ -6,7 +6,7 @@
  * read-only. The automated "safety stop" E2E lands with the first free-text feature (Phase 5/6).
  */
 import { expect, test } from "@playwright/test";
-import { RUN, completeOnboarding, demoAdmin, readCode, redeem, signIn, signOut } from "./helpers";
+import { RUN, completeOnboarding, demoAdmin, readCode, redeem, signIn, signOut, openModule } from "./helpers";
 
 test("manual safety event, clinician workflow, participant help and admin oversight", async ({
   page,
@@ -14,11 +14,13 @@ test("manual safety event, clinician workflow, participant help and admin oversi
 }) => {
   const admin = demoAdmin();
   await signIn(page, admin.username, admin.password);
+  await openModule(page, "Administration");
   await page.getByRole("button", { name: "New therapist code" }).click();
   const therapistCode = await readCode(page);
   await signOut(page);
 
   const t = await redeem(browser, therapistCode, `e2e-st-${RUN}`, `Dr Safety ${RUN}`);
+  await openModule(t, "Family Bridge");
   await expect(t).toHaveURL(/\/therapist$/);
   await t.getByLabel("New group name").fill(`Safety group ${RUN}`);
   await t.getByRole("button", { name: "Create" }).click();
@@ -66,7 +68,11 @@ test("manual safety event, clinician workflow, participant help and admin oversi
 
   // Admin oversight: read-only (D39).
   await signIn(page, admin.username, admin.password);
-  await page.getByRole("link", { name: "Safety oversight" }).click();
+  // on the Portal (D95) it is both a page link and a sidebar item; use the sidebar
+  await page
+    .getByRole("navigation", { name: "Main navigation" })
+    .getByRole("link", { name: "Safety oversight" })
+    .click();
   await page.getByRole("radio", { name: "Resolved" }).click();
   await page.getByRole("link", { name: new RegExp(`Suspected abuse · Willow ${RUN}`) }).click();
   await expect(page.getByText(/Read-only oversight view/)).toBeVisible();

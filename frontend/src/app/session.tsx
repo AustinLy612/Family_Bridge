@@ -130,8 +130,8 @@ export const ROLE_HOME: Record<Role, string> = {
 
 export const isParticipantRole = (role: Role): boolean => role === "adolescent" || role === "caregiver";
 
-/** Where a signed-in user belongs right now. */
+/** Where a signed-in user belongs right now: the shared Portal once onboarding is done (D95). */
 export function landingFor(user: SessionUser): string {
   if (isParticipantRole(user.role) && user.onboarded === false) return "/onboarding";
-  return ROLE_HOME[user.role];
+  return "/portal";
 }

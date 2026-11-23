@@ -35,7 +35,14 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "safetyOversight": "Safety oversight",
-    "aiLayer": "AI layer"
+    "aiLayer": "AI layer",
+    "portal": "Portal",
+    "familyHome": "Overview",
+    "module": {
+      "family": "Family Bridge",
+      "learning": "Personal Learning",
+      "admin": "Administration"
+    }
   },
   "role": {
     "adolescent": "Teen",
@@ -1419,5 +1426,50 @@
     },
     "showAll": "Show all ({{count}})",
     "showFewer": "Show fewer"
+  },
+  "portal": {
+    "subtitle": "Your account and every part of FamilyBridge, in one place.",
+    "hello": "Welcome back, {{alias}}",
+    "body": "Choose where to go next. Your account details and settings are further down.",
+    "modulesTitle": "Areas",
+    "includes": "Includes",
+    "enter": "Open {{module}}",
+    "continueLesson": "Continue your lesson",
+    "alwaysHere": "Always available",
+    "shared": {
+      "help": "Ways to get support now, including crisis contacts.",
+      "safetyQueue": "Safety events for your groups that need a look.",
+      "metrics": "Feasibility indicators for your group. Counts only.",
+      "safetyOversight": "Safety events across all groups."
+    },
+    "accountTitle": "Your account",
+    "username": "Username",
+    "role": "Role",
+    "account": {
+      "profile": "Age, grade and interests, so practice fits your life.",
+      "settings": "Display name, language, accessibility, password and research choice."
+    },
+    "modules": {
+      "family": {
+        "adolescent": "Learning together as a family: skills from your group sessions, your diary card and activities with your family.",
+        "caregiver": "Learning together as a family: skills from your group sessions, your diary card and activities with your teen.",
+        "therapist": "Your groups and families, diary cards and homework, and joint family activities."
+      },
+      "learning": {
+        "adolescent": "One-to-one DBT skills lessons and practice, at your own pace.",
+        "caregiver": "Explore DBT skills and practise them, at your own pace.",
+        "therapist": "Participants' individual learning: skills practised, and the AI lesson content you review.",
+        "admin": "The skills knowledge base and the AI layer behind individual lessons."
+      },
+      "admin": {
+        "admin": "Therapist accounts, site settings and research export."
+      }
+    },
+    "familyHome": {
+      "subtitle": "Family learning: group review, diary cards and joint activities.",
+      "bodyTeen": "Skills from your group, your diary card and activities with your family, all in one place.",
+      "bodyCarer": "Skills from your group, your diary card and activities with your teen, all in one place.",
+      "diaryHint": "Notes on feelings, urges and skills. You choose what to share."
+    }
   }
 }

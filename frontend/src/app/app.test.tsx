@@ -41,30 +41,32 @@ describe("role-gated route trees", () => {
     await waitFor(() => expect(router.state.location.pathname).toBe("/"));
   });
 
-  it("redirects a caregiver away from the adolescent tree to their own home", async () => {
+  it("redirects a caregiver away from the adolescent tree to the Portal", async () => {
     const { router } = renderApp("/teen/diary", CAREGIVER);
-    await waitFor(() => expect(router.state.location.pathname).toBe("/caregiver"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/portal"));
   });
 
   it("redirects a therapist away from the admin tree", async () => {
     const { router } = renderApp("/admin", THERAPIST);
-    await waitFor(() => expect(router.state.location.pathname).toBe("/therapist"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/portal"));
   });
 
-  it("shows the adolescent navigation from Plan §5.13.1", () => {
+  it("shows the adolescent navigation tree with only the open module expanded (D95)", () => {
     renderApp("/teen", TEEN);
     const nav = screen.getByRole("navigation", { name: "主导航" });
     const labels = within(nav)
       .getAllByRole("link")
       .map((a) => a.textContent);
-    expect(labels).toEqual(["首页", "学习", "小组回顾", "日记卡", "共同活动", "帮助", "个人资料"]);
+    expect(labels).toEqual(["门户", "家桥", "概览", "小组回顾", "日记卡", "共同活动", "个人学习", "帮助"]);
+    // profile is personal information: pinned with Settings, outside the module tree
+    expect(screen.getByRole("link", { name: "个人资料" })).toHaveAttribute("href", "/teen/profile");
   });
 
-  it("uses 'Explore skills' for caregivers and has no Profile entry", () => {
+  it("caregivers reach Explore skills through Personal Learning and have no Profile entry", () => {
     renderApp("/caregiver", CAREGIVER);
     const nav = screen.getByRole("navigation", { name: "主导航" });
-    expect(within(nav).getByRole("link", { name: "探索技能" })).toBeInTheDocument();
-    expect(within(nav).queryByRole("link", { name: "个人资料" })).toBeNull();
+    expect(within(nav).getByRole("link", { name: "个人学习" })).toHaveAttribute("href", "/caregiver/learn");
+    expect(screen.queryByRole("link", { name: "个人资料" })).toBeNull();
   });
 });
 

@@ -1,0 +1,82 @@
+/* Unified Portal (D95): module cards in the existing card language (tinted tiles, rounded,
+   icon tile + title), an account facts card, and list rows for everything else. */
+.portal-modules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--space-4);
+}
+.portal-module {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+}
+.portal-module--lavender {
+  background: var(--color-card-lavender);
+}
+.portal-module--amber {
+  background: var(--color-card-amber);
+}
+.portal-module--blue {
+  background: var(--color-card-blue);
+}
+.portal-module__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.portal-module__head .fb-icon-tile {
+  background: var(--color-surface);
+}
+.portal-module__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  margin: 0;
+}
+.portal-module__body {
+  margin: 0;
+  max-width: none;
+  line-height: 1.6;
+}
+.portal-module__features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.portal-module__feature {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+}
+.portal-module__feature:hover {
+  border-color: var(--color-plum);
+}
+.portal-module__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+.portal-account__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--space-4);
+  margin: 0;
+}
+.portal-account__facts dt {
+  color: var(--color-ink-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-1);
+}
+.portal-account__facts dd {
+  margin: 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}

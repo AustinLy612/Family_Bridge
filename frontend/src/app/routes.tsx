@@ -5,6 +5,7 @@ import { NAV } from "./nav";
 import { RoleGate } from "./RoleGate";
 import { landingFor, ROLE_HOME, ROLES, useSessionControls, type Role } from "./session";
 import { StartPage } from "../routes/StartPage";
+import { PortalPage } from "../routes/PortalPage";
 import { RolePlaceholder } from "../routes/RolePlaceholder";
 import { NotFound } from "../routes/NotFound";
 import { RedeemPage } from "../routes/auth/RedeemPage";
@@ -135,6 +136,7 @@ export function buildRoutes(): RouteObject[] {
     { path: "/redeem", element: <RedeemPage /> },
     { path: "/reset", element: <ResetPage /> },
     { path: "/onboarding", element: <OnboardingPage /> },
+    { path: "/portal", element: <PortalPage /> }, // shared landing for every role (D95)
     ...roleTrees,
     ...(Gallery
       ? [

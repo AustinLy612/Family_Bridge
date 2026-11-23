@@ -29,7 +29,10 @@ lessons, reflections or joint-session content; there is no break-glass access.
    .venv/Scripts/python -m app.cli create-admin --username site-admin
    ```
 
-4. Sign in at the web address and fill in **Site settings** (§2) before inviting anyone.
+4. Sign in at the web address and fill in **Site settings** (§2) before inviting anyone. You land
+   on the **Portal**: **Administration** holds Therapists, Site settings and Research export;
+   **Personal Learning** holds the Knowledge base and AI layer; **Safety oversight** is always in
+   the sidebar.
 
 ## 2. Site settings
 

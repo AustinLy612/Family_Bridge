@@ -10,6 +10,13 @@ contacts.
 You see only your own groups. Adolescent and caregiver data stay separate: a caregiver sees an
 adolescent's diary items only when the adolescent shares them.
 
+## Finding your way
+
+After you sign in you land on the **Portal**: your account details, **Settings**, and a card for
+each area. **Family Bridge** holds Groups & families, Schedule, Diary review and Joint sessions.
+**Personal Learning** holds Progress and Content review (a family's Learning review opens from
+the family page). The **Safety queue** and **Metrics** stay in the sidebar wherever you are.
+
 ## Getting started
 
 1. Redeem the code from the admin at `/redeem`. Choose a username, a display name, your language
